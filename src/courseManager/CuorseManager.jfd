@@ -1,0 +1,56 @@
+JFDML JFormDesigner: "7.0.7.0.1134" Java: "17.0.3" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+			"$horizontalGroup": "par l {seq l {space :::p, comp MainPanel:::::x, space ::9:x}}"
+			"$verticalGroup": "par l {seq l {comp MainPanel:::::x, space :::p}}"
+		} ) {
+			name: "this"
+			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+				"$horizontalGroup": "par l {seq l {space :p:44:p, comp label2:::p::p, space :0:0:x}, seq l {space :p:36:p, par l:::p {comp btnLogin::::277:x, comp textField1::l:::x, seq {space :p:8:p, comp label1:::p::p}, comp passwordField1::l:::x}, space ::35:x}}"
+				"$verticalGroup": "par l {seq t {space ::181:x, comp label1:::p::p, space :::p, comp textField1:::p::p, space :p:32:p, comp label2:::p::p, space :::x, comp passwordField1:::p::p, space :p:32:p, comp btnLogin:::p::p, space :p:121:p}}"
+			} ) {
+				name: "MainPanel"
+				"focusCycleRoot": true
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "btnLogin"
+					"text": "Login"
+					"cursor": new java.awt.Cursor( 12 )
+					"maximumSize": sfield com.jformdesigner.model.FormObject NULL_VALUE
+					"minimumSize": sfield com.jformdesigner.model.FormObject NULL_VALUE
+					"preferredSize": new java.awt.Dimension( 94, 35 )
+					"background": new java.awt.Color( 88, 101, 242, 255 )
+					"foreground": new java.awt.Color( 255, 255, 255, 255 )
+					"font": new java.awt.Font( "Segoe UI Historic", 1, 15 )
+					addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseEntered", "btnLoginMouseEntered", true ) )
+				} )
+				add( new FormComponent( "javax.swing.JTextField" ) {
+					name: "textField1"
+					"maximumSize": sfield com.jformdesigner.model.FormObject NULL_VALUE
+					"minimumSize": sfield com.jformdesigner.model.FormObject NULL_VALUE
+					"preferredSize": new java.awt.Dimension( 60, 25 )
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "label1"
+					"text": "USERNAME"
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "label2"
+					"text": "PASSWORD"
+				} )
+				add( new FormComponent( "javax.swing.JPasswordField" ) {
+					name: "passwordField1"
+					"preferredSize": new java.awt.Dimension( 60, 25 )
+					"margin": new java.awt.Insets( 5, 15, 5, 15 )
+					"minimumSize": sfield com.jformdesigner.model.FormObject NULL_VALUE
+					"maximumSize": sfield com.jformdesigner.model.FormObject NULL_VALUE
+				} )
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 0, 0 )
+			"size": new java.awt.Dimension( 365, 550 )
+		} )
+	}
+}
