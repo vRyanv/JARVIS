@@ -1,0 +1,225 @@
+JFDML JFormDesigner: "7.0.7.0.1134" Java: "17.0.3" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+			"$horizontalGroup": "par l {comp mainPanel::t:::x}"
+			"$verticalGroup": "par l {comp mainPanel::l:::x}"
+		} ) {
+			name: "this"
+			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.CardLayout ) ) {
+				name: "mainPanel"
+				auxiliary() {
+					"JavaCodeGenerator.variableModifiers": 1
+				}
+				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+					"$horizontalGroup": "par l {seq {par l {seq l {space :p:31:p, par l {comp panel3::::281:x, seq {par l {par l:::p {comp txtUserName2::::248:x, comp label4::l:p::p, comp txtPass2::l:::x, comp label5::l:p::p, comp btnLogin2::t:::x, comp label6::::248:x}, seq {space :6:6:p, comp label7:::p::p, space :::p, comp btnShowRegisterCard:::p::p}}, space :0:33:x}}}, seq t {space :::p, comp panel4::::306:x}}, space :::p}}"
+					"$verticalGroup": "par l {seq l {space :p:53:p, comp label6:::p:57:p, space :p:43:p, comp label4:::p::p, space :::p, comp txtUserName2:::p::p, space :::p, comp panel3:::p::p, space :::p, comp label5:::p::p, space :::p, comp txtPass2:::p::p, space :p:2:p, comp panel4:::p::p, space u:::p, comp btnLogin2:::p::p, space u:::p, par b {comp btnShowRegisterCard::b:p::p, comp label7::b:p::p}, space ::77:x}}"
+				} ) {
+					name: "loginCard"
+					auxiliary() {
+						"JavaCodeGenerator.variableModifiers": 1
+					}
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "label4"
+						"text": "USERNAME"
+						"font": &SwingDerivedFont0 new com.jformdesigner.model.SwingDerivedFont( null, 1, 0, false )
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "label5"
+						"text": "PASSWORD"
+						"font": #SwingDerivedFont0
+					} )
+					add( new FormComponent( "javax.swing.JTextField" ) {
+						name: "txtUserName2"
+						"maximumSize": sfield com.jformdesigner.model.FormObject NULL_VALUE
+						"minimumSize": sfield com.jformdesigner.model.FormObject NULL_VALUE
+						"preferredSize": &Dimension0 new java.awt.Dimension( 60, 25 )
+						auxiliary() {
+							"JavaCodeGenerator.variableModifiers": 1
+						}
+					} )
+					add( new FormComponent( "javax.swing.JPasswordField" ) {
+						name: "txtPass2"
+						"maximumSize": sfield com.jformdesigner.model.FormObject NULL_VALUE
+						"minimumSize": sfield com.jformdesigner.model.FormObject NULL_VALUE
+						"preferredSize": &Dimension1 new java.awt.Dimension( 60, 25 )
+						auxiliary() {
+							"JavaCodeGenerator.variableModifiers": 1
+						}
+					} )
+					add( new FormComponent( "javax.swing.JButton" ) {
+						name: "btnLogin2"
+						"text": "Login"
+						"maximumSize": sfield com.jformdesigner.model.FormObject NULL_VALUE
+						"minimumSize": sfield com.jformdesigner.model.FormObject NULL_VALUE
+						"preferredSize": &Dimension2 new java.awt.Dimension( 60, 35 )
+						"background": &Color0 new java.awt.Color( 88, 101, 242, 255 )
+						"cursor": &Cursor0 new java.awt.Cursor( 12 )
+						"foreground": &Color1 new java.awt.Color( 255, 255, 255, 255 )
+						"font": &Font0 new java.awt.Font( "JetBrains Mono ExtraBold", 1, 15 )
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "label6"
+						"text": "Wellcome To JARVIS!"
+						"horizontalAlignment": 0
+						"font": &Font1 new java.awt.Font( "JetBrains Mono ExtraBold", 1, 18 )
+						"foreground": &Color2 new java.awt.Color( 255, 255, 255, 255 )
+					} )
+					add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+						"$horizontalGroup": "par l {seq t {space ::133:x, comp lbUsernameIncorrect2:::p:142:p, space :::p}}"
+						"$verticalGroup": "par l {seq t {space :0:3:x, comp lbUsernameIncorrect2:::p::p}}"
+					} ) {
+						name: "panel3"
+						"preferredSize": &Dimension3 new java.awt.Dimension( 248, 20 )
+						add( new FormComponent( "javax.swing.JLabel" ) {
+							name: "lbUsernameIncorrect2"
+							"text": "Username incorrect"
+							"font": &Font2 new java.awt.Font( "JetBrains Mono", 0, 12 )
+							"foreground": &Color3 new java.awt.Color( 255, 0, 51, 255 )
+							auxiliary() {
+								"JavaCodeGenerator.variableModifiers": 1
+							}
+						} )
+					} )
+					add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+						"$horizontalGroup": "par l {seq t {space ::158:x, comp lbPassIncorrect2:::p:142:p, space :::p}}"
+						"$verticalGroup": "par l {seq t {space :0:3:x, comp lbPassIncorrect2:::p::p}}"
+					} ) {
+						name: "panel4"
+						"preferredSize": &Dimension4 new java.awt.Dimension( 242, 20 )
+						add( new FormComponent( "javax.swing.JLabel" ) {
+							name: "lbPassIncorrect2"
+							"text": "Password incorrect"
+							"font": #Font2
+							"foreground": #Color3
+							auxiliary() {
+								"JavaCodeGenerator.variableModifiers": 1
+							}
+						} )
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "label7"
+						"text": "Need an account?"
+						"font": new java.awt.Font( "JetBrains Mono", 0, 12 )
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "btnShowRegisterCard"
+						"text": "Register"
+						"cursor": #Cursor0
+						"foreground": new java.awt.Color( 0, 175, 244, 255 )
+						auxiliary() {
+							"JavaCodeGenerator.variableModifiers": 1
+						}
+					} )
+				}, new FormLayoutConstraints( class java.lang.String ) {
+					"value": "loginCard"
+				} )
+				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+					"$horizontalGroup": "par l {seq {par l {seq l {space :p:31:p, par l {comp panel1::::281:x, seq {par l {par l:::p {comp txtUserName::::248:x, comp label1::l:p::p, comp txtPass::l:::x, comp label2::l:p::p, comp btnLogin::t:::x, comp label3::::248:x}, seq l {space :6:6:p, comp btnShowLoginCard:::p::p}}, space :0:33:x}}}, seq t {space :::p, comp panel2::::306:x}}, space :::p}}"
+					"$verticalGroup": "par l {seq l {space :p:53:p, comp label3:::p:57:p, space :p:43:p, comp label1:::p::p, space :::p, comp txtUserName:::p::p, space :::p, comp panel1:::p::p, space :::p, comp label2:::p::p, space :::p, comp txtPass:::p::p, space :p:2:p, comp panel2:::p::p, space u:::p, comp btnLogin:::p::p, space u:::p, comp btnShowLoginCard:::p::p, space ::80:x}}"
+				} ) {
+					name: "registerCard"
+					auxiliary() {
+						"JavaCodeGenerator.variableModifiers": 1
+					}
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "label1"
+						"text": "USERNAME"
+						"font": #SwingDerivedFont0
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "label2"
+						"text": "PASSWORD"
+						"font": #SwingDerivedFont0
+					} )
+					add( new FormComponent( "javax.swing.JTextField" ) {
+						name: "txtUserName"
+						"maximumSize": sfield com.jformdesigner.model.FormObject NULL_VALUE
+						"minimumSize": sfield com.jformdesigner.model.FormObject NULL_VALUE
+						"preferredSize": #Dimension0
+						auxiliary() {
+							"JavaCodeGenerator.variableModifiers": 1
+						}
+					} )
+					add( new FormComponent( "javax.swing.JPasswordField" ) {
+						name: "txtPass"
+						"maximumSize": sfield com.jformdesigner.model.FormObject NULL_VALUE
+						"minimumSize": sfield com.jformdesigner.model.FormObject NULL_VALUE
+						"preferredSize": #Dimension1
+						auxiliary() {
+							"JavaCodeGenerator.variableModifiers": 1
+						}
+					} )
+					add( new FormComponent( "javax.swing.JButton" ) {
+						name: "btnLogin"
+						"text": "Register"
+						"maximumSize": sfield com.jformdesigner.model.FormObject NULL_VALUE
+						"minimumSize": sfield com.jformdesigner.model.FormObject NULL_VALUE
+						"preferredSize": #Dimension2
+						"background": #Color0
+						"cursor": #Cursor0
+						"foreground": #Color1
+						"font": #Font0
+						addEvent( new FormEvent( "java.awt.event.MouseListener", "mousePressed", "btnLoginMousePressed", true ) )
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "label3"
+						"text": "Wellcome To JARVIS!"
+						"horizontalAlignment": 0
+						"font": #Font1
+						"foreground": #Color2
+					} )
+					add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+						"$horizontalGroup": "par l {seq t {space ::133:x, comp lbUsernameIncorrect:::p:142:p, space :::p}}"
+						"$verticalGroup": "par l {seq t {space :0:3:x, comp lbUsernameIncorrect:::p::p}}"
+					} ) {
+						name: "panel1"
+						"preferredSize": #Dimension3
+						add( new FormComponent( "javax.swing.JLabel" ) {
+							name: "lbUsernameIncorrect"
+							"text": "Username incorrect"
+							"font": #Font2
+							"foreground": #Color3
+							auxiliary() {
+								"JavaCodeGenerator.variableModifiers": 1
+							}
+						} )
+					} )
+					add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+						"$horizontalGroup": "par l {seq t {space ::158:x, comp lbPassIncorrect:::p:142:p, space :::p}}"
+						"$verticalGroup": "par l {seq t {space :0:3:x, comp lbPassIncorrect:::p::p}}"
+					} ) {
+						name: "panel2"
+						"preferredSize": #Dimension4
+						add( new FormComponent( "javax.swing.JLabel" ) {
+							name: "lbPassIncorrect"
+							"text": "Password incorrect"
+							"font": #Font2
+							"foreground": #Color3
+							auxiliary() {
+								"JavaCodeGenerator.variableModifiers": 1
+							}
+						} )
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "btnShowLoginCard"
+						"text": "Already have an account?"
+						"foreground": new java.awt.Color( 0, 175, 244, 255 )
+						"font": new java.awt.Font( "JetBrains Mono", 0, 12 )
+						"cursor": #Cursor0
+						auxiliary() {
+							"JavaCodeGenerator.variableModifiers": 1
+						}
+					} )
+				}, new FormLayoutConstraints( class java.lang.String ) {
+					"value": "registerCard"
+				} )
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 0, 0 )
+			"size": new java.awt.Dimension( 320, 505 )
+		} )
+	}
+}
