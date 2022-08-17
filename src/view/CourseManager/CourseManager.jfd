@@ -4,13 +4,105 @@ new FormModel {
 	contentType: "form/swing"
 	root: new FormRoot {
 		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-			"$horizontalGroup": "par l {space :0:993:x}"
-			"$verticalGroup": "par l {space :0:395:x}"
+			"$horizontalGroup": "par l {seq l {comp mainPanel:::p::p, space :0:0:x}}"
+			"$verticalGroup": "par l {comp mainPanel::l:::x}"
 		} ) {
 			name: "this"
+			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+				"$horizontalGroup": "par l {seq l {comp controllerPanel:::p::p, space :::p, par l {comp titlePanel:::::x, comp cardPanel:::::x}, space :::x}}"
+				"$verticalGroup": "par l {seq {comp titlePanel:::p::p, space :::p, comp cardPanel:::::x}, comp controllerPanel:::::x}"
+			} ) {
+				name: "mainPanel"
+				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+					"$horizontalGroup": "par l {seq {space :::p, par l {comp label1:::::x, seq {comp adminController:::p:207:p, space :0:0:x}, seq t {space :0:0:x, comp classRoomController:::p:207:p}, comp courseController::l:::x}, space :::p}}"
+					"$verticalGroup": "par l {seq l {space :::p, comp label1:::p:41:p, space :p:18:p, comp courseController:::p:39:p, space :::p, comp classRoomController:::p:39:p, space :::p, comp adminController:::p:39:p, space :::x}}"
+				} ) {
+					name: "controllerPanel"
+					"background": new java.awt.Color( 26, 27, 63, 255 )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "label1"
+						"text": "JARVIS 1.0"
+						"horizontalAlignment": 0
+						"font": new java.awt.Font( "JetBrains Mono", 3, 18 )
+						"foreground": new java.awt.Color( 255, 255, 255, 255 )
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "courseController"
+						"text": "Course"
+						"foreground": new java.awt.Color( 255, 255, 255, 255 )
+						"font": &Font0 new java.awt.Font( "JetBrains Mono", 1, 16 )
+						"cursor": &Cursor0 new java.awt.Cursor( 12 )
+						"horizontalTextPosition": 2
+						"horizontalAlignment": 2
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "classRoomController"
+						"text": "Class room"
+						"horizontalAlignment": 2
+						"foreground": &Color0 new java.awt.Color( 255, 255, 255, 255 )
+						"font": #Font0
+						"cursor": #Cursor0
+						"horizontalTextPosition": 2
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "adminController"
+						"text": "Admin"
+						"horizontalAlignment": 2
+						"foreground": #Color0
+						"font": #Font0
+						"cursor": #Cursor0
+						"horizontalTextPosition": 2
+					} )
+				} )
+				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+					"$horizontalGroup": "par l {seq t {space :::x, comp lbTitleHeader:::p:207:p, space :p:292:p}}"
+					"$verticalGroup": "par l {comp lbTitleHeader::l::50:x}"
+				} ) {
+					name: "titlePanel"
+					"background": new java.awt.Color( 26, 27, 80, 255 )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "lbTitleHeader"
+						"text": "Course"
+						"horizontalAlignment": 0
+						"foreground": #Color0
+						"font": #Font0
+					} )
+				} )
+				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.CardLayout ) ) {
+					name: "cardPanel"
+					"background": new java.awt.Color( 31, 32, 70, 255 )
+					add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+						"$horizontalGroup": "par l {space :0:800:x}"
+						"$verticalGroup": "par l {space :0:559:x}"
+					} ) {
+						name: "cardCourse"
+						"background": new java.awt.Color( 31, 32, 70, 255 )
+					}, new FormLayoutConstraints( class java.lang.String ) {
+						"value": "cardCourse"
+					} )
+					add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+						"$horizontalGroup": "par l {space :0:800:x}"
+						"$verticalGroup": "par l {space :0:559:x}"
+					} ) {
+						name: "cardClassRoom"
+						"background": new java.awt.Color( 31, 32, 70, 255 )
+					}, new FormLayoutConstraints( class java.lang.String ) {
+						"value": "cardClassRoom"
+					} )
+					add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+						"$horizontalGroup": "par l {space :0:800:x}"
+						"$verticalGroup": "par l {space :0:559:x}"
+					} ) {
+						name: "cardAdmin"
+						"background": new java.awt.Color( 31, 32, 70, 255 )
+					}, new FormLayoutConstraints( class java.lang.String ) {
+						"value": "cardAdmin"
+					} )
+				} )
+			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 0, 0 )
-			"size": new java.awt.Dimension( 995, 435 )
+			"size": new java.awt.Dimension( 1030, 655 )
 		} )
 	}
 }
