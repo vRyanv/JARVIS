@@ -2,15 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="34a4562e-e422-4f6a-9647-613949237cee" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/model/fileProcess/FileProcess.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/view/CourseManager/CourseManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/view/CourseManager/CourseManager.jfd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/flatlaf_2_4.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controller/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/LoginController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/user/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/user/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/user/userList.dat" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/user/userList.dat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/LoginForm/LoginForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/LoginForm/LoginForm.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/LoginForm/LoginForm.jfd" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/LoginForm/LoginForm.jfd" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,25 +31,25 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Project.color&quot;: &quot;000f0e&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/App/JformDesign/lib/flatlaf-2.4.jar&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Project.color": "000f0e",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "last_opened_file_path": "D:/flatlaf-2.4.jar",
+    "project.structure.last.edited": "Libraries",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "preferences.lookFeel"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File&quot;: [
-      &quot;JAVA&quot;,
-      &quot;PLAIN_TEXT&quot;
+  "keyToStringList": {
+    "com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File": [
+      "JAVA",
+      "PLAIN_TEXT"
     ]
   }
-}</component>
+}]]></component>
   <component name="RunManager" selected="Application.LoginForm">
     <configuration name="CuorseManager" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="view.login.CuorseManager" />
