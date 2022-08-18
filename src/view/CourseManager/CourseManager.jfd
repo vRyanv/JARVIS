@@ -1,4 +1,4 @@
-JFDML JFormDesigner: "7.0.7.0.1134" Java: "17.0.3" encoding: "UTF-8"
+JFDML JFormDesigner: "7.0.7.0.1134" Java: "11.0.15" encoding: "UTF-8"
 
 new FormModel {
 	contentType: "form/swing"
@@ -73,7 +73,7 @@ new FormModel {
 					"background": new java.awt.Color( 31, 32, 70, 255 )
 					add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
 						"$horizontalGroup": "par l {space :0:800:x}"
-						"$verticalGroup": "par l {space :0:564:x}"
+						"$verticalGroup": "par l {space :0:572:x}"
 					} ) {
 						name: "cardCourse"
 						"background": new java.awt.Color( 31, 32, 70, 255 )
@@ -82,7 +82,7 @@ new FormModel {
 					} )
 					add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
 						"$horizontalGroup": "par l {space :0:800:x}"
-						"$verticalGroup": "par l {space :0:564:x}"
+						"$verticalGroup": "par l {space :0:572:x}"
 					} ) {
 						name: "cardClassRoom"
 						"background": new java.awt.Color( 31, 32, 70, 255 )
@@ -250,14 +250,19 @@ new FormModel {
 								"value": "cardNewCourse"
 							} )
 							add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-								"$horizontalGroup": "par l {seq l {space :::p, comp contanerCourseBoxPanel:::::x, space :::p}}"
+								"$horizontalGroup": "par l {seq l {space :::p, comp contanerCourseBoxPanel:::::p, space :::p}}"
 								"$verticalGroup": "par l {seq l {space :::p, comp contanerCourseBoxPanel:::::x, space :::p}}"
 							} ) {
 								name: "cardCourseManager"
 								"background": new java.awt.Color( 31, 32, 70, 255 )
-								add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.FlowLayout ) ) {
+								add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.FlowLayout ) {
+									"vgap": 1
+									"hgap": 10
+								} ) {
 									name: "contanerCourseBoxPanel"
 									"background": new java.awt.Color( 31, 32, 70, 255 )
+									"maximumSize": new java.awt.Dimension( 32779, 32779 )
+									"inheritsPopupMenu": true
 								} )
 							}, new FormLayoutConstraints( class java.lang.String ) {
 								"value": "cardCourseManager"

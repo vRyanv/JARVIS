@@ -23,18 +23,18 @@ public class AdminController {
     private String pathCourse = "src/model/course/course.dat";
     public CourseManager courseManager;
 
-//    public static void main(String[] args) {
-//        FileProcess.writeObject("src/model/course/course.dat", new TreeMap<String, Course>());
-//    }
+    public static void main(String[] args) {
+        FileProcess.writeObject("src/model/course/course.dat", new TreeMap<String, Course>());
+    }
 
     public AdminController(CourseManager courseManager)
     {
-        this.courseTreeMap = (TreeMap<String, Course>) FileProcess.readObject(this.pathCourse);
+        this.loadData();
         this.cardLayout = (CardLayout) courseManager.cardMainPanelAdmin.getLayout();
         courseManager.lbNewCourse.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                DefautlStateController(courseManager.lbCourseManager, courseManager.lbNewCourse);
+                DefaultStateController(courseManager.lbCourseManager, courseManager.lbNewCourse);
                 ChangeStateActive(courseManager.lbNewCourse, "press", "cardNewCourse");
                 showCard(cardLayout, courseManager.cardMainPanelAdmin, "cardNewCourse");
             }
@@ -53,7 +53,7 @@ public class AdminController {
         courseManager.lbCourseManager.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                DefautlStateController(courseManager.lbCourseManager, courseManager.lbNewCourse);
+                DefaultStateController(courseManager.lbCourseManager, courseManager.lbNewCourse);
                 ChangeStateActive(courseManager.lbCourseManager, "press","cardCourseManager");
                 showCard(cardLayout, courseManager.cardMainPanelAdmin, "cardCourseManager");
             }
@@ -106,6 +106,17 @@ public class AdminController {
         });
     }
 
+    private void loadData()
+    {
+        this.courseTreeMap = (TreeMap<String, Course>) FileProcess.readObject(this.pathCourse);
+        if(this.courseTreeMap == null)
+        {
+            System.out.println("load data");
+            FileProcess.writeObject(pathCourse, new TreeMap<String, Course>());
+            this.courseTreeMap = (TreeMap<String, Course>) FileProcess.readObject(this.pathCourse);
+        }
+    }
+
     private void ChangeStateActive(JLabel controller, String type, String _currentCard)
     {
 
@@ -133,7 +144,7 @@ public class AdminController {
         }
     }
 
-    private void DefautlStateController(JLabel... controllers)
+    private void DefaultStateController(JLabel... controllers)
     {
         for (JLabel controller: controllers)
         {
@@ -160,7 +171,7 @@ public class AdminController {
         }
         else
         {
-            if(Regex("[0-9]",id))
+            if(Regex("[0-9]+",id))
             {
                 if(saveCourse(id, name, numOfLession, description, courseTreeMap))
                 {

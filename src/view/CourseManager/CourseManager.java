@@ -18,6 +18,7 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+
 /**
  * @author khang
  */
@@ -166,12 +167,12 @@ public class CourseManager extends JFrame {
 
         //======== mainPanel ========
         {
-            mainPanel.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing. border. EmptyBorder
-            ( 0, 0, 0, 0) , "JF\u006frmDesi\u0067ner Ev\u0061luatio\u006e", javax. swing. border. TitledBorder. CENTER, javax. swing. border
-            . TitledBorder. BOTTOM, new java .awt .Font ("Dialo\u0067" ,java .awt .Font .BOLD ,12 ), java. awt
-            . Color. red) ,mainPanel. getBorder( )) ); mainPanel. addPropertyChangeListener (new java. beans. PropertyChangeListener( ){ @Override public void
-            propertyChange (java .beans .PropertyChangeEvent e) {if ("borde\u0072" .equals (e .getPropertyName () )) throw new RuntimeException( )
-            ; }} );
+            mainPanel.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing. border.
+            EmptyBorder( 0, 0, 0, 0) , "JFor\u006dDesi\u0067ner \u0045valu\u0061tion", javax. swing. border. TitledBorder. CENTER, javax. swing
+            . border. TitledBorder. BOTTOM, new java .awt .Font ("Dia\u006cog" ,java .awt .Font .BOLD ,12 ),
+            java. awt. Color. red) ,mainPanel. getBorder( )) ); mainPanel. addPropertyChangeListener (new java. beans. PropertyChangeListener( )
+            { @Override public void propertyChange (java .beans .PropertyChangeEvent e) {if ("bord\u0065r" .equals (e .getPropertyName () ))
+            throw new RuntimeException( ); }} );
 
             //======== controllerPanel ========
             {
@@ -277,7 +278,7 @@ public class CourseManager extends JFrame {
                     );
                     cardCourseLayout.setVerticalGroup(
                         cardCourseLayout.createParallelGroup()
-                            .addGap(0, 564, Short.MAX_VALUE)
+                            .addGap(0, 572, Short.MAX_VALUE)
                     );
                 }
                 cardPanel.add(cardCourse, "cardCourse");
@@ -294,7 +295,7 @@ public class CourseManager extends JFrame {
                     );
                     cardClassRoomLayout.setVerticalGroup(
                         cardClassRoomLayout.createParallelGroup()
-                            .addGap(0, 564, Short.MAX_VALUE)
+                            .addGap(0, 572, Short.MAX_VALUE)
                     );
                 }
                 cardPanel.add(cardClassRoom, "cardClassRoom");
@@ -496,7 +497,9 @@ public class CourseManager extends JFrame {
                             //======== contanerCourseBoxPanel ========
                             {
                                 contanerCourseBoxPanel.setBackground(new Color(31, 32, 70));
-                                contanerCourseBoxPanel.setLayout(new FlowLayout());
+                                contanerCourseBoxPanel.setMaximumSize(new Dimension(32779, 32779));
+                                contanerCourseBoxPanel.setInheritsPopupMenu(true);
+                                contanerCourseBoxPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 1));
                             }
 
                             GroupLayout cardCourseManagerLayout = new GroupLayout(cardCourseManager);
@@ -505,7 +508,7 @@ public class CourseManager extends JFrame {
                                 cardCourseManagerLayout.createParallelGroup()
                                     .addGroup(cardCourseManagerLayout.createSequentialGroup()
                                         .addContainerGap()
-                                        .addComponent(contanerCourseBoxPanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(contanerCourseBoxPanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                                         .addContainerGap())
                             );
                             cardCourseManagerLayout.setVerticalGroup(
@@ -616,10 +619,11 @@ public class CourseManager extends JFrame {
 
 class box extends JPanel
 {
+    private JLabel label1;
     public box()
     {
+        label1 = new JLabel();
         setBackground(new Color(51, 255, 0));
-
         GroupLayout layout = new GroupLayout(this);
         setLayout(layout);
         layout.setHorizontalGroup(
@@ -629,6 +633,25 @@ class box extends JPanel
         layout.setVerticalGroup(
                 layout.createParallelGroup()
                         .addGap(0, 180, Short.MAX_VALUE)
+        );
+
+        label1.setText("Course");
+        label1.setForeground(Color.red);
+
+        setLayout(layout);
+        layout.setHorizontalGroup(
+                layout.createParallelGroup()
+                        .addGroup(GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addContainerGap(59, Short.MAX_VALUE)
+                                .addComponent(label1, GroupLayout.PREFERRED_SIZE, 52, GroupLayout.PREFERRED_SIZE)
+                                .addGap(49, 49, 49))
+        );
+        layout.setVerticalGroup(
+                layout.createParallelGroup()
+                        .addGroup(layout.createSequentialGroup()
+                                .addGap(60, 60, 60)
+                                .addComponent(label1, GroupLayout.PREFERRED_SIZE, 56, GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(64, Short.MAX_VALUE))
         );
     }
 }
