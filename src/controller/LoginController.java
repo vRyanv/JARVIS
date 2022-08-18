@@ -1,15 +1,13 @@
 package controller;
 
-import model.fileProcess.FileProcess;
+import library.fileProcess.FileProcess;
 import model.user.User;
 import view.CourseManager.CourseManager;
 import view.LoginForm.LoginForm;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.TreeMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

@@ -1,24 +1,28 @@
 package model.course;
 
+import library.fileProcess.FileProcess;
 import model.user.User;
 
+import java.io.File;
+import java.io.Serializable;
 import java.sql.Time;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class Course {
+public class Course implements Serializable {
     private String id;
     private String name;
-    private byte numberOfLessons;
+    private int numberOfLessons;
     private String description;
     private List<User> studentList;
 
-    public Course(String id, String name, byte numberOfLessons, String description, List<User> studentList) {
+    public Course(String id, String name, int numberOfLessons, String description) {
         this.id = id;
         this.name = name;
         this.numberOfLessons = numberOfLessons;
         this.description = description;
-        this.studentList = studentList;
+        this.studentList = new ArrayList<>();
     }
 
     public String getId() {
@@ -29,7 +33,7 @@ public class Course {
         return name;
     }
 
-    public byte getNumberOfLessons() {
+    public int getNumberOfLessons() {
         return numberOfLessons;
     }
 
@@ -50,7 +54,7 @@ public class Course {
         this.name = name;
     }
 
-    public void setNumberOfLessons(byte numberOfLessons) {
+    public void setNumberOfLessons(int numberOfLessons) {
         this.numberOfLessons = numberOfLessons;
     }
 
@@ -62,7 +66,5 @@ public class Course {
     public void setStudentList(List<User> studentList) {
         this.studentList = studentList;
     }
-
-
 
 }

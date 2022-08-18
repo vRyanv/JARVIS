@@ -2,16 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="34a4562e-e422-4f6a-9647-613949237cee" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/controller/AdminController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/controller/ClassRoomController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/controller/CourseController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/model/course/Course.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/model/course/course.dat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/flatlaf_2_4.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/flatlaf_2_4.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/library/colorCustom/ColorCustom.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/view/CourseManager/CourseBox.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/view/CourseManager/CourseBox.jfd" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controller/AdminController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/AdminController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controller/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/LoginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/course/Course.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/course/Course.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/course/course.dat" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/course/course.dat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/fileProcess/FileProcess.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/library/fileProcess/FileProcess.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/view/CourseManager/CourseManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/CourseManager/CourseManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/view/CourseManager/CourseManager.jfd" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/CourseManager/CourseManager.jfd" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/LoginForm/LoginForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/LoginForm/LoginForm.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,8 +22,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="Enum" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -42,7 +43,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "Project.color": "000f0e",
+    "Project.color": "036860",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
@@ -73,12 +74,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CourseManager" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="view.CourseManager.CourseManager" />
+    <configuration name="Course" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="model.course.Course" />
       <module name="JARVIS" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="view.CourseManager.*" />
+          <option name="PATTERN" value="model.course.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -86,12 +87,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="FileProcess" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="model.fileProcess.FileProcess" />
+    <configuration name="CourseManager" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="view.CourseManager.CourseManager" />
       <module name="JARVIS" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="model.fileProcess.*" />
+          <option name="PATTERN" value="view.CourseManager.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -129,9 +130,9 @@
       <list>
         <item itemvalue="Application.CourseManager" />
         <item itemvalue="Application.AdminController" />
+        <item itemvalue="Application.Course" />
         <item itemvalue="Application.LoginForm" />
         <item itemvalue="Application.LoginController" />
-        <item itemvalue="Application.FileProcess" />
       </list>
     </recent_temporary>
   </component>
