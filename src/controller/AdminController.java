@@ -4,6 +4,7 @@ import library.colorCustom.ColorCustom;
 import model.course.Course;
 import library.fileProcess.FileProcess;
 import model.user.User;
+import server.Server;
 import view.CourseManager.CourseManager;
 
 import javax.swing.*;
@@ -17,6 +18,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class AdminController {
+    private boolean serverIsOn = false;
     private CardLayout cardLayout;
     private String currentCard = "cardNewCourse";
     private TreeMap<String, Course> courseTreeMap;
@@ -102,6 +104,28 @@ public class AdminController {
             @Override
             public void mousePressed(MouseEvent e) {
                 courseManager.lbInvalidCourseName.setVisible(false);
+            }
+        });
+
+        courseManager.rbServerOn.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                if(!serverIsOn)
+                {
+                    Thread threadServer = new Thread(){
+                        @Override
+                        public void run() {
+                            try{
+                                new Server();
+                            }catch (Exception ex){
+                                courseManager.rbServerOn.setSelected(false);
+                                JOptionPane.showMessageDialog(courseManager.cardMainPanelAdmin, "Server Error!", "Error", JOptionPane.ERROR_MESSAGE);
+                            }
+                        }
+                    };
+                    courseManager.lbServerTitle.setForeground(ColorCustom.green);
+                    threadServer.start();
+                }
             }
         });
     }

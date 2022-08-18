@@ -1,4 +1,4 @@
-JFDML JFormDesigner: "7.0.7.0.1134" Java: "11.0.15" encoding: "UTF-8"
+JFDML JFormDesigner: "7.0.7.0.1134" Java: "17.0.3" encoding: "UTF-8"
 
 new FormModel {
 	contentType: "form/swing"
@@ -73,7 +73,7 @@ new FormModel {
 					"background": new java.awt.Color( 31, 32, 70, 255 )
 					add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
 						"$horizontalGroup": "par l {space :0:800:x}"
-						"$verticalGroup": "par l {space :0:572:x}"
+						"$verticalGroup": "par l {space :0:564:x}"
 					} ) {
 						name: "cardCourse"
 						"background": new java.awt.Color( 31, 32, 70, 255 )
@@ -82,7 +82,7 @@ new FormModel {
 					} )
 					add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
 						"$horizontalGroup": "par l {space :0:800:x}"
-						"$verticalGroup": "par l {space :0:572:x}"
+						"$verticalGroup": "par l {space :0:564:x}"
 					} ) {
 						name: "cardClassRoom"
 						"background": new java.awt.Color( 31, 32, 70, 255 )
@@ -96,8 +96,8 @@ new FormModel {
 						name: "cardAdmin"
 						"background": new java.awt.Color( 31, 32, 70, 255 )
 						add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-							"$horizontalGroup": "par l {seq t {space :::x, comp button1:::p::p, space :p:131:p, comp lbNewCourse:::p:134:p, space u:::p, comp lbCourseManager:::p:134:p, space :::p}}"
-							"$verticalGroup": "par l {seq l {space :::p, par b {comp lbCourseManager::b:p:42:p, comp lbNewCourse::b:p:42:p, comp button1::b:p::p}}}"
+							"$horizontalGroup": "par l {seq t {space :p:14:p, comp lbServerTitle:::p::p, space :::p, comp rbServerOn:::p::p, space :p:28:p, comp rbServerOff:::p::p, space :::x, comp lbNewCourse:::p:134:p, space u:::p, comp lbCourseManager:::p:134:p, space :::p}}"
+							"$verticalGroup": "par l {seq {space :::p, par l {par b:l {comp lbCourseManager::b:p:42:p, comp lbNewCourse::b:p:42:p}, seq t {par b {comp lbServerTitle::b:p::p, comp rbServerOn::b:p::p, comp rbServerOff::b:p::p}, space :::p}}}}"
 						} ) {
 							name: "toolbarAdmin"
 							"background": new java.awt.Color( 31, 32, 70, 255 )
@@ -127,9 +127,34 @@ new FormModel {
 									"JavaCodeGenerator.variableModifiers": 1
 								}
 							} )
-							add( new FormComponent( "javax.swing.JButton" ) {
-								name: "button1"
-								"text": "text"
+							add( new FormComponent( "javax.swing.JLabel" ) {
+								name: "lbServerTitle"
+								"text": "Chat Server: "
+								"foreground": new java.awt.Color( 255, 255, 255, 255 )
+								auxiliary() {
+									"JavaCodeGenerator.variableModifiers": 1
+								}
+							} )
+							add( new FormComponent( "javax.swing.JRadioButton" ) {
+								name: "rbServerOn"
+								"text": "On"
+								"$buttonGroup": &FormReference0 new FormReference( "serverMode" )
+								"cursor": &Cursor2 new java.awt.Cursor( 12 )
+								"foreground": &Color2 new java.awt.Color( 255, 255, 255, 255 )
+								auxiliary() {
+									"JavaCodeGenerator.variableModifiers": 1
+								}
+							} )
+							add( new FormComponent( "javax.swing.JRadioButton" ) {
+								name: "rbServerOff"
+								"text": "Off"
+								"$buttonGroup": #FormReference0
+								"cursor": #Cursor2
+								"foreground": #Color2
+								"selected": true
+								auxiliary() {
+									"JavaCodeGenerator.variableModifiers": 1
+								}
 							} )
 						} )
 						add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.CardLayout ) ) {
@@ -148,22 +173,22 @@ new FormModel {
 								add( new FormComponent( "javax.swing.JLabel" ) {
 									name: "label2"
 									"text": "Course id"
-									"foreground": &Color2 new java.awt.Color( 255, 255, 255, 255 )
+									"foreground": &Color3 new java.awt.Color( 255, 255, 255, 255 )
 								} )
 								add( new FormComponent( "javax.swing.JLabel" ) {
 									name: "label3"
 									"text": "Course name"
-									"foreground": #Color2
+									"foreground": #Color3
 								} )
 								add( new FormComponent( "javax.swing.JLabel" ) {
 									name: "label4"
 									"text": "number Of Lessons"
-									"foreground": #Color2
+									"foreground": #Color3
 								} )
 								add( new FormComponent( "javax.swing.JLabel" ) {
 									name: "label5"
 									"text": "Description"
-									"foreground": #Color2
+									"foreground": #Color3
 								} )
 								add( new FormComponent( "javax.swing.JTextField" ) {
 									name: "txtCuorseId"
@@ -177,7 +202,7 @@ new FormModel {
 								add( new FormComponent( "javax.swing.JTextField" ) {
 									name: "txtCourseName"
 									"foreground": sfield java.awt.Color white
-									"selectionColor": &Color3 new java.awt.Color( 255, 255, 255, 255 )
+									"selectionColor": &Color4 new java.awt.Color( 255, 255, 255, 255 )
 									"selectedTextColor": sfield java.awt.Color black
 									auxiliary() {
 										"JavaCodeGenerator.variableModifiers": 1
@@ -188,7 +213,7 @@ new FormModel {
 									add( new FormComponent( "javax.swing.JTextArea" ) {
 										name: "txtareaDecription"
 										"foreground": sfield java.awt.Color white
-										"selectionColor": #Color3
+										"selectionColor": #Color4
 										"selectedTextColor": sfield java.awt.Color black
 										auxiliary() {
 											"JavaCodeGenerator.variableModifiers": 1
@@ -198,7 +223,7 @@ new FormModel {
 								add( new FormComponent( "javax.swing.JLabel" ) {
 									name: "lbInvalidIdCourse"
 									"text": "text"
-									"foreground": &Color4 new java.awt.Color( 229, 128, 131, 255 )
+									"foreground": &Color5 new java.awt.Color( 229, 128, 131, 255 )
 									"font": &Font2 new java.awt.Font( "JetBrains Mono", 0, 15 )
 									"visible": false
 									auxiliary() {
@@ -208,7 +233,7 @@ new FormModel {
 								add( new FormComponent( "javax.swing.JLabel" ) {
 									name: "lbInvalidCourseName"
 									"text": "text"
-									"foreground": #Color4
+									"foreground": #Color5
 									"font": #Font2
 									"visible": false
 									auxiliary() {
@@ -250,19 +275,23 @@ new FormModel {
 								"value": "cardNewCourse"
 							} )
 							add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-								"$horizontalGroup": "par l {seq l {space :::p, comp contanerCourseBoxPanel:::::p, space :::p}}"
-								"$verticalGroup": "par l {seq l {space :::p, comp contanerCourseBoxPanel:::::x, space :::p}}"
+								"$horizontalGroup": "par l {comp scrollPane3::l:p:800:p}"
+								"$verticalGroup": "par l {seq t {space :::p, comp scrollPane3:::::x}}"
 							} ) {
 								name: "cardCourseManager"
 								"background": new java.awt.Color( 31, 32, 70, 255 )
-								add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.FlowLayout ) {
-									"vgap": 1
-									"hgap": 10
-								} ) {
-									name: "contanerCourseBoxPanel"
-									"background": new java.awt.Color( 31, 32, 70, 255 )
-									"maximumSize": new java.awt.Dimension( 32779, 32779 )
-									"inheritsPopupMenu": true
+								add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+									name: "scrollPane3"
+									add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.FlowLayout ) {
+										"vgap": 10
+										"hgap": 10
+										"alignOnBaseline": true
+									} ) {
+										name: "contanerCourseBoxPanel"
+										"background": new java.awt.Color( 31, 32, 70, 255 )
+										"maximumSize": new java.awt.Dimension( 32779, 32779 )
+										"inheritsPopupMenu": true
+									} )
 								} )
 							}, new FormLayoutConstraints( class java.lang.String ) {
 								"value": "cardCourseManager"
@@ -276,6 +305,11 @@ new FormModel {
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 0, 0 )
 			"size": new java.awt.Dimension( 1025, 660 )
+		} )
+		add( new FormNonVisual( "javax.swing.ButtonGroup" ) {
+			name: "serverMode"
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 5, 670 )
 		} )
 	}
 }
