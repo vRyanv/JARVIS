@@ -22,7 +22,7 @@ public class AdminController {
     private CardLayout cardLayout;
     private String currentCard = "cardNewCourse";
     private TreeMap<String, Course> courseTreeMap;
-    private String pathCourse = "src/model/course/course.dat";
+    private String pathCourse = System.getProperty("user.dir")+"\\src\\model\\course\\courseList.dat";
     public CourseManager courseManager;
 
     public AdminController(CourseManager courseManager)
@@ -115,7 +115,7 @@ public class AdminController {
                                 new Server();
                             }catch (Exception ex){
                                 courseManager.rbServerOn.setSelected(false);
-                                JOptionPane.showMessageDialog(courseManager.cardMainPanelAdmin, "Server Error!", "Error", JOptionPane.ERROR_MESSAGE);
+                                JOptionPane.showMessageDialog(courseManager.cardMainPanelAdmin, "Server Error!", "Admin:Error", JOptionPane.ERROR_MESSAGE);
                             }
                         }
                     };
@@ -131,7 +131,7 @@ public class AdminController {
         if(this.courseTreeMap == null) {
             this.courseTreeMap = (TreeMap<String, Course>) FileProcess.readObject(this.pathCourse);
             if (this.courseTreeMap == null) {
-                JOptionPane.showMessageDialog(this.courseManager, "Can't load course data", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this.courseManager, "Can't load course data", "Admin:Error", JOptionPane.ERROR_MESSAGE);
             }
         }
     }
@@ -194,7 +194,7 @@ public class AdminController {
             {
                 if(saveCourse(id, name, numOfLession, description, courseTreeMap))
                 {
-                    JOptionPane.showMessageDialog(courseManager.cardMainPanelAdmin,"Add new Success", "Message", JOptionPane.PLAIN_MESSAGE);
+                    JOptionPane.showMessageDialog(courseManager.cardMainPanelAdmin,"Add new Success", "Admin:Message", JOptionPane.PLAIN_MESSAGE);
                 }
             }
             else

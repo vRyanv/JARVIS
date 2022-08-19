@@ -106,6 +106,10 @@ public class LoginController{
                 this.loginForm.dispose();
                 new CourseManager(email);
             }
+            else
+            {
+                this.loginForm.lbEmailOrPassWrong.setVisible(true);
+            }
         }
         else
         {

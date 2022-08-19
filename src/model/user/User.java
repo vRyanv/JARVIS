@@ -1,6 +1,7 @@
 package model.user;
 
 import java.io.Serializable;
+import java.util.TreeMap;
 
 public class User implements Serializable
 {
@@ -27,4 +28,5 @@ public class User implements Serializable
         this.email = email;
         this.password = password;
     }
+
 }

@@ -9,6 +9,7 @@ import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.TreeMap;
 
 public class Course implements Serializable {
     private String id;
@@ -23,6 +24,16 @@ public class Course implements Serializable {
         this.numberOfLessons = numberOfLessons;
         this.description = description;
         this.studentList = new ArrayList<>();
+    }
+
+    public boolean createCourseList(String path)
+    {
+        return FileProcess.writeObject(path, new TreeMap<String, Course>());
+    }
+
+    public static Object readCourseList(String path)
+    {
+        return FileProcess.readObject(path);
     }
 
     public String getId() {

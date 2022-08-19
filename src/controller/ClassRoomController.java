@@ -24,30 +24,39 @@ public class ClassRoomController {
     public ClassRoomController(CourseManager courseManager, String email)
     {
         this.courseManager = courseManager;
+        this.courseManager.btnSendMess.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                SendMess(courseManager.txtMess.getText());
+            }
+        });
         this.cardLayout = (CardLayout) courseManager.cardClassRoom.getLayout();
         this.courseManager.btnRoom1.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseReleased(MouseEvent e) {
-                if(Connect())
-                {
-                    try{
-                                receiver = new Thread(new Receiver(dis, courseManager));
-                                receiver.start();
-                                dos.writeUTF("intoRoom");
-                                cardLayout.show(courseManager.cardClassRoom, "cardRoom");
-                    }catch (Exception ex){
-                        JOptionPane.showMessageDialog(courseManager.cardClassRoom, "Can't into  room", "Error", JOptionPane.ERROR_MESSAGE);
-                    }
 
-                }
-                else
-                {
-                    JOptionPane.showMessageDialog(courseManager.cardClassRoom, "Can't connect to server", "Error", JOptionPane.ERROR_MESSAGE);
-                }
             }
         });
     }
+    private void enrollRoom()
+    {
+        if(Connect())
+        {
+            try{
+                receiver = new Thread(new Receiver(dis, courseManager));
+                receiver.start();
+                dos.writeUTF("intoRoom,");
+                cardLayout.show(courseManager.cardClassRoom, "cardRoom");
+            }catch (Exception ex){
+                JOptionPane.showMessageDialog(courseManager.cardClassRoom, "Can't into  room", "Error", JOptionPane.ERROR_MESSAGE);
+            }
 
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(courseManager.cardClassRoom, "Can't connect to server", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
     private boolean Connect()
     {
         try{
@@ -60,10 +69,14 @@ public class ClassRoomController {
         }
     }
 
-    private boolean enrollRoom()
+    private boolean SendMess(String mess)
     {
-
-        return false;
+        try {
+            dos.writeUTF("Mess,"+mess);
+            return true;
+        }catch (Exception ex){
+            return false;
+        }
     }
 }
 

@@ -3,7 +3,7 @@
     <output-path>$PROJECT_DIR$/out/artifacts/JARVIS_jar</output-path>
     <root id="archive" name="JARVIS.jar">
       <element id="module-output" name="JARVIS" />
-      <element id="extracted-dir" path="$PROJECT_DIR$/../../flatlaf-2.4.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../App/JformDesign/lib/flatlaf-2.4.jar" path-in-jar="/" />
     </root>
   </artifact>
 </component>

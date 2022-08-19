@@ -10,12 +10,18 @@
       <change beforePath="$PROJECT_DIR$/.idea/artifacts/JARVIS_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/JARVIS_jar.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/libraries/flatlaf_2_4.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/flatlaf_2_4.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JARVIS.jar" beforeDir="false" afterPath="$PROJECT_DIR$/JARVIS.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controller/AdminController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/AdminController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/controller/ClassRoomController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/ClassRoomController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controller/CourseController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/CourseController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/controller/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/LoginController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/server/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/Server.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/course/Course.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/course/Course.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/course/course.dat" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/course/courseList.dat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/user/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/user/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/CourseManager/CourseBox.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/CourseManager/CourseBox.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/CourseManager/CourseBox.jfd" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/CourseManager/CourseBox.jfd" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/view/CourseManager/CourseManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/CourseManager/CourseManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/view/CourseManager/CourseManager.jfd" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/CourseManager/CourseManager.jfd" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/LoginForm/LoginForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/LoginForm/LoginForm.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,8 +56,8 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "last_opened_file_path": "D:/flatlaf-2.4.jar",
-    "project.structure.last.edited": "Modules",
+    "last_opened_file_path": "D:/App/JformDesign/lib/flatlaf-2.4.jar",
+    "project.structure.last.edited": "Artifacts",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
     "settings.editor.selected.configurable": "preferences.lookFeel"
@@ -105,7 +111,6 @@
     </configuration>
     <configuration name="JARVIS" type="JarApplication">
       <option name="JAR_PATH" value="$PROJECT_DIR$/out/artifacts/JARVIS_jar/JARVIS.jar" />
-      <option name="WORKING_DIRECTORY" value="D:\java\JARVIS\out\artifacts\JARVIS_jar" />
       <option name="ALTERNATIVE_JRE_PATH" />
       <method v="2">
         <option name="BuildArtifacts" enabled="true">
