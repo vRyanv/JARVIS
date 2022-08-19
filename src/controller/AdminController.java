@@ -25,13 +25,10 @@ public class AdminController {
     private String pathCourse = "src/model/course/course.dat";
     public CourseManager courseManager;
 
-    public static void main(String[] args) {
-        FileProcess.writeObject("src/model/course/course.dat", new TreeMap<String, Course>());
-    }
-
     public AdminController(CourseManager courseManager)
     {
-        this.loadData();
+        this.courseManager = courseManager;
+        this.LoadData();
         this.cardLayout = (CardLayout) courseManager.cardMainPanelAdmin.getLayout();
         courseManager.lbNewCourse.addMouseListener(new MouseAdapter() {
             @Override
@@ -77,8 +74,7 @@ public class AdminController {
                 AddNewCourse(courseManager.txtCuorseId.getText(),
                 courseManager.txtCourseName.getText(),
                 Integer.parseInt(courseManager.spinnerLession.getValue().toString()),
-                courseManager.txtareaDecription.getText(),
-                courseManager.lbInvalidIdCourse, courseManager.lbInvalidCourseName, courseManager, courseTreeMap);
+                courseManager.txtareaDecription.getText());
             }
         });
 
@@ -130,14 +126,13 @@ public class AdminController {
         });
     }
 
-    private void loadData()
+    private void LoadData()
     {
-        this.courseTreeMap = (TreeMap<String, Course>) FileProcess.readObject(this.pathCourse);
-        if(this.courseTreeMap == null)
-        {
-            System.out.println("load data");
-            FileProcess.writeObject(pathCourse, new TreeMap<String, Course>());
+        if(this.courseTreeMap == null) {
             this.courseTreeMap = (TreeMap<String, Course>) FileProcess.readObject(this.pathCourse);
+            if (this.courseTreeMap == null) {
+                JOptionPane.showMessageDialog(this.courseManager, "Can't load course data", "Error", JOptionPane.ERROR_MESSAGE);
+            }
         }
     }
 
@@ -181,17 +176,17 @@ public class AdminController {
         cardLayout.show(cardMainAdmin, cardName);
     }
 
-    private void AddNewCourse(String id, String name, int numOfLession, String description, JLabel lbInvalidIdCourse, JLabel lbInvalidCourseName, CourseManager courseManager, TreeMap<String, Course> courseTreeMap)
+    private void AddNewCourse(String id, String name, int numOfLession, String description)
     {
         if(id.equals(""))
         {
-            lbInvalidIdCourse.setText("Enter id*");
-            lbInvalidIdCourse.setVisible(true);
+            courseManager.lbInvalidIdCourse.setText("Enter id*");
+            courseManager.lbInvalidIdCourse.setVisible(true);
         }
         else if(name.equals(""))
         {
-            lbInvalidCourseName.setText("Enter name*");
-            lbInvalidCourseName.setVisible(true);
+            courseManager.lbInvalidCourseName.setText("Enter name*");
+            courseManager.lbInvalidCourseName.setVisible(true);
         }
         else
         {
@@ -204,8 +199,8 @@ public class AdminController {
             }
             else
             {
-                lbInvalidIdCourse.setText("Id must be positive number*");
-                lbInvalidIdCourse.setVisible(true);
+                courseManager.lbInvalidIdCourse.setText("Id must be positive number*");
+                courseManager.lbInvalidIdCourse.setVisible(true);
             }
         }
     }

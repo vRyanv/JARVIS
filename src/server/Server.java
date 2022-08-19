@@ -23,7 +23,9 @@ public class Server
 
             while (serverIsOn)
             {
+                System.out.println("running");
                 socket = serverSocket.accept();
+                System.out.println("new User");
 
                 DataInputStream dis =new DataInputStream(socket.getInputStream());
                 DataOutputStream dos = new DataOutputStream(socket.getOutputStream());

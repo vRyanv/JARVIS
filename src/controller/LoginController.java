@@ -5,9 +5,11 @@ import model.user.User;
 import view.CourseManager.CourseManager;
 import view.LoginForm.LoginForm;
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.Arrays;
+import java.util.List;
 import java.util.TreeMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -19,7 +21,7 @@ public class LoginController{
     public LoginController(LoginForm loginForm, CardLayout cardLayout)
     {
         this.loginForm = loginForm;
-        userTreeMap = (TreeMap<String, User>) FileProcess.readObject(pathUserList);
+        this.LoadData();
 
         //===== login form =====
         loginForm.txtPass.addKeyListener(new KeyAdapter() {
@@ -83,19 +85,31 @@ public class LoginController{
         });
     }
 
-
-
+    private void LoadData()
+    {
+        if(this.userTreeMap == null)
+        {
+            this.userTreeMap = (TreeMap<String, User>) FileProcess.readObject(this.pathUserList);
+            if(this.userTreeMap == null)
+            {
+                JOptionPane.showMessageDialog(this.loginForm, "Can't load user data", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }
 
     private void loginProcess(String email, char[] pass)
     {
-        if(userTreeMap.get(email).getEmail().equals(email) || Arrays.equals(userTreeMap.get(email).getPassword(), pass))
+        if(this.userTreeMap.containsKey(email))
         {
-            loginForm.dispose();
-            new CourseManager();
+            if(Arrays.equals(this.userTreeMap.get(email).getPassword(), pass))
+            {
+                this.loginForm.dispose();
+                new CourseManager(email);
+            }
         }
         else
         {
-            loginForm.lbEmailOrPassWrong.setVisible(true);
+            this.loginForm.lbEmailOrPassWrong.setVisible(true);
         }
     }
 
@@ -177,9 +191,5 @@ public class LoginController{
         return FileProcess.writeObject(this.pathUserList ,this.userTreeMap);
     }
 
-    public static void main(String[] args) {
-//        TreeMap<String, User> userList = (TreeMap<String, User>) FileProcess.readObject("src/model/user/userList.dat");
-        FileProcess.writeObject("src/model/user/userList.dat", new TreeMap<String, User>());
-    }
 
 }

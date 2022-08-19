@@ -17,22 +17,25 @@ import javax.swing.GroupLayout;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 
 /**
  * @author khang
  */
 public class CourseManager extends JFrame {
+    private String email;
     private CardLayout cardLayout;
     public String currentCard = "cardCourse";
-    public CourseManager() {
+    public CourseManager(String Thread) {
         initComponents();
-        CourseConfig();
+        CourseConfig(Thread);
     }
 
-
-    private void CourseConfig()
+    private void CourseConfig(String email)
     {
         addController();
+        this.email = email;
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setTitle("Jarvis");
         this.setIconImage(Toolkit.getDefaultToolkit().getImage("src/images/iconTitle.jpg"));
@@ -63,7 +66,7 @@ public class CourseManager extends JFrame {
                 {
                     defaultController();
                     activeController(classRoomController, "cardClassRoom","CLASS ROOM", ColorCustom.yellow);
-                    new ClassRoomController(_courseManager);
+                    new ClassRoomController(_courseManager, email);
                 }
             }
         });
@@ -105,15 +108,6 @@ public class CourseManager extends JFrame {
         this.adminController.setOpaque(false);
     }
 
-    public static void main(String[] args) {
-        try{
-            UIManager.setLookAndFeel(new FlatDarculaLaf());
-        }catch (Exception ex){
-
-        }
-        new CourseManager();
-    }
-
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         // Generated using JFormDesigner Evaluation license - khang
@@ -128,6 +122,10 @@ public class CourseManager extends JFrame {
         cardPanel = new JPanel();
         cardCourse = new JPanel();
         cardClassRoom = new JPanel();
+        cardChooseRoom = new JPanel();
+        btnRoom2 = new JButton();
+        btnRoom1 = new JButton();
+        cardRoom = new JPanel();
         cardAdmin = new JPanel();
         toolbarAdmin = new JPanel();
         lbCourseManager = new JLabel();
@@ -159,14 +157,11 @@ public class CourseManager extends JFrame {
 
         //======== mainPanel ========
         {
-            mainPanel.setBorder(new javax.swing.border.CompoundBorder(new javax.swing.border.TitledBorder(
-            new javax.swing.border.EmptyBorder(0,0,0,0), "JF\u006frm\u0044es\u0069gn\u0065r \u0045va\u006cua\u0074io\u006e"
-            ,javax.swing.border.TitledBorder.CENTER,javax.swing.border.TitledBorder.BOTTOM
-            ,new java.awt.Font("D\u0069al\u006fg",java.awt.Font.BOLD,12)
-            ,java.awt.Color.red),mainPanel. getBorder()));mainPanel. addPropertyChangeListener(
-            new java.beans.PropertyChangeListener(){@Override public void propertyChange(java.beans.PropertyChangeEvent e
-            ){if("\u0062or\u0064er".equals(e.getPropertyName()))throw new RuntimeException()
-            ;}});
+            mainPanel.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing. border. EmptyBorder(
+            0, 0, 0, 0) , "JFor\u006dDesi\u0067ner \u0045valu\u0061tion", javax. swing. border. TitledBorder. CENTER, javax. swing. border. TitledBorder
+            . BOTTOM, new java .awt .Font ("Dia\u006cog" ,java .awt .Font .BOLD ,12 ), java. awt. Color.
+            red) ,mainPanel. getBorder( )) ); mainPanel. addPropertyChangeListener (new java. beans. PropertyChangeListener( ){ @Override public void propertyChange (java .
+            beans .PropertyChangeEvent e) {if ("bord\u0065r" .equals (e .getPropertyName () )) throw new RuntimeException( ); }} );
 
             //======== controllerPanel ========
             {
@@ -280,17 +275,58 @@ public class CourseManager extends JFrame {
                 //======== cardClassRoom ========
                 {
                     cardClassRoom.setBackground(new Color(31, 32, 70));
+                    cardClassRoom.setMaximumSize(null);
+                    cardClassRoom.setPreferredSize(new Dimension(800, 564));
+                    cardClassRoom.setLayout(new CardLayout());
 
-                    GroupLayout cardClassRoomLayout = new GroupLayout(cardClassRoom);
-                    cardClassRoom.setLayout(cardClassRoomLayout);
-                    cardClassRoomLayout.setHorizontalGroup(
-                        cardClassRoomLayout.createParallelGroup()
-                            .addGap(0, 800, Short.MAX_VALUE)
-                    );
-                    cardClassRoomLayout.setVerticalGroup(
-                        cardClassRoomLayout.createParallelGroup()
-                            .addGap(0, 564, Short.MAX_VALUE)
-                    );
+                    //======== cardChooseRoom ========
+                    {
+                        cardChooseRoom.setBackground(new Color(26, 27, 63));
+
+                        //---- btnRoom2 ----
+                        btnRoom2.setText("Room 2");
+
+                        //---- btnRoom1 ----
+                        btnRoom1.setText("Room 1");
+
+                        GroupLayout cardChooseRoomLayout = new GroupLayout(cardChooseRoom);
+                        cardChooseRoom.setLayout(cardChooseRoomLayout);
+                        cardChooseRoomLayout.setHorizontalGroup(
+                            cardChooseRoomLayout.createParallelGroup()
+                                .addGroup(cardChooseRoomLayout.createSequentialGroup()
+                                    .addGap(264, 264, 264)
+                                    .addComponent(btnRoom1)
+                                    .addGap(38, 38, 38)
+                                    .addComponent(btnRoom2)
+                                    .addContainerGap(286, Short.MAX_VALUE))
+                        );
+                        cardChooseRoomLayout.setVerticalGroup(
+                            cardChooseRoomLayout.createParallelGroup()
+                                .addGroup(cardChooseRoomLayout.createSequentialGroup()
+                                    .addGap(142, 142, 142)
+                                    .addGroup(cardChooseRoomLayout.createParallelGroup()
+                                        .addComponent(btnRoom1)
+                                        .addComponent(btnRoom2))
+                                    .addContainerGap(384, Short.MAX_VALUE))
+                        );
+                    }
+                    cardClassRoom.add(cardChooseRoom, "cardChooseRoom");
+
+                    //======== cardRoom ========
+                    {
+
+                        GroupLayout cardRoomLayout = new GroupLayout(cardRoom);
+                        cardRoom.setLayout(cardRoomLayout);
+                        cardRoomLayout.setHorizontalGroup(
+                            cardRoomLayout.createParallelGroup()
+                                .addGap(0, 800, Short.MAX_VALUE)
+                        );
+                        cardRoomLayout.setVerticalGroup(
+                            cardRoomLayout.createParallelGroup()
+                                .addGap(0, 564, Short.MAX_VALUE)
+                        );
+                    }
+                    cardClassRoom.add(cardRoom, "cardRoom");
                 }
                 cardPanel.add(cardClassRoom, "cardClassRoom");
 
@@ -614,7 +650,11 @@ public class CourseManager extends JFrame {
     private JLabel lbTitleHeader;
     private JPanel cardPanel;
     private JPanel cardCourse;
-    private JPanel cardClassRoom;
+    public JPanel cardClassRoom;
+    public JPanel cardChooseRoom;
+    public JButton btnRoom2;
+    public JButton btnRoom1;
+    public JPanel cardRoom;
     private JPanel cardAdmin;
     private JPanel toolbarAdmin;
     public JLabel lbCourseManager;

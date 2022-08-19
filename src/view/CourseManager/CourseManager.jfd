@@ -80,12 +80,51 @@ new FormModel {
 					}, new FormLayoutConstraints( class java.lang.String ) {
 						"value": "cardCourse"
 					} )
-					add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-						"$horizontalGroup": "par l {space :0:800:x}"
-						"$verticalGroup": "par l {space :0:564:x}"
-					} ) {
+					add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.CardLayout ) ) {
 						name: "cardClassRoom"
 						"background": new java.awt.Color( 31, 32, 70, 255 )
+						"maximumSize": sfield com.jformdesigner.model.FormObject NULL_VALUE
+						"preferredSize": new java.awt.Dimension( 800, 564 )
+						auxiliary() {
+							"JavaCodeGenerator.variableModifiers": 1
+						}
+						add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+							"$horizontalGroup": "par l {seq l {space :p:264:p, comp btnRoom1:::p::p, space :38:38:p, comp btnRoom2:::p::p, space ::286:x}}"
+							"$verticalGroup": "par l {seq l {space :p:142:p, par l {comp btnRoom1:::p::p, comp btnRoom2:::p::p}, space ::384:x}}"
+						} ) {
+							name: "cardChooseRoom"
+							"background": new java.awt.Color( 26, 27, 63, 255 )
+							auxiliary() {
+								"JavaCodeGenerator.variableModifiers": 1
+							}
+							add( new FormComponent( "javax.swing.JButton" ) {
+								name: "btnRoom2"
+								"text": "Room 2"
+								auxiliary() {
+									"JavaCodeGenerator.variableModifiers": 1
+								}
+							} )
+							add( new FormComponent( "javax.swing.JButton" ) {
+								name: "btnRoom1"
+								"text": "Room 1"
+								auxiliary() {
+									"JavaCodeGenerator.variableModifiers": 1
+								}
+							} )
+						}, new FormLayoutConstraints( class java.lang.String ) {
+							"value": "cardChooseRoom"
+						} )
+						add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+							"$horizontalGroup": "par l {space :0:800:x}"
+							"$verticalGroup": "par l {space :0:564:x}"
+						} ) {
+							name: "cardRoom"
+							auxiliary() {
+								"JavaCodeGenerator.variableModifiers": 1
+							}
+						}, new FormLayoutConstraints( class java.lang.String ) {
+							"value": "cardRoom"
+						} )
 					}, new FormLayoutConstraints( class java.lang.String ) {
 						"value": "cardClassRoom"
 					} )

@@ -14,7 +14,6 @@ public class FileProcess {
             objectOutputStream.close();
             return true;
         }catch (Exception ex){
-            System.err.println(ex);
             return false;
         }
 
