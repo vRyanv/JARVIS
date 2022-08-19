@@ -17,6 +17,7 @@ public class ClassRoomController {
     private String host = "localhost";
     private int port = 2108;
     private Socket socket;
+    private Thread receiver;
     private DataInputStream dis;
     private DataOutputStream dos;
     private String email;
@@ -29,7 +30,15 @@ public class ClassRoomController {
             public void mouseReleased(MouseEvent e) {
                 if(Connect())
                 {
-                    cardLayout.show(courseManager.cardClassRoom, "cardRoom");
+                    try{
+                                receiver = new Thread(new Receiver(dis, courseManager));
+                                receiver.start();
+                                dos.writeUTF("intoRoom");
+                                cardLayout.show(courseManager.cardClassRoom, "cardRoom");
+                    }catch (Exception ex){
+                        JOptionPane.showMessageDialog(courseManager.cardClassRoom, "Can't into  room", "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+
                 }
                 else
                 {
@@ -75,11 +84,12 @@ class Receiver implements Runnable
             while (true)
             {
                 String getResponseFromServer = dis.readUTF();
-                String[] ResponseElement = getResponseFromServer.split(",");
-                if(ResponseElement[0].equals("message"))
-                {
-                    NewMess();
-                }
+                System.out.println(getResponseFromServer);
+//                String[] ResponseElement = getResponseFromServer.split(",");
+//                if(ResponseElement[0].equals("message"))
+//                {
+//                    NewMess();
+//                }
             }
         }catch (Exception ex){
             JOptionPane.showMessageDialog(courseManager.cardClassRoom, "Something wrong", "Error", JOptionPane.ERROR_MESSAGE);

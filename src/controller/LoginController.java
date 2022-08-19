@@ -15,7 +15,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class LoginController{
-    public String pathUserList = "src/model/user/userList.dat";
+    public String pathUserList = System.getProperty("user.dir")+"\\src\\model\\user\\userList.dat";
     private TreeMap<String, User> userTreeMap;
     private LoginForm loginForm;
     public LoginController(LoginForm loginForm, CardLayout cardLayout)

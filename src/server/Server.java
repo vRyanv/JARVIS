@@ -34,7 +34,7 @@ public class Server
                 String[] requestElement = request.split(",");
                 if(requestElement[0].equals("intoRoom"))
                 {
-                    System.out.println("into room");
+                    dos.writeUTF(requestElement[0]);
                 }
             }
 

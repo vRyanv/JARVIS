@@ -1,4 +1,4 @@
-JFDML JFormDesigner: "7.0.7.0.1134" Java: "17.0.3" encoding: "UTF-8"
+JFDML JFormDesigner: "7.0.7.0.1134" Java: "11.0.15" encoding: "UTF-8"
 
 new FormModel {
 	contentType: "form/swing"
@@ -73,7 +73,7 @@ new FormModel {
 					"background": new java.awt.Color( 31, 32, 70, 255 )
 					add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
 						"$horizontalGroup": "par l {space :0:800:x}"
-						"$verticalGroup": "par l {space :0:564:x}"
+						"$verticalGroup": "par l {space :0:572:x}"
 					} ) {
 						name: "cardCourse"
 						"background": new java.awt.Color( 31, 32, 70, 255 )
@@ -89,8 +89,8 @@ new FormModel {
 							"JavaCodeGenerator.variableModifiers": 1
 						}
 						add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-							"$horizontalGroup": "par l {seq l {space :p:264:p, comp btnRoom1:::p::p, space :38:38:p, comp btnRoom2:::p::p, space ::286:x}}"
-							"$verticalGroup": "par l {seq l {space :p:142:p, par l {comp btnRoom1:::p::p, comp btnRoom2:::p::p}, space ::384:x}}"
+							"$horizontalGroup": "par l {seq l {space :p:264:p, comp btnRoom1:::p::p, space :38:38:p, comp btnRoom2:::p::p, space ::317:x}}"
+							"$verticalGroup": "par l {seq l {space :p:142:p, par l {comp btnRoom1:::p::p, comp btnRoom2:::p::p}, space ::400:x}}"
 						} ) {
 							name: "cardChooseRoom"
 							"background": new java.awt.Color( 26, 27, 63, 255 )
@@ -116,7 +116,7 @@ new FormModel {
 						} )
 						add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
 							"$horizontalGroup": "par l {space :0:800:x}"
-							"$verticalGroup": "par l {space :0:564:x}"
+							"$verticalGroup": "par l {space :0:572:x}"
 						} ) {
 							name: "cardRoom"
 							auxiliary() {
@@ -135,8 +135,8 @@ new FormModel {
 						name: "cardAdmin"
 						"background": new java.awt.Color( 31, 32, 70, 255 )
 						add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-							"$horizontalGroup": "par l {seq t {space :p:14:p, comp lbServerTitle:::p::p, space :::p, comp rbServerOn:::p::p, space :p:28:p, comp rbServerOff:::p::p, space :::x, comp lbNewCourse:::p:134:p, space u:::p, comp lbCourseManager:::p:134:p, space :::p}}"
-							"$verticalGroup": "par l {seq {space :::p, par l {par b:l {comp lbCourseManager::b:p:42:p, comp lbNewCourse::b:p:42:p}, seq t {par b {comp lbServerTitle::b:p::p, comp rbServerOn::b:p::p, comp rbServerOff::b:p::p}, space :::p}}}}"
+							"$horizontalGroup": "par l {seq t {space :p:14:p, comp lbServerTitle:::p::p, space :::p, comp rbServerOn:::p::p, space :p:28:p, comp rbServerOff:::p::p, space :::x, comp button1:::p::p, space :p:117:p, comp lbNewCourse:::p:134:p, space u:::p, comp lbCourseManager:::p:134:p, space :::p}}"
+							"$verticalGroup": "par l {seq {space :::p, par l {par b:l {comp lbCourseManager::b:p:42:p, comp lbNewCourse::b:p:42:p}, seq t {par b {comp lbServerTitle::b:p::p, comp rbServerOn::b:p::p, comp rbServerOff::b:p::p, comp button1::b:p::p}, space :::p}}}}"
 						} ) {
 							name: "toolbarAdmin"
 							"background": new java.awt.Color( 31, 32, 70, 255 )
@@ -194,6 +194,10 @@ new FormModel {
 								auxiliary() {
 									"JavaCodeGenerator.variableModifiers": 1
 								}
+							} )
+							add( new FormComponent( "javax.swing.JButton" ) {
+								name: "button1"
+								"text": "text"
 							} )
 						} )
 						add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.CardLayout ) ) {
@@ -328,8 +332,9 @@ new FormModel {
 									} ) {
 										name: "contanerCourseBoxPanel"
 										"background": new java.awt.Color( 31, 32, 70, 255 )
-										"maximumSize": new java.awt.Dimension( 32779, 32779 )
+										"maximumSize": new java.awt.Dimension( 100, 50 )
 										"inheritsPopupMenu": true
+										"preferredSize": new java.awt.Dimension( 100, 50 )
 									} )
 								} )
 							}, new FormLayoutConstraints( class java.lang.String ) {

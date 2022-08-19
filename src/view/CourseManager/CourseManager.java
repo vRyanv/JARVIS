@@ -30,6 +30,15 @@ public class CourseManager extends JFrame {
     public CourseManager(String Thread) {
         initComponents();
         CourseConfig(Thread);
+        this.button1.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                box _box = new box();
+                contanerCourseBoxPanel.add(_box, FlowLayout.LEFT);
+                contanerCourseBoxPanel.revalidate();
+                contanerCourseBoxPanel.repaint();
+            }
+        });
     }
 
     private void CourseConfig(String email)
@@ -133,6 +142,7 @@ public class CourseManager extends JFrame {
         lbServerTitle = new JLabel();
         rbServerOn = new JRadioButton();
         rbServerOff = new JRadioButton();
+        button1 = new JButton();
         cardMainPanelAdmin = new JPanel();
         cardNewCourse = new JPanel();
         label2 = new JLabel();
@@ -157,11 +167,13 @@ public class CourseManager extends JFrame {
 
         //======== mainPanel ========
         {
-            mainPanel.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing. border. EmptyBorder(
-            0, 0, 0, 0) , "JFor\u006dDesi\u0067ner \u0045valu\u0061tion", javax. swing. border. TitledBorder. CENTER, javax. swing. border. TitledBorder
-            . BOTTOM, new java .awt .Font ("Dia\u006cog" ,java .awt .Font .BOLD ,12 ), java. awt. Color.
-            red) ,mainPanel. getBorder( )) ); mainPanel. addPropertyChangeListener (new java. beans. PropertyChangeListener( ){ @Override public void propertyChange (java .
-            beans .PropertyChangeEvent e) {if ("bord\u0065r" .equals (e .getPropertyName () )) throw new RuntimeException( ); }} );
+            mainPanel.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax
+            . swing. border. EmptyBorder( 0, 0, 0, 0) , "JF\u006frmDesi\u0067ner Ev\u0061luatio\u006e", javax. swing
+            . border. TitledBorder. CENTER, javax. swing. border. TitledBorder. BOTTOM, new java .awt .
+            Font ("Dialo\u0067" ,java .awt .Font .BOLD ,12 ), java. awt. Color. red
+            ) ,mainPanel. getBorder( )) ); mainPanel. addPropertyChangeListener (new java. beans. PropertyChangeListener( ){ @Override
+            public void propertyChange (java .beans .PropertyChangeEvent e) {if ("borde\u0072" .equals (e .getPropertyName (
+            ) )) throw new RuntimeException( ); }} );
 
             //======== controllerPanel ========
             {
@@ -267,7 +279,7 @@ public class CourseManager extends JFrame {
                     );
                     cardCourseLayout.setVerticalGroup(
                         cardCourseLayout.createParallelGroup()
-                            .addGap(0, 564, Short.MAX_VALUE)
+                            .addGap(0, 572, Short.MAX_VALUE)
                     );
                 }
                 cardPanel.add(cardCourse, "cardCourse");
@@ -298,7 +310,7 @@ public class CourseManager extends JFrame {
                                     .addComponent(btnRoom1)
                                     .addGap(38, 38, 38)
                                     .addComponent(btnRoom2)
-                                    .addContainerGap(286, Short.MAX_VALUE))
+                                    .addContainerGap(317, Short.MAX_VALUE))
                         );
                         cardChooseRoomLayout.setVerticalGroup(
                             cardChooseRoomLayout.createParallelGroup()
@@ -307,7 +319,7 @@ public class CourseManager extends JFrame {
                                     .addGroup(cardChooseRoomLayout.createParallelGroup()
                                         .addComponent(btnRoom1)
                                         .addComponent(btnRoom2))
-                                    .addContainerGap(384, Short.MAX_VALUE))
+                                    .addContainerGap(400, Short.MAX_VALUE))
                         );
                     }
                     cardClassRoom.add(cardChooseRoom, "cardChooseRoom");
@@ -323,7 +335,7 @@ public class CourseManager extends JFrame {
                         );
                         cardRoomLayout.setVerticalGroup(
                             cardRoomLayout.createParallelGroup()
-                                .addGap(0, 564, Short.MAX_VALUE)
+                                .addGap(0, 572, Short.MAX_VALUE)
                         );
                     }
                     cardClassRoom.add(cardRoom, "cardRoom");
@@ -371,6 +383,9 @@ public class CourseManager extends JFrame {
                         rbServerOff.setForeground(Color.white);
                         rbServerOff.setSelected(true);
 
+                        //---- button1 ----
+                        button1.setText("text");
+
                         GroupLayout toolbarAdminLayout = new GroupLayout(toolbarAdmin);
                         toolbarAdmin.setLayout(toolbarAdminLayout);
                         toolbarAdminLayout.setHorizontalGroup(
@@ -383,6 +398,8 @@ public class CourseManager extends JFrame {
                                     .addGap(28, 28, 28)
                                     .addComponent(rbServerOff)
                                     .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(button1)
+                                    .addGap(117, 117, 117)
                                     .addComponent(lbNewCourse, GroupLayout.PREFERRED_SIZE, 134, GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
                                     .addComponent(lbCourseManager, GroupLayout.PREFERRED_SIZE, 134, GroupLayout.PREFERRED_SIZE)
@@ -400,7 +417,8 @@ public class CourseManager extends JFrame {
                                             .addGroup(toolbarAdminLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                                                 .addComponent(lbServerTitle)
                                                 .addComponent(rbServerOn)
-                                                .addComponent(rbServerOff))
+                                                .addComponent(rbServerOff)
+                                                .addComponent(button1))
                                             .addContainerGap())))
                         );
                     }
@@ -552,8 +570,9 @@ public class CourseManager extends JFrame {
                                 //======== contanerCourseBoxPanel ========
                                 {
                                     contanerCourseBoxPanel.setBackground(new Color(31, 32, 70));
-                                    contanerCourseBoxPanel.setMaximumSize(new Dimension(32779, 32779));
+                                    contanerCourseBoxPanel.setMaximumSize(new Dimension(100, 50));
                                     contanerCourseBoxPanel.setInheritsPopupMenu(true);
+                                    contanerCourseBoxPanel.setPreferredSize(new Dimension(100, 50));
                                     contanerCourseBoxPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
                                     ((FlowLayout)contanerCourseBoxPanel.getLayout()).setAlignOnBaseline(true);
                                 }
@@ -662,6 +681,7 @@ public class CourseManager extends JFrame {
     public JLabel lbServerTitle;
     public JRadioButton rbServerOn;
     public JRadioButton rbServerOff;
+    private JButton button1;
     public JPanel cardMainPanelAdmin;
     private JPanel cardNewCourse;
     private JLabel label2;

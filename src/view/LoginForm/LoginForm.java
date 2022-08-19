@@ -24,7 +24,7 @@ public class LoginForm extends JFrame {
     private void loginConfig()
     {
         this.setTitle("Jarvis");
-        this.setIconImage(Toolkit.getDefaultToolkit().getImage("src/images/iconTitle.jpg"));
+        this.setIconImage(Toolkit.getDefaultToolkit().getImage(System.getProperty("user.dir")+"\\src\\images\\iconTitle.jpg"));
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLocationRelativeTo(null);
         this.setVisible(true);
@@ -35,7 +35,7 @@ public class LoginForm extends JFrame {
 
     public static void main(String[] args) {
         try{
-            UIManager.setLookAndFeel(new FlatDarculaLaf());
+            UIManager.setLookAndFeel("com.formdev.flatlaf.FlatDarculaLaf");
         }catch (Exception ex){
 
         }
