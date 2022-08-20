@@ -16,14 +16,12 @@ public class Course implements Serializable {
     private String name;
     private int numberOfLessons;
     private String description;
-    private List<User> studentList;
 
     public Course(String id, String name, int numberOfLessons, String description) {
         this.id = id;
         this.name = name;
         this.numberOfLessons = numberOfLessons;
         this.description = description;
-        this.studentList = new ArrayList<>();
     }
 
     public boolean createCourseList(String path)
@@ -53,9 +51,6 @@ public class Course implements Serializable {
         return description;
     }
 
-    public List<User> getStudentList() {
-        return studentList;
-    }
 
     public void setId(String id) {
         this.id = id;
@@ -72,10 +67,6 @@ public class Course implements Serializable {
     public void setDescription(String description)
     {
         this.description = description;
-    }
-
-    public void setStudentList(List<User> studentList) {
-        this.studentList = studentList;
     }
 
 }

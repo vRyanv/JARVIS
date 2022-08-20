@@ -7,19 +7,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="34a4562e-e422-4f6a-9647-613949237cee" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/artifacts/JARVIS_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/JARVIS_jar.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/libraries/flatlaf_2_4.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/flatlaf_2_4.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JARVIS.jar" beforeDir="false" afterPath="$PROJECT_DIR$/JARVIS.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controller/AdminController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/AdminController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controller/ClassRoomController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/ClassRoomController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/controller/CourseController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/CourseController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controller/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/LoginController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/model/course/Course.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/course/Course.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/course/course.dat" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/course/courseList.dat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/user/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/user/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/CourseManager/CourseBox.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/CourseManager/CourseBox.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/CourseManager/CourseBox.jfd" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/CourseManager/CourseBox.jfd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/course/courseList.dat" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/course/courseList.dat" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/view/CourseManager/CourseManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/CourseManager/CourseManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/view/CourseManager/CourseManager.jfd" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/CourseManager/CourseManager.jfd" afterDir="false" />
     </list>
@@ -56,8 +48,8 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "last_opened_file_path": "D:/App/JformDesign/lib/flatlaf-2.4.jar",
-    "project.structure.last.edited": "Artifacts",
+    "last_opened_file_path": "D:/flatlaf-2.4.jar",
+    "project.structure.last.edited": "Libraries",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
     "settings.editor.selected.configurable": "preferences.lookFeel"
