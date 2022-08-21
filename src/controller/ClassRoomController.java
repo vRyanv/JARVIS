@@ -1,15 +1,22 @@
 package controller;
 
+import model.course.Course;
+import view.CourseBox.CourseBox;
 import view.CourseManager.CourseManager;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+import java.util.TreeMap;
 
 public class ClassRoomController {
     private CourseManager courseManager;
@@ -20,10 +27,21 @@ public class ClassRoomController {
     private Thread receiver;
     private DataInputStream dis;
     private DataOutputStream dos;
+    private TreeMap<String, Course> room;
+    private List<CourseBox> courseBoxList;
     private String email;
+    private String path = System.getProperty("user.dir")+"\\src\\model\\course\\courseList.dat";
     public ClassRoomController(CourseManager courseManager, String email)
     {
         this.courseManager = courseManager;
+        this.courseBoxList = new ArrayList<>();
+        this.LoadRoom();
+        this.courseManager.btnRefreshRoom.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                LoadRoom();
+            }
+        });
         this.courseManager.btnSendMess.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
@@ -31,21 +49,47 @@ public class ClassRoomController {
             }
         });
         this.cardLayout = (CardLayout) courseManager.cardClassRoom.getLayout();
-        this.courseManager.btnRoom1.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseReleased(MouseEvent e) {
 
-            }
-        });
     }
-    private void enrollRoom()
+
+    private void LoadRoom()
+    {
+        this.room = (TreeMap<String, Course>) Course.readCourseList(this.path);
+        if(this.room == null)
+        {
+            JOptionPane.showMessageDialog(courseManager.cardClassRoom, "Can't load room", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        else
+        {
+            courseManager.containerRoomPanel.removeAll();
+            for (Course course: this.room.values())
+            {
+                CourseBox courseBox = new CourseBox(course.getName(), course.getId());
+                courseBox.btnCourseId.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        enrollRoom(e.getActionCommand());
+                    }
+                });
+                this.courseBoxList.add(courseBox);
+                courseManager.containerRoomPanel.add(courseBox, FlowLayout.LEFT);
+            }
+            courseManager.containerRoomPanel.revalidate();
+            courseManager.containerRoomPanel.repaint();
+        }
+    }
+
+
+
+    //====== chat =====
+    private void enrollRoom(String roomId)
     {
         if(Connect())
         {
             try{
                 receiver = new Thread(new Receiver(dis, courseManager));
                 receiver.start();
-                dos.writeUTF("intoRoom,");
+                dos.writeUTF("intoRoom,"+roomId);
                 cardLayout.show(courseManager.cardClassRoom, "cardRoom");
             }catch (Exception ex){
                 JOptionPane.showMessageDialog(courseManager.cardClassRoom, "Can't into  room", "Error", JOptionPane.ERROR_MESSAGE);
@@ -114,3 +158,5 @@ class Receiver implements Runnable
 
     }
 }
+
+

@@ -4,8 +4,6 @@
 
 package view.LoginForm;
 
-import java.awt.event.*;
-import com.formdev.flatlaf.FlatDarculaLaf;
 import controller.LoginController;
 
 import java.awt.*;
@@ -34,11 +32,11 @@ public class LoginForm extends JFrame {
     }
 
     public static void main(String[] args) {
-        try{
-            UIManager.setLookAndFeel("com.formdev.flatlaf.FlatDarculaLaf");
-        }catch (Exception ex){
-
-        }
+//        try{
+////            UIManager.setLookAndFeel("com.formdev.flatlaf.FlatDarculaLaf");
+//        }catch (Exception ex){
+//
+//        }
         new LoginForm();
     }
 

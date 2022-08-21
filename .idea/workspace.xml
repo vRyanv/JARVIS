@@ -7,13 +7,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="34a4562e-e422-4f6a-9647-613949237cee" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/flatlaf_2_4.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/flatlaf_2_4.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/view/CourseBox/CourseBox.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/view/EditCourseDialog/EditCourseDialog.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/view/EditCourseDialog/EditCourseDialog.jfd" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controller/CourseController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/CourseController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/course/Course.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/course/Course.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controller/AdminController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/AdminController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controller/ClassRoomController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/ClassRoomController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controller/CourseController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/library/fileProcess/FileProcess.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/library/fileProcess/FileProcess.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/model/course/courseList.dat" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/course/courseList.dat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/CourseManager/CourseBox.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/CourseManager/CourseBox.jfd" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/view/CourseManager/CourseManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/CourseManager/CourseManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/view/CourseManager/CourseManager.jfd" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/CourseManager/CourseManager.jfd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/LoginForm/LoginForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/LoginForm/LoginForm.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,7 +51,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "Project.color": "036860",
+    "Project.color": "000f0e",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
@@ -62,12 +69,25 @@
   }
 }]]></component>
   <component name="RunManager" selected="Application.LoginForm">
-    <configuration name="CourseManager" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="view.CourseManager.CourseManager" />
+    <configuration name="EditCourseDialog" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="view.EditCourseDialog.EditCourseDialog" />
       <module name="JARVIS" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="view.CourseManager.*" />
+          <option name="PATTERN" value="view.EditCourseDialog.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="FileProcess" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="library.fileProcess.FileProcess" />
+      <module name="JARVIS" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="library.fileProcess.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -116,7 +136,8 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Application.CourseManager" />
+      <item itemvalue="Application.EditCourseDialog" />
+      <item itemvalue="Application.FileProcess" />
       <item itemvalue="Application.LoginController" />
       <item itemvalue="Application.LoginForm" />
       <item itemvalue="JAR Application.JARVIS" />
@@ -125,9 +146,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.LoginForm" />
+        <item itemvalue="Application.EditCourseDialog" />
+        <item itemvalue="Application.FileProcess" />
         <item itemvalue="JAR Application.JARVIS.jar" />
         <item itemvalue="Application.LoginController" />
-        <item itemvalue="Application.CourseManager" />
       </list>
     </recent_temporary>
   </component>

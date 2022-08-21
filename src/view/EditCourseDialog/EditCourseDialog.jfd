@@ -1,0 +1,152 @@
+JFDML JFormDesigner: "7.0.7.0.1134" Java: "17.0.3" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormWindow( "javax.swing.JDialog", new FormLayoutManager( class java.awt.BorderLayout ) ) {
+			name: "this"
+			"minimumSize": new java.awt.Dimension( 900, 580 )
+			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.BorderLayout ) ) {
+				name: "dialogPane"
+				"border": new javax.swing.border.EmptyBorder( 12, 12, 12, 12 )
+				"preferredSize": new java.awt.Dimension( 100, 50 )
+				"maximumSize": new java.awt.Dimension( 100, 50 )
+				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+					"$horizontalGroup": "par l {seq l {space :p:25:p, par l {comp label2:::p:92:p, comp label4:::p:147:p, comp spinnerLession:::p:232:p, comp label5:::p:147:p, seq l {space :1:1:p, comp txtareaDecription:::p:766:p}, seq {par l {comp txtCuorseId::l:p:232:p, comp label3::l:p:92:p, comp txtCourseName::l:p:232:p}, space u:::p, par l {comp lbInvalidIdCourse:::p:265:p, comp lbInvalidCourseName:::p:265:p}}}, space ::22:x}}"
+					"$verticalGroup": "par l {seq l {comp label2:::p:35:p, space :6:6:p, par t {seq {comp txtCuorseId:::p:34:p, space :12:12:p, comp label3:::p:35:p, space :6:6:p, comp txtCourseName:::p:34:p}, seq {comp lbInvalidIdCourse:::p::p, space :66:66:p, comp lbInvalidCourseName:::p::p}}, space :p:6:p, comp label4:::p:35:p, space :6:6:p, comp spinnerLession:::p:39:p, space :12:12:p, comp label5:::p:35:p, space :7:7:p, comp txtareaDecription:::p:133:p, space :0:11:x}}"
+				} ) {
+					name: "contentPanel"
+					"maximumSize": sfield com.jformdesigner.model.FormObject NULL_VALUE
+					"preferredSize": new java.awt.Dimension( 798, 435 )
+					"background": new java.awt.Color( 31, 32, 70, 255 )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "label2"
+						"text": "Course id"
+						"foreground": &Color0 new java.awt.Color( 255, 255, 255, 255 )
+					} )
+					add( new FormComponent( "javax.swing.JTextField" ) {
+						name: "txtCuorseId"
+						"foreground": sfield java.awt.Color white
+						"selectedTextColor": sfield java.awt.Color black
+						"selectionColor": new java.awt.Color( 255, 255, 255, 255 )
+						"editable": false
+						auxiliary() {
+							"JavaCodeGenerator.variableModifiers": 1
+						}
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "label3"
+						"text": "Course name"
+						"foreground": #Color0
+					} )
+					add( new FormComponent( "javax.swing.JTextField" ) {
+						name: "txtCourseName"
+						"foreground": sfield java.awt.Color white
+						"selectionColor": &Color1 new java.awt.Color( 255, 255, 255, 255 )
+						"selectedTextColor": sfield java.awt.Color black
+						auxiliary() {
+							"JavaCodeGenerator.variableModifiers": 1
+						}
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "label4"
+						"text": "number Of Lessons"
+						"foreground": #Color0
+					} )
+					add( new FormComponent( "javax.swing.JSpinner" ) {
+						name: "spinnerLession"
+						"model": new javax.swing.SpinnerNumberModel {
+							minimum: 0
+						}
+						auxiliary() {
+							"JavaCodeGenerator.variableModifiers": 1
+						}
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "label5"
+						"text": "Description"
+						"foreground": #Color0
+					} )
+					add( new FormComponent( "javax.swing.JTextArea" ) {
+						name: "txtareaDecription"
+						"foreground": sfield java.awt.Color white
+						"selectionColor": #Color1
+						"selectedTextColor": sfield java.awt.Color black
+						auxiliary() {
+							"JavaCodeGenerator.variableModifiers": 1
+						}
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "lbInvalidCourseName"
+						"text": "text"
+						"foreground": &Color2 new java.awt.Color( 229, 128, 131, 255 )
+						"font": &Font0 new java.awt.Font( "JetBrains Mono", 0, 15 )
+						"visible": false
+						auxiliary() {
+							"JavaCodeGenerator.variableModifiers": 1
+						}
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "lbInvalidIdCourse"
+						"text": "text"
+						"foreground": #Color2
+						"font": #Font0
+						"visible": false
+						auxiliary() {
+							"JavaCodeGenerator.variableModifiers": 1
+						}
+					} )
+				}, new FormLayoutConstraints( class java.lang.String ) {
+					"value": "Center"
+				} )
+				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.GridBagLayout ) {
+					"$columnSpecs": "0:1.0, 0, 80, 80"
+					"$rowSpecs": "0"
+					"$hGap": 5
+					"$vGap": 5
+				} ) {
+					name: "buttonBar"
+					"border": new javax.swing.border.EmptyBorder( 12, 0, 0, 0 )
+					add( new FormComponent( "javax.swing.JButton" ) {
+						name: "btnSaveEdit"
+						"text": "Save"
+						auxiliary() {
+							"JavaCodeGenerator.variableModifiers": 1
+						}
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+						"gridx": 1
+					} )
+					add( new FormComponent( "javax.swing.JButton" ) {
+						name: "btnDeleteCourse"
+						"text": "Delete"
+						"cursor": &Cursor0 new java.awt.Cursor( 12 )
+						auxiliary() {
+							"JavaCodeGenerator.variableModifiers": 1
+						}
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+						"gridx": 2
+						"gridy": 0
+					} )
+					add( new FormComponent( "javax.swing.JButton" ) {
+						name: "btnCancelEdit"
+						"text": "Cancel"
+						"cursor": #Cursor0
+						auxiliary() {
+							"JavaCodeGenerator.variableModifiers": 1
+						}
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+						"gridx": 3
+						"gridy": 0
+					} )
+				}, new FormLayoutConstraints( class java.lang.String ) {
+					"value": "South"
+				} )
+			}, new FormLayoutConstraints( class java.lang.String ) {
+				"value": "Center"
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 0, 0 )
+			"size": new java.awt.Dimension( 840, 560 )
+		} )
+	}
+}

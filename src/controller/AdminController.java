@@ -5,12 +5,13 @@ import model.course.Course;
 import library.fileProcess.FileProcess;
 import model.user.User;
 import server.Server;
+import view.CourseBox.CourseBox;
 import view.CourseManager.CourseManager;
+import view.EditCourseDialog.EditCourseDialog;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.TreeMap;
@@ -22,8 +23,10 @@ public class AdminController {
     private CardLayout cardLayout;
     private String currentCard = "cardNewCourse";
     private TreeMap<String, Course> courseTreeMap;
+    private List<CourseBox> courseBoxList;
     private String pathCourse = System.getProperty("user.dir")+"\\src\\model\\course\\courseList.dat";
     public CourseManager courseManager;
+    private EditCourseDialog editCourseDialog;
 
     public AdminController(CourseManager courseManager)
     {
@@ -54,6 +57,7 @@ public class AdminController {
             public void mouseClicked(MouseEvent e) {
                 DefaultStateController(courseManager.lbCourseManager, courseManager.lbNewCourse);
                 ChangeStateActive(courseManager.lbCourseManager, "press","cardCourseManager");
+                LoadData();
                 showCard(cardLayout, courseManager.cardMainPanelAdmin, "cardCourseManager");
             }
 
@@ -124,15 +128,33 @@ public class AdminController {
                 }
             }
         });
+
     }
 
     private void LoadData()
     {
-        if(this.courseTreeMap == null) {
-            this.courseTreeMap = (TreeMap<String, Course>) FileProcess.readObject(this.pathCourse);
-            if (this.courseTreeMap == null) {
-                JOptionPane.showMessageDialog(this.courseManager, "Can't load course data", "Admin:Error", JOptionPane.ERROR_MESSAGE);
+        this.courseTreeMap = (TreeMap<String, Course>) Course.readCourseList(this.pathCourse);
+        if (this.courseTreeMap == null) {
+            JOptionPane.showMessageDialog(this.courseManager, "Can't load course data", "Admin:Error", JOptionPane.ERROR_MESSAGE);
+        }
+        else
+        {
+            this.courseBoxList = new ArrayList<>();
+            courseManager.contanerCourseBoxPanel.removeAll();
+            for (Course course: this.courseTreeMap.values())
+            {
+                CourseBox courseBox = new CourseBox(course.getName(), course.getId());
+                courseBox.btnCourseId.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        ShowDialogCourseDetail(e.getActionCommand());
+                    }
+                });
+                this.courseBoxList.add(courseBox);
+                courseManager.contanerCourseBoxPanel.add(courseBox, FlowLayout.LEFT);
             }
+            courseManager.contanerCourseBoxPanel.revalidate();
+            courseManager.contanerCourseBoxPanel.repaint();
         }
     }
 
@@ -183,6 +205,11 @@ public class AdminController {
             courseManager.lbInvalidIdCourse.setText("Enter id*");
             courseManager.lbInvalidIdCourse.setVisible(true);
         }
+        else if(courseTreeMap.containsKey(id))
+        {
+            courseManager.lbInvalidIdCourse.setText("ID existed*");
+            courseManager.lbInvalidIdCourse.setVisible(true);
+        }
         else if(name.equals(""))
         {
             courseManager.lbInvalidCourseName.setText("Enter name*");
@@ -192,7 +219,7 @@ public class AdminController {
         {
             if(Regex("[0-9]+",id))
             {
-                if(saveCourse(id, name, numOfLession, description, courseTreeMap))
+                if(saveCourse(id, name, numOfLession, description, "newCourse"))
                 {
                     JOptionPane.showMessageDialog(courseManager.cardMainPanelAdmin,"Add new Success", "Admin:Message", JOptionPane.PLAIN_MESSAGE);
                 }
@@ -205,10 +232,149 @@ public class AdminController {
         }
     }
 
-    private boolean saveCourse(String id, String name, int numOfLession, String description, TreeMap<String, Course> courseTreeMap)
+    private void ShowDialogCourseDetail(String courseId)
     {
-        Course course = new Course(id, name, numOfLession, description);
-        courseTreeMap.put(id, course);
+        if(editCourseDialog == null)
+        {
+            EditDialogConfig();
+            LoadDataCourseDetail(courseId);
+        }
+        else
+        {
+            LoadDataCourseDetail(courseId);
+            editCourseDialog.setVisible(true);
+        }
+    }
+
+    private void EditDialogConfig()
+    {
+        editCourseDialog = new EditCourseDialog(courseManager.getOwner());
+
+        editCourseDialog.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                int choice = JOptionPane.showConfirmDialog(editCourseDialog,
+                        "Want to save changes ?", "Confirm",
+                        JOptionPane.OK_CANCEL_OPTION);
+
+                if(choice == JOptionPane.OK_OPTION)
+                {
+                    saveCourse(editCourseDialog.txtCuorseId.getText(),
+                            editCourseDialog.txtCourseName.getText(),
+                            Integer.parseInt(editCourseDialog.spinnerLession.getValue().toString()),
+                            editCourseDialog.txtareaDecription.getText(),
+                            "editCourse");
+                    courseManager.contanerCourseBoxPanel.removeAll();
+                    LoadData();
+                    editCourseDialog.dispose();
+                }
+                else
+                {
+                    editCourseDialog.dispose();
+                }
+            }
+        });
+
+        editCourseDialog.btnSaveEdit.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                saveCourse(editCourseDialog.txtCuorseId.getText(),
+                        editCourseDialog.txtCourseName.getText(),
+                        Integer.parseInt(editCourseDialog.spinnerLession.getValue().toString()),
+                        editCourseDialog.txtareaDecription.getText(),
+                        "editCourse");
+                courseManager.contanerCourseBoxPanel.removeAll();
+                LoadData();
+                editCourseDialog.dispose();
+            }
+        });
+
+        editCourseDialog.btnDeleteCourse.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                DeleteCourse();
+            }
+        });
+
+        editCourseDialog.btnCancelEdit.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                editCourseDialog.dispose();
+            }
+        });
+
+
+    }
+
+    private void DeleteCourse()
+    {
+        String courseId = editCourseDialog.txtCuorseId.getText();
+        if(courseTreeMap.containsKey(courseId))
+        {
+            int choice = JOptionPane.showConfirmDialog(editCourseDialog,
+                    "Delete course with ID: "+ courseId,
+                    "Confirm", JOptionPane.OK_CANCEL_OPTION);
+            if(choice == JOptionPane.OK_OPTION)
+            {
+                courseTreeMap.remove(courseId);
+                if(FileProcess.writeObject(pathCourse, courseTreeMap))
+                {
+                    courseManager.contanerCourseBoxPanel.removeAll();
+                    LoadData();
+                    editCourseDialog.dispose();
+                }
+                else
+                {
+                    JOptionPane.showMessageDialog(editCourseDialog,
+                            "Delete fail", "Erorr",
+                            JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(editCourseDialog,
+                    "Not found course ID: "+courseId,"Erorr",
+                    JOptionPane.ERROR_MESSAGE);
+        }
+
+    }
+
+    private void LoadDataCourseDetail(String courseId)
+    {
+        if(this.courseTreeMap.containsKey(courseId))
+        {
+            for (Course course: courseTreeMap.values())
+            {
+                if(course.getId().equals(courseId))
+                {
+                    editCourseDialog.txtCuorseId.setText(courseId);
+                    editCourseDialog.txtCourseName.setText(course.getName());
+                    editCourseDialog.spinnerLession.setValue(course.getNumberOfLessons());
+                    editCourseDialog.txtareaDecription.setText(course.getDescription());
+                    break;
+                }
+            }
+        }
+        else
+        {
+            JOptionPane.showConfirmDialog(courseManager.cardMainPanelAdmin, "Admin: Not found course with ID: "+courseId, "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    private boolean saveCourse(String id, String name, int numOfLession, String description, String type)
+    {
+        if(type.equals("newCourse"))
+        {
+            Course course = new Course(id, name, numOfLession, description);
+            courseTreeMap.put(id, course);
+        }
+        else
+        {
+            courseTreeMap.get(id).setName(name);
+            courseTreeMap.get(id).setNumberOfLessons(numOfLession);
+            courseTreeMap.get(id).setDescription(description);
+        }
         return FileProcess.writeObject(pathCourse, courseTreeMap);
     }
 
