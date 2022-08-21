@@ -3,10 +3,7 @@ package library.fileProcess;
 import com.sun.tools.javac.Main;
 import model.course.Course;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.util.TreeMap;
 
 public class FileProcess {
@@ -20,13 +17,26 @@ public class FileProcess {
         }catch (Exception ex){
             return false;
         }
-
     }
+
 
     public static Object readObject(String path)
     {
         try {
             ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(path));
+            Object object =  objectInputStream.readObject();
+            objectInputStream.close();
+            return object;
+        }catch (Exception ex){
+            return null;
+        }
+    }
+
+    public static Object readObject(File file)
+    {
+        try {
+
+            ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(file));
             Object object =  objectInputStream.readObject();
             objectInputStream.close();
             return object;

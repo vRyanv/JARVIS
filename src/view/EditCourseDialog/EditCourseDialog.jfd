@@ -12,8 +12,8 @@ new FormModel {
 				"preferredSize": new java.awt.Dimension( 100, 50 )
 				"maximumSize": new java.awt.Dimension( 100, 50 )
 				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-					"$horizontalGroup": "par l {seq l {space :p:25:p, par l {comp label2:::p:92:p, comp label4:::p:147:p, comp spinnerLession:::p:232:p, comp label5:::p:147:p, seq l {space :1:1:p, comp txtareaDecription:::p:766:p}, seq {par l {comp txtCuorseId::l:p:232:p, comp label3::l:p:92:p, comp txtCourseName::l:p:232:p}, space u:::p, par l {comp lbInvalidIdCourse:::p:265:p, comp lbInvalidCourseName:::p:265:p}}}, space ::22:x}}"
-					"$verticalGroup": "par l {seq l {comp label2:::p:35:p, space :6:6:p, par t {seq {comp txtCuorseId:::p:34:p, space :12:12:p, comp label3:::p:35:p, space :6:6:p, comp txtCourseName:::p:34:p}, seq {comp lbInvalidIdCourse:::p::p, space :66:66:p, comp lbInvalidCourseName:::p::p}}, space :p:6:p, comp label4:::p:35:p, space :6:6:p, comp spinnerLession:::p:39:p, space :12:12:p, comp label5:::p:35:p, space :7:7:p, comp txtareaDecription:::p:133:p, space :0:11:x}}"
+					"$horizontalGroup": "par l {seq l {space :p:25:p, par l {comp label2:::p:92:p, comp label4:::p:147:p, comp spinnerLession:::p:232:p, comp label5:::p:147:p, seq l {space :1:1:p, comp txtareaDecription:::p:766:p}, seq {par l {comp txtCourseId::l:p:232:p, comp label3::l:p:92:p, comp txtCourseName::l:p:232:p}, space u:::p, par l {comp lbInvalidIdCourse:::p:265:p, comp lbInvalidCourseName:::p:265:p}}}, space ::22:x}}"
+					"$verticalGroup": "par l {seq l {comp label2:::p:35:p, space :6:6:p, par t {seq {comp txtCourseId:::p:34:p, space :12:12:p, comp label3:::p:35:p, space :6:6:p, comp txtCourseName:::p:34:p}, seq {comp lbInvalidIdCourse:::p::p, space :66:66:p, comp lbInvalidCourseName:::p::p}}, space :p:6:p, comp label4:::p:35:p, space :6:6:p, comp spinnerLession:::p:39:p, space :12:12:p, comp label5:::p:35:p, space :7:7:p, comp txtareaDecription:::p:133:p, space :0:11:x}}"
 				} ) {
 					name: "contentPanel"
 					"maximumSize": sfield com.jformdesigner.model.FormObject NULL_VALUE
@@ -25,7 +25,7 @@ new FormModel {
 						"foreground": &Color0 new java.awt.Color( 255, 255, 255, 255 )
 					} )
 					add( new FormComponent( "javax.swing.JTextField" ) {
-						name: "txtCuorseId"
+						name: "txtCourseId"
 						"foreground": sfield java.awt.Color white
 						"selectedTextColor": sfield java.awt.Color black
 						"selectionColor": new java.awt.Color( 255, 255, 255, 255 )
@@ -110,6 +110,8 @@ new FormModel {
 					add( new FormComponent( "javax.swing.JButton" ) {
 						name: "btnSaveEdit"
 						"text": "Save"
+						"foreground": sfield java.awt.Color white
+						"background": new java.awt.Color( 33, 204, 121, 255 )
 						auxiliary() {
 							"JavaCodeGenerator.variableModifiers": 1
 						}
@@ -120,6 +122,8 @@ new FormModel {
 						name: "btnDeleteCourse"
 						"text": "Delete"
 						"cursor": &Cursor0 new java.awt.Cursor( 12 )
+						"background": new java.awt.Color( 229, 53, 37, 255 )
+						"foreground": sfield java.awt.Color white
 						auxiliary() {
 							"JavaCodeGenerator.variableModifiers": 1
 						}
@@ -131,6 +135,8 @@ new FormModel {
 						name: "btnCancelEdit"
 						"text": "Cancel"
 						"cursor": #Cursor0
+						"background": new java.awt.Color( 250, 176, 5, 255 )
+						"foreground": sfield java.awt.Color white
 						auxiliary() {
 							"JavaCodeGenerator.variableModifiers": 1
 						}

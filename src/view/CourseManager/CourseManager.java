@@ -7,6 +7,7 @@ package view.CourseManager;
 import javax.swing.border.*;
 import controller.AdminController;
 import controller.ClassRoomController;
+import controller.CourseManagerController;
 import library.colorCustom.ColorCustom;
 import library.fileProcess.FileProcess;
 import view.CourseBox.CourseBox;
@@ -25,95 +26,14 @@ import java.io.DataOutputStream;
  */
 public class CourseManager extends JFrame {
     private String email;
-    private CardLayout cardLayout;
-    public String currentCard = "cardCourse";
+
     public CourseManager(String email) {
         initComponents();
-        CourseConfig(email);
-    }
-
-
-
-    private void CourseConfig(String email)
-    {
-        this.email = email;
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setTitle("Jarvis");
-        this.setIconImage(Toolkit.getDefaultToolkit().getImage("src/images/iconTitle.jpg"));
-        AddController();
-        ChangeView();
+        new CourseManagerController(this, email);
         this.setVisible(true);
     }
 
-    private void AddController()
-    {
-//        new CourseController(this);
-        new ClassRoomController(this, email);
-        new AdminController(this);
-    }
 
-    private void ChangeView()
-    {
-        cardLayout = (CardLayout) this.cardPanel.getLayout();
-
-        activeController(courseController, "cardCourse","COURSE", ColorCustom.orange);
-        this.courseController.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mousePressed(MouseEvent e) {
-                if(!currentCard.equals("cardCourse") )
-                {
-                    defaultController();
-                    activeController(courseController, "cardCourse","COURSE", ColorCustom.orange);
-                }
-            }
-        });
-        this.classRoomController.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mousePressed(MouseEvent e) {
-                if(!currentCard.equals("cardClassRoom"))
-                {
-                    defaultController();
-                    activeController(classRoomController, "cardClassRoom","CLASS ROOM", ColorCustom.yellow);
-
-                }
-            }
-        });
-        this.adminController.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mousePressed(MouseEvent e) {
-                if(!currentCard.equals("cardAdmin"))
-                {
-                    defaultController();
-                    activeController(adminController, "cardAdmin","ADMIN", ColorCustom.red);
-                }
-            }
-        });
-
-    }
-
-    private void activeController(JLabel controller, String _currentCard, String title, Color color)
-    {
-        lbTitleHeader.setText(title);
-        lbTitleHeader.setForeground(Color.white);
-        titlePanel.setBackground(color);
-        controller.setHorizontalAlignment(SwingConstants.CENTER);
-        controller.setBackground(color);
-        controller.setOpaque(true);
-        currentCard = _currentCard;
-        cardLayout.show(cardPanel, _currentCard);
-    }
-
-    private void defaultController()
-    {
-        this.courseController.setHorizontalAlignment(SwingConstants.LEFT);
-        this.courseController.setOpaque(false);
-
-        this.classRoomController.setHorizontalAlignment(SwingConstants.LEFT);
-        this.classRoomController.setOpaque(false);
-
-        this.adminController.setHorizontalAlignment(SwingConstants.LEFT);
-        this.adminController.setOpaque(false);
-    }
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
@@ -155,7 +75,7 @@ public class CourseManager extends JFrame {
         label3 = new JLabel();
         label4 = new JLabel();
         label5 = new JLabel();
-        txtCuorseId = new JTextField();
+        txtCourseId = new JTextField();
         txtCourseName = new JTextField();
         scrollPane1 = new JScrollPane();
         txtareaDecription = new JTextArea();
@@ -167,18 +87,21 @@ public class CourseManager extends JFrame {
         cardCourseManager = new JPanel();
         scrollPane3 = new JScrollPane();
         contanerCourseBoxPanel = new JPanel();
+        btnLoadDataFromDisk = new JLabel();
+        btnSaveAs = new JButton();
 
         //======== this ========
         var contentPane = getContentPane();
 
         //======== mainPanel ========
         {
-            mainPanel.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing. border. EmptyBorder
-            ( 0, 0, 0, 0) , "JF\u006frmDesi\u0067ner Ev\u0061luatio\u006e", javax. swing. border. TitledBorder. CENTER, javax. swing. border
-            . TitledBorder. BOTTOM, new java .awt .Font ("Dialo\u0067" ,java .awt .Font .BOLD ,12 ), java. awt
-            . Color. red) ,mainPanel. getBorder( )) ); mainPanel. addPropertyChangeListener (new java. beans. PropertyChangeListener( ){ @Override public void
-            propertyChange (java .beans .PropertyChangeEvent e) {if ("borde\u0072" .equals (e .getPropertyName () )) throw new RuntimeException( )
-            ; }} );
+            mainPanel.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax
+            . swing. border. EmptyBorder( 0, 0, 0, 0) , "JF\u006frmDes\u0069gner \u0045valua\u0074ion", javax. swing
+            . border. TitledBorder. CENTER, javax. swing. border. TitledBorder. BOTTOM, new java .awt .
+            Font ("D\u0069alog" ,java .awt .Font .BOLD ,12 ), java. awt. Color. red
+            ) ,mainPanel. getBorder( )) ); mainPanel. addPropertyChangeListener (new java. beans. PropertyChangeListener( ){ @Override
+            public void propertyChange (java .beans .PropertyChangeEvent e) {if ("\u0062order" .equals (e .getPropertyName (
+            ) )) throw new RuntimeException( ); }} );
 
             //======== controllerPanel ========
             {
@@ -304,7 +227,7 @@ public class CourseManager extends JFrame {
                                 .addGroup(cardCourseLayout.createParallelGroup()
                                     .addComponent(scrollPane2, GroupLayout.DEFAULT_SIZE, 848, Short.MAX_VALUE)
                                     .addGroup(GroupLayout.Alignment.TRAILING, cardCourseLayout.createSequentialGroup()
-                                        .addContainerGap(719, Short.MAX_VALUE)
+                                        .addContainerGap(726, Short.MAX_VALUE)
                                         .addComponent(btnRefreshCourseList)
                                         .addGap(8, 8, 8)))
                                 .addContainerGap())
@@ -391,7 +314,7 @@ public class CourseManager extends JFrame {
                                 panel2Layout.createParallelGroup()
                                     .addGroup(GroupLayout.Alignment.TRAILING, panel2Layout.createSequentialGroup()
                                         .addContainerGap()
-                                        .addComponent(txtMess, GroupLayout.DEFAULT_SIZE, 676, Short.MAX_VALUE)
+                                        .addComponent(txtMess, GroupLayout.DEFAULT_SIZE, 680, Short.MAX_VALUE)
                                         .addGap(18, 18, 18)
                                         .addComponent(btnSendMess)
                                         .addGap(48, 48, 48))
@@ -543,10 +466,10 @@ public class CourseManager extends JFrame {
                             label5.setText("Description");
                             label5.setForeground(Color.white);
 
-                            //---- txtCuorseId ----
-                            txtCuorseId.setForeground(Color.white);
-                            txtCuorseId.setSelectedTextColor(Color.black);
-                            txtCuorseId.setSelectionColor(Color.white);
+                            //---- txtCourseId ----
+                            txtCourseId.setForeground(Color.white);
+                            txtCourseId.setSelectedTextColor(Color.black);
+                            txtCourseId.setSelectionColor(Color.white);
 
                             //---- txtCourseName ----
                             txtCourseName.setForeground(Color.white);
@@ -609,7 +532,7 @@ public class CourseManager extends JFrame {
                                                     .addComponent(scrollPane1, GroupLayout.PREFERRED_SIZE, 768, GroupLayout.PREFERRED_SIZE)
                                                     .addComponent(label2, GroupLayout.PREFERRED_SIZE, 92, GroupLayout.PREFERRED_SIZE)
                                                     .addGroup(cardNewCourseLayout.createSequentialGroup()
-                                                        .addComponent(txtCuorseId, GroupLayout.PREFERRED_SIZE, 232, GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(txtCourseId, GroupLayout.PREFERRED_SIZE, 232, GroupLayout.PREFERRED_SIZE)
                                                         .addGap(18, 18, 18)
                                                         .addComponent(lbInvalidIdCourse, GroupLayout.PREFERRED_SIZE, 265, GroupLayout.PREFERRED_SIZE))
                                                     .addComponent(label3, GroupLayout.PREFERRED_SIZE, 92, GroupLayout.PREFERRED_SIZE)
@@ -628,9 +551,9 @@ public class CourseManager extends JFrame {
                                     .addGroup(cardNewCourseLayout.createSequentialGroup()
                                         .addComponent(label2, GroupLayout.PREFERRED_SIZE, 35, GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(cardNewCourseLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                            .addComponent(txtCuorseId, GroupLayout.PREFERRED_SIZE, 34, GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(lbInvalidIdCourse))
+                                        .addComponent(txtCourseId, GroupLayout.PREFERRED_SIZE, 34, GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(lbInvalidIdCourse)
                                         .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(label3, GroupLayout.PREFERRED_SIZE, 35, GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
@@ -674,19 +597,38 @@ public class CourseManager extends JFrame {
                                 scrollPane3.setViewportView(contanerCourseBoxPanel);
                             }
 
+                            //---- btnLoadDataFromDisk ----
+                            btnLoadDataFromDisk.setText("Load data from disk?");
+                            btnLoadDataFromDisk.setForeground(new Color(0, 175, 244));
+                            btnLoadDataFromDisk.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+
+                            //---- btnSaveAs ----
+                            btnSaveAs.setText("Save as");
+                            btnSaveAs.setFont(new Font("JetBrains Mono", Font.BOLD, 12));
+                            btnSaveAs.setBackground(new Color(253, 138, 114));
+                            btnSaveAs.setForeground(Color.white);
+
                             GroupLayout cardCourseManagerLayout = new GroupLayout(cardCourseManager);
                             cardCourseManager.setLayout(cardCourseManagerLayout);
                             cardCourseManagerLayout.setHorizontalGroup(
                                 cardCourseManagerLayout.createParallelGroup()
                                     .addGroup(cardCourseManagerLayout.createSequentialGroup()
-                                        .addComponent(scrollPane3, GroupLayout.DEFAULT_SIZE, 848, Short.MAX_VALUE)
+                                        .addGap(0, 547, Short.MAX_VALUE)
+                                        .addComponent(btnLoadDataFromDisk)
+                                        .addGap(34, 34, 34)
+                                        .addComponent(btnSaveAs)
                                         .addContainerGap())
+                                    .addComponent(scrollPane3, GroupLayout.DEFAULT_SIZE, 854, Short.MAX_VALUE)
                             );
                             cardCourseManagerLayout.setVerticalGroup(
                                 cardCourseManagerLayout.createParallelGroup()
                                     .addGroup(GroupLayout.Alignment.TRAILING, cardCourseManagerLayout.createSequentialGroup()
                                         .addContainerGap()
-                                        .addComponent(scrollPane3))
+                                        .addGroup(cardCourseManagerLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                            .addComponent(btnLoadDataFromDisk)
+                                            .addComponent(btnSaveAs, GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE))
+                                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(scrollPane3, GroupLayout.DEFAULT_SIZE, 478, Short.MAX_VALUE))
                             );
                         }
                         cardMainPanelAdmin.add(cardCourseManager, "cardCourseManager");
@@ -759,12 +701,12 @@ public class CourseManager extends JFrame {
     private JPanel mainPanel;
     private JPanel controllerPanel;
     private JLabel label1;
-    private JLabel courseController;
-    private JLabel classRoomController;
-    private JLabel adminController;
-    private JPanel titlePanel;
-    private JLabel lbTitleHeader;
-    private JPanel cardPanel;
+    public JLabel courseController;
+    public JLabel classRoomController;
+    public JLabel adminController;
+    public JPanel titlePanel;
+    public JLabel lbTitleHeader;
+    public JPanel cardPanel;
     private JPanel cardCourse;
     private JScrollPane scrollPane2;
     public JPanel containerCourseList;
@@ -793,7 +735,7 @@ public class CourseManager extends JFrame {
     private JLabel label3;
     private JLabel label4;
     private JLabel label5;
-    public JTextField txtCuorseId;
+    public JTextField txtCourseId;
     public JTextField txtCourseName;
     private JScrollPane scrollPane1;
     public JTextArea txtareaDecription;
@@ -805,5 +747,7 @@ public class CourseManager extends JFrame {
     private JPanel cardCourseManager;
     private JScrollPane scrollPane3;
     public JPanel contanerCourseBoxPanel;
+    public JLabel btnLoadDataFromDisk;
+    public JButton btnSaveAs;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

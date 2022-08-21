@@ -22,6 +22,7 @@ public class EditCourseDialog extends JDialog {
         super(owner);
         initComponents();
         this.pack();
+        this.setTitle("Edit Course");
         this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         this.setVisible(true);
     }
@@ -32,7 +33,7 @@ public class EditCourseDialog extends JDialog {
         dialogPane = new JPanel();
         contentPanel = new JPanel();
         label2 = new JLabel();
-        txtCuorseId = new JTextField();
+        txtCourseId = new JTextField();
         label3 = new JLabel();
         txtCourseName = new JTextField();
         label4 = new JLabel();
@@ -56,12 +57,11 @@ public class EditCourseDialog extends JDialog {
             dialogPane.setBorder(new EmptyBorder(12, 12, 12, 12));
             dialogPane.setPreferredSize(new Dimension(100, 50));
             dialogPane.setMaximumSize(new Dimension(100, 50));
-            dialogPane.setBorder ( new javax . swing. border .CompoundBorder ( new javax . swing. border .TitledBorder ( new javax . swing. border .EmptyBorder
-            ( 0, 0 ,0 , 0) ,  "JFor\u006dDesi\u0067ner \u0045valu\u0061tion" , javax. swing .border . TitledBorder. CENTER ,javax . swing. border
-            .TitledBorder . BOTTOM, new java. awt .Font ( "Dia\u006cog", java .awt . Font. BOLD ,12 ) ,java . awt
-            . Color .red ) ,dialogPane. getBorder () ) ); dialogPane. addPropertyChangeListener( new java. beans .PropertyChangeListener ( ){ @Override public void
-            propertyChange (java . beans. PropertyChangeEvent e) { if( "bord\u0065r" .equals ( e. getPropertyName () ) )throw new RuntimeException( )
-            ;} } );
+            dialogPane.setBorder(new javax.swing.border.CompoundBorder(new javax.swing.border.TitledBorder(new javax.swing.border.EmptyBorder(
+            0,0,0,0), "JF\u006frmDes\u0069gner \u0045valua\u0074ion",javax.swing.border.TitledBorder.CENTER,javax.swing.border.TitledBorder
+            .BOTTOM,new java.awt.Font("D\u0069alog",java.awt.Font.BOLD,12),java.awt.Color.
+            red),dialogPane. getBorder()));dialogPane. addPropertyChangeListener(new java.beans.PropertyChangeListener(){@Override public void propertyChange(java.
+            beans.PropertyChangeEvent e){if("\u0062order".equals(e.getPropertyName()))throw new RuntimeException();}});
             dialogPane.setLayout(new BorderLayout());
 
             //======== contentPanel ========
@@ -74,11 +74,11 @@ public class EditCourseDialog extends JDialog {
                 label2.setText("Course id");
                 label2.setForeground(Color.white);
 
-                //---- txtCuorseId ----
-                txtCuorseId.setForeground(Color.white);
-                txtCuorseId.setSelectedTextColor(Color.black);
-                txtCuorseId.setSelectionColor(Color.white);
-                txtCuorseId.setEditable(false);
+                //---- txtCourseId ----
+                txtCourseId.setForeground(Color.white);
+                txtCourseId.setSelectedTextColor(Color.black);
+                txtCourseId.setSelectionColor(Color.white);
+                txtCourseId.setEditable(false);
 
                 //---- label3 ----
                 label3.setText("Course name");
@@ -133,7 +133,7 @@ public class EditCourseDialog extends JDialog {
                                     .addComponent(txtareaDecription, GroupLayout.PREFERRED_SIZE, 766, GroupLayout.PREFERRED_SIZE))
                                 .addGroup(contentPanelLayout.createSequentialGroup()
                                     .addGroup(contentPanelLayout.createParallelGroup()
-                                        .addComponent(txtCuorseId, GroupLayout.PREFERRED_SIZE, 232, GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(txtCourseId, GroupLayout.PREFERRED_SIZE, 232, GroupLayout.PREFERRED_SIZE)
                                         .addComponent(label3, GroupLayout.PREFERRED_SIZE, 92, GroupLayout.PREFERRED_SIZE)
                                         .addComponent(txtCourseName, GroupLayout.PREFERRED_SIZE, 232, GroupLayout.PREFERRED_SIZE))
                                     .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
@@ -149,7 +149,7 @@ public class EditCourseDialog extends JDialog {
                             .addGap(6, 6, 6)
                             .addGroup(contentPanelLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
                                 .addGroup(contentPanelLayout.createSequentialGroup()
-                                    .addComponent(txtCuorseId, GroupLayout.PREFERRED_SIZE, 34, GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtCourseId, GroupLayout.PREFERRED_SIZE, 34, GroupLayout.PREFERRED_SIZE)
                                     .addGap(12, 12, 12)
                                     .addComponent(label3, GroupLayout.PREFERRED_SIZE, 35, GroupLayout.PREFERRED_SIZE)
                                     .addGap(6, 6, 6)
@@ -180,6 +180,8 @@ public class EditCourseDialog extends JDialog {
 
                 //---- btnSaveEdit ----
                 btnSaveEdit.setText("Save");
+                btnSaveEdit.setForeground(Color.white);
+                btnSaveEdit.setBackground(new Color(33, 204, 121));
                 buttonBar.add(btnSaveEdit, new GridBagConstraints(1, 0, 1, 1, 0.0, 0.0,
                     GridBagConstraints.CENTER, GridBagConstraints.BOTH,
                     new Insets(0, 0, 0, 5), 0, 0));
@@ -187,6 +189,8 @@ public class EditCourseDialog extends JDialog {
                 //---- btnDeleteCourse ----
                 btnDeleteCourse.setText("Delete");
                 btnDeleteCourse.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+                btnDeleteCourse.setBackground(new Color(229, 53, 37));
+                btnDeleteCourse.setForeground(Color.white);
                 buttonBar.add(btnDeleteCourse, new GridBagConstraints(2, 0, 1, 1, 0.0, 0.0,
                     GridBagConstraints.CENTER, GridBagConstraints.BOTH,
                     new Insets(0, 0, 0, 5), 0, 0));
@@ -194,6 +198,8 @@ public class EditCourseDialog extends JDialog {
                 //---- btnCancelEdit ----
                 btnCancelEdit.setText("Cancel");
                 btnCancelEdit.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+                btnCancelEdit.setBackground(new Color(250, 176, 5));
+                btnCancelEdit.setForeground(Color.white);
                 buttonBar.add(btnCancelEdit, new GridBagConstraints(3, 0, 1, 1, 0.0, 0.0,
                     GridBagConstraints.CENTER, GridBagConstraints.BOTH,
                     new Insets(0, 0, 0, 0), 0, 0));
@@ -211,7 +217,7 @@ public class EditCourseDialog extends JDialog {
     private JPanel dialogPane;
     private JPanel contentPanel;
     private JLabel label2;
-    public JTextField txtCuorseId;
+    public JTextField txtCourseId;
     private JLabel label3;
     public JTextField txtCourseName;
     private JLabel label4;

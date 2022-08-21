@@ -1,5 +1,7 @@
 package view.CourseBox;
 
+import library.fileProcess.FileProcess;
+
 import javax.swing.*;
 import java.awt.*;
 

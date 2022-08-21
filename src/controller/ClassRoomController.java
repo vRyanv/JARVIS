@@ -68,7 +68,7 @@ public class ClassRoomController {
                 courseBox.btnCourseId.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        enrollRoom(e.getActionCommand());
+                        enrollRoom(e.getActionCommand(), email);
                     }
                 });
                 this.courseBoxList.add(courseBox);
@@ -82,7 +82,7 @@ public class ClassRoomController {
 
 
     //====== chat =====
-    private void enrollRoom(String roomId)
+    private void enrollRoom(String roomId, String email)
     {
         if(Connect())
         {
