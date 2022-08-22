@@ -14,8 +14,8 @@ new FormModel {
 					"JavaCodeGenerator.variableModifiers": 1
 				}
 				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-					"$horizontalGroup": "par l {seq {par l {seq l {space :::p, comp panel3::::312:x}, seq {par l {seq {space :p:31:p, par l {par l:::p {comp label4::l:p::p, comp label6::l::248:x, comp txtPass::l:::x, comp label5::l:p::p, comp txtEmail::l::248:x}, seq {space :6:6:p, comp label7:::p::p, space :::p, comp btnShowRegisterCard:::p::p}}}, seq l {space :p:29:p, comp btnLogin:::p:248:p}}, space :0:39:x}}, space :::p}}"
-					"$verticalGroup": "par l {seq l {space :p:15:p, comp label6:::p:57:p, space :p:81:p, comp label4:::p::p, space :::p, comp txtEmail:::p:33:p, space u:::p, comp label5:::p::p, space :::p, comp txtPass:::p::p, space u:::p, comp panel3:::p::p, space s:::p, comp btnLogin:::p::p, space :p:8:p, par b {comp btnShowRegisterCard::b:p::p, comp label7::b:p::p}, space ::72:x}}"
+					"$horizontalGroup": "par l {seq {par l {seq l {space :::p, comp panel3::::311:x}, seq {par l {seq {space :p:31:p, par l:::p {comp label4::l:p::p, comp label6::l::248:x, comp txtPass::l:::x, comp label5::l:p::p, comp txtEmail::l::248:x}}, seq l {space :p:32:p, par l {seq l {space :p:8:p, comp label7:::p::p, space :::p, comp btnShowRegisterCard:::p::p}, comp btnLogin::l:p:248:p}}, seq t {space :::p, comp cbShowPass:::p:129:p}}, space :0:37:x}}, space :::p}}"
+					"$verticalGroup": "par l {seq l {space :p:15:p, comp label6:::p:57:p, space :p:81:p, comp label4:::p::p, space :::p, comp txtEmail:::p:33:p, space u:::p, comp label5:::p::p, space :::p, comp txtPass:::p::p, space u:::p, comp panel3:::p::p, space :::p, comp cbShowPass:::p::p, space :p:31:p, comp btnLogin:::p::p, space :p:8:p, par b {comp btnShowRegisterCard::b:p::p, comp label7::b:p::p}, space ::62:x}}"
 				} ) {
 					name: "loginCard"
 					auxiliary() {
@@ -71,7 +71,7 @@ new FormModel {
 						"foreground": &Color2 new java.awt.Color( 255, 255, 255, 255 )
 					} )
 					add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-						"$horizontalGroup": "par l {seq t {space ::278:x, comp lbEmailOrPassWrong:::p:206:p, space :p:34:p}}"
+						"$horizontalGroup": "par l {seq t {space ::277:x, comp lbEmailOrPassWrong:::p:206:p, space :p:34:p}}"
 						"$verticalGroup": "par l {comp lbEmailOrPassWrong::t::0:x}"
 					} ) {
 						name: "panel3"
@@ -101,12 +101,20 @@ new FormModel {
 							"JavaCodeGenerator.variableModifiers": 1
 						}
 					} )
+					add( new FormComponent( "javax.swing.JCheckBox" ) {
+						name: "cbShowPass"
+						"text": "Show password"
+						"font": new java.awt.Font( "JetBrains Mono", 0, 11 )
+						auxiliary() {
+							"JavaCodeGenerator.variableModifiers": 1
+						}
+					} )
 				}, new FormLayoutConstraints( class java.lang.String ) {
 					"value": "loginCard"
 				} )
 				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-					"$horizontalGroup": "par l {seq {par l {seq t {space :::p, comp panel6::::312:x}, seq l {space :p:43:p, par l {comp panel2::::275:x, comp panel1::::275:x, seq {par l {comp panel5::l:p:275:p, comp label8:::p::p, comp txtPassConfirm:::p:248:p, comp txtPassRegister::l:p:248:p, comp label2::l:p::p, comp label1::l:p::p, comp label3::l:p:248:p, comp btnRegister::l:p:244:p, seq {space :6:6:p, comp btnShowLoginCard:::p::p}, comp txtEmailRegister::l:p:248:p}, space :0:0:x}}}}, space :::p}}"
-					"$verticalGroup": "par l {seq l {space :p:13:p, comp label3:::p:57:p, space :::p, comp label1:::p::p, space :::p, comp txtEmailRegister:::p:31:p, space :::p, comp panel1:::p::p, space :::p, comp label2:::p::p, space :::p, comp txtPassRegister:::p::p, space :p:2:p, comp panel2:::p::p, space :::x, comp label8:::p::p, space :6:6:p, comp txtPassConfirm:::p::p, space :::p, comp panel5:::p::p, space :p:12:p, comp panel6:::p:25:p, space u:::p, comp btnRegister:::p::p, space u:::p, comp btnShowLoginCard:::p::p, space :p:31:p}}"
+					"$horizontalGroup": "par l {seq {space :43:43:p, par l {seq {par l {comp txtPassRegister::l:p:248:p, comp label2::l:p::p, comp label1::l:p::p, comp label3::l:p:248:p, comp txtEmailRegister::l:p:248:p}, space :0:26:x}, comp panel2::::274:x, comp panel1::::274:x}, space :::p}, seq l {space :::p, par l {comp panel6::t::317:x, seq l {space :p:37:p, par l {comp panel5::l:p:275:p, comp label8:::p::p, comp txtPassConfirm:::p:248:p, par t:l {par l {seq l {space :6:6:p, comp btnShowLoginCard:::p::p}, comp btnRegister::l:p:244:p}, seq {space :p:125:p, comp cbIsRoleAdmin:::p:119:p}}}}}}}"
+					"$verticalGroup": "par l {seq l {space :p:13:p, comp label3:::p:57:p, space :::p, comp label1:::p::p, space :::p, comp txtEmailRegister:::p:31:p, space :::p, comp panel1:::p::p, space :::p, comp label2:::p::p, space :::p, comp txtPassRegister:::p::p, space :p:2:p, comp panel2:::p::p, space :::p, comp label8:::p::p, space :6:6:p, comp txtPassConfirm:::p::p, space :::p, comp panel5:::p::p, space :p:12:p, comp panel6:::p:25:p, space :::p, comp cbIsRoleAdmin:::p:30:p, space u:::p, comp btnRegister:::p::p, space u:::p, comp btnShowLoginCard:::p::p, space ::35:x}}"
 				} ) {
 					name: "registerCard"
 					auxiliary() {
@@ -252,13 +260,20 @@ new FormModel {
 							}
 						} )
 					} )
+					add( new FormComponent( "javax.swing.JCheckBox" ) {
+						name: "cbIsRoleAdmin"
+						"text": "Role admin"
+						auxiliary() {
+							"JavaCodeGenerator.variableModifiers": 1
+						}
+					} )
 				}, new FormLayoutConstraints( class java.lang.String ) {
 					"value": "registerCard"
 				} )
 			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 0, 0 )
-			"size": new java.awt.Dimension( 320, 505 )
+			"size": new java.awt.Dimension( 325, 545 )
 		} )
 	}
 }

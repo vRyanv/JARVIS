@@ -6,6 +6,8 @@ import view.CourseManager.CourseManager;
 import view.LoginForm.LoginForm;
 
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.Arrays;
@@ -44,6 +46,20 @@ public class LoginController{
             @Override
             public void mousePressed(MouseEvent e) {
                 cardLayout.show(loginForm.mainPanel, "loginCard");
+            }
+        });
+
+        loginForm.cbShowPass.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                if(loginForm.txtPass.getEchoChar() == (char)0)
+                {
+                    loginForm.txtPass.setEchoChar('\u2022');
+                }
+                else
+                {
+                    loginForm.txtPass.setEchoChar((char)0);
+                }
             }
         });
 
@@ -104,7 +120,7 @@ public class LoginController{
             if(Arrays.equals(this.userTreeMap.get(email).getPassword(), pass))
             {
                 this.loginForm.dispose();
-                new CourseManager(email);
+                new CourseManager(email, this.userTreeMap.get(email).getRole());
             }
             else
             {
@@ -147,7 +163,12 @@ public class LoginController{
             }
             else
             {
-                if(saveAccount(email, pass))
+                String role = "user";
+                if (loginForm.cbIsRoleAdmin.isSelected())
+                {
+                    role = "admin";
+                }
+                if(saveAccount(email, pass,role))
                 {
                     loginForm.lbEmptyInforRegister.setText("Register success <3");
                     loginForm.lbEmptyInforRegister.setForeground(new Color(35, 177, 77));
@@ -189,9 +210,9 @@ public class LoginController{
         return Arrays.equals(pass, confirmPass);
     }
 
-    private boolean saveAccount(String email, char[] pass)
+    private boolean saveAccount(String email, char[] pass, String role)
     {
-        this.userTreeMap.put(email, new User(email, pass));
+        this.userTreeMap.put(email, new User(email, pass, role));
         return FileProcess.writeObject(this.pathUserList ,this.userTreeMap);
     }
 

@@ -6,10 +6,7 @@ import view.CourseManager.CourseManager;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.net.Socket;
@@ -28,11 +25,17 @@ public class ClassRoomController {
     private DataInputStream dis;
     private DataOutputStream dos;
     private TreeMap<String, Course> room;
+    private String currentRoom;
     private List<CourseBox> courseBoxList;
+    private DefaultListModel currentModel;
     private String email;
+    private String username;
     private String path = System.getProperty("user.dir")+"\\src\\model\\course\\courseList.dat";
+
     public ClassRoomController(CourseManager courseManager, String email)
     {
+        this.email = email;
+        this.username = email.substring(0, email.indexOf("@"));
         this.courseManager = courseManager;
         this.courseBoxList = new ArrayList<>();
         this.LoadRoom();
@@ -49,7 +52,21 @@ public class ClassRoomController {
             }
         });
         this.cardLayout = (CardLayout) courseManager.cardClassRoom.getLayout();
-
+//        this.courseManager.addWindowListener(new WindowAdapter() {
+//            @Override
+//            public void windowClosing(WindowEvent e) {
+//                int choice = JOptionPane.showConfirmDialog(courseManager, "Logout ?", "Confirm",JOptionPane.OK_CANCEL_OPTION);
+//                if(choice == JOptionPane.OK_OPTION)
+//                {
+//                    try {
+//                        dos.writeUTF("logout,"+username);
+//                    }catch (Exception ex){
+//                        JOptionPane.showMessageDialog(courseManager, "Something wrong!", "Error", JOptionPane.ERROR_MESSAGE);
+//                    }
+//
+//                }
+//            }
+//        });
     }
 
     private void LoadRoom()
@@ -87,11 +104,19 @@ public class ClassRoomController {
         if(Connect())
         {
             try{
-                receiver = new Thread(new Receiver(dis, courseManager));
+                this.currentModel = new DefaultListModel<>();
+                this.courseManager.listMess.setModel(this.currentModel);
+                this.currentRoom = roomId;
+                this.courseManager.lbRoomId.setText("Room ID: "+roomId);
+
+                receiver = new Thread(new Receiver(dis, courseManager, this.currentModel ));
                 receiver.start();
-                dos.writeUTF("intoRoom,"+roomId);
+                dos.writeUTF("intoRoom,"+roomId+","+username);
+
                 cardLayout.show(courseManager.cardClassRoom, "cardRoom");
+
             }catch (Exception ex){
+                System.err.println(ex);
                 JOptionPane.showMessageDialog(courseManager.cardClassRoom, "Can't into  room", "Error", JOptionPane.ERROR_MESSAGE);
             }
 
@@ -100,6 +125,11 @@ public class ClassRoomController {
         {
             JOptionPane.showMessageDialog(courseManager.cardClassRoom, "Can't connect to server", "Error", JOptionPane.ERROR_MESSAGE);
         }
+    }
+
+    private void AutoScroll()
+    {
+        courseManager.scrollPane5.getVerticalScrollBar().setValue(courseManager.scrollPane5.getVerticalScrollBar().getMaximum());
     }
     private boolean Connect()
     {
@@ -116,9 +146,11 @@ public class ClassRoomController {
     private boolean SendMess(String mess)
     {
         try {
-            dos.writeUTF("Mess,"+mess);
+            dos.writeUTF("Mess,"+currentRoom+","+mess);
+            this.currentModel.addElement(this.username +": "+mess);
             return true;
         }catch (Exception ex){
+            System.err.println(ex);
             return false;
         }
     }
@@ -129,11 +161,13 @@ class Receiver implements Runnable
 {
     private DataInputStream dis;
     private CourseManager courseManager;
+    private DefaultListModel currentModel;
 
-    public Receiver(DataInputStream dis, CourseManager courseManager)
+    public Receiver(DataInputStream dis, CourseManager courseManager, DefaultListModel currentModel)
     {
         this.dis = dis;
         this.courseManager = courseManager;
+        this.currentModel = currentModel;
     }
     @Override
     public void run() {
@@ -141,11 +175,15 @@ class Receiver implements Runnable
             while (true)
             {
                 String getResponseFromServer = dis.readUTF();
-                System.out.println(getResponseFromServer);
-//                String[] ResponseElement = getResponseFromServer.split(",");
-//                if(ResponseElement[0].equals("message"))
+                String[] ResponseElement = getResponseFromServer.split(",");
+                if(ResponseElement[0].equals("message"))
+                {
+                    NewMess(ResponseElement[1]);
+                }
+//                else if (ResponseElement[0].equals("logout"))
 //                {
-//                    NewMess();
+//                    System.out.println("out");
+//                    break;
 //                }
             }
         }catch (Exception ex){
@@ -153,9 +191,10 @@ class Receiver implements Runnable
         }
     }
 
-    private void NewMess()
+    private void NewMess(String mess)
     {
-
+        System.out.println(mess);
+        this.currentModel.addElement(mess);
     }
 }
 

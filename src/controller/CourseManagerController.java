@@ -7,6 +7,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class CourseManagerController {
     private String email;
@@ -14,27 +16,37 @@ public class CourseManagerController {
     public String currentCard = "cardCourse";
     private CourseManager courseManager;
 
-    public CourseManagerController(CourseManager courseManager, String email)
+    public CourseManagerController(CourseManager courseManager, String email, String role)
     {
         this.courseManager = courseManager;
-        CourseConfig(email);
+        CourseConfig(email, role);
     }
 
-    private void CourseConfig(String email)
+    private void CourseConfig(String email, String role)
     {
         this.email = email;
         this.courseManager.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.courseManager.setTitle("Jarvis");
         this.courseManager.setIconImage(Toolkit.getDefaultToolkit().getImage("src/images/iconTitle.jpg"));
-        AddController();
+        this.courseManager.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//        this.courseManager.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        AddController(role);
         ChangeView();
-
     }
 
-    private void AddController()
+    private void AddController(String role)
     {
         new ClassRoomController(this.courseManager, email);
-        new AdminController(this.courseManager);
+
+        if(role.equals("user"))
+        {
+            this.courseManager.adminController.setVisible(false);
+        }
+        else
+        {
+            new AdminController(this.courseManager);
+        }
+
     }
 
     private void ChangeView()

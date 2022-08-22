@@ -21,12 +21,23 @@ public class User implements Serializable
         this.password = password;
     }
 
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
     private String email;
     private char[] password;
 
-    public User(String email, char[] password) {
+    private String role;
+
+    public User(String email, char[] password, String role) {
         this.email = email;
         this.password = password;
+        this.role = role;
     }
 
 }

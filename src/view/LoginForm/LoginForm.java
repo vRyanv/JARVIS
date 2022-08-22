@@ -32,11 +32,11 @@ public class LoginForm extends JFrame {
     }
 
     public static void main(String[] args) {
-        try{
-            UIManager.setLookAndFeel("com.formdev.flatlaf.FlatDarculaLaf");
-        }catch (Exception ex){
-
-        }
+//        try{
+//            UIManager.setLookAndFeel("com.formdev.flatlaf.FlatDarculaLaf");
+//        }catch (Exception ex){
+//
+//        }
         new LoginForm();
     }
 
@@ -56,6 +56,7 @@ public class LoginForm extends JFrame {
         lbEmailOrPassWrong = new JLabel();
         label7 = new JLabel();
         btnShowRegisterCard = new JLabel();
+        cbShowPass = new JCheckBox();
         registerCard = new JPanel();
         label1 = new JLabel();
         label2 = new JLabel();
@@ -74,18 +75,20 @@ public class LoginForm extends JFrame {
         lbPassIncorrectConfirm = new JLabel();
         panel6 = new JPanel();
         lbEmptyInforRegister = new JLabel();
+        cbIsRoleAdmin = new JCheckBox();
 
         //======== this ========
         var contentPane = getContentPane();
 
         //======== mainPanel ========
         {
-            mainPanel.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing. border.
-            EmptyBorder( 0, 0, 0, 0) , "JFor\u006dDesi\u0067ner \u0045valu\u0061tion", javax. swing. border. TitledBorder. CENTER, javax. swing
-            . border. TitledBorder. BOTTOM, new java .awt .Font ("Dia\u006cog" ,java .awt .Font .BOLD ,12 ),
-            java. awt. Color. red) ,mainPanel. getBorder( )) ); mainPanel. addPropertyChangeListener (new java. beans. PropertyChangeListener( )
-            { @Override public void propertyChange (java .beans .PropertyChangeEvent e) {if ("bord\u0065r" .equals (e .getPropertyName () ))
-            throw new RuntimeException( ); }} );
+            mainPanel.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new
+            javax. swing. border. EmptyBorder( 0, 0, 0, 0) , "JF\u006frmDes\u0069gner \u0045valua\u0074ion", javax
+            . swing. border. TitledBorder. CENTER, javax. swing. border. TitledBorder. BOTTOM, new java
+            .awt .Font ("D\u0069alog" ,java .awt .Font .BOLD ,12 ), java. awt
+            . Color. red) ,mainPanel. getBorder( )) ); mainPanel. addPropertyChangeListener (new java. beans.
+            PropertyChangeListener( ){ @Override public void propertyChange (java .beans .PropertyChangeEvent e) {if ("\u0062order" .
+            equals (e .getPropertyName () )) throw new RuntimeException( ); }} );
             mainPanel.setLayout(new CardLayout());
 
             //======== loginCard ========
@@ -140,7 +143,7 @@ public class LoginForm extends JFrame {
                     panel3Layout.setHorizontalGroup(
                         panel3Layout.createParallelGroup()
                             .addGroup(GroupLayout.Alignment.TRAILING, panel3Layout.createSequentialGroup()
-                                .addContainerGap(278, Short.MAX_VALUE)
+                                .addContainerGap(277, Short.MAX_VALUE)
                                 .addComponent(lbEmailOrPassWrong, GroupLayout.PREFERRED_SIZE, 206, GroupLayout.PREFERRED_SIZE)
                                 .addGap(34, 34, 34))
                     );
@@ -159,6 +162,10 @@ public class LoginForm extends JFrame {
                 btnShowRegisterCard.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
                 btnShowRegisterCard.setForeground(new Color(0, 175, 244));
 
+                //---- cbShowPass ----
+                cbShowPass.setText("Show password");
+                cbShowPass.setFont(new Font("JetBrains Mono", Font.PLAIN, 11));
+
                 GroupLayout loginCardLayout = new GroupLayout(loginCard);
                 loginCard.setLayout(loginCardLayout);
                 loginCardLayout.setHorizontalGroup(
@@ -167,27 +174,30 @@ public class LoginForm extends JFrame {
                             .addGroup(loginCardLayout.createParallelGroup()
                                 .addGroup(loginCardLayout.createSequentialGroup()
                                     .addContainerGap()
-                                    .addComponent(panel3, GroupLayout.DEFAULT_SIZE, 312, Short.MAX_VALUE))
+                                    .addComponent(panel3, GroupLayout.DEFAULT_SIZE, 311, Short.MAX_VALUE))
                                 .addGroup(loginCardLayout.createSequentialGroup()
                                     .addGroup(loginCardLayout.createParallelGroup()
                                         .addGroup(loginCardLayout.createSequentialGroup()
                                             .addGap(31, 31, 31)
+                                            .addGroup(loginCardLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
+                                                .addComponent(label4)
+                                                .addComponent(label6, GroupLayout.DEFAULT_SIZE, 248, Short.MAX_VALUE)
+                                                .addComponent(txtPass, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(label5)
+                                                .addComponent(txtEmail, GroupLayout.DEFAULT_SIZE, 248, Short.MAX_VALUE)))
+                                        .addGroup(loginCardLayout.createSequentialGroup()
+                                            .addGap(32, 32, 32)
                                             .addGroup(loginCardLayout.createParallelGroup()
-                                                .addGroup(loginCardLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
-                                                    .addComponent(label4)
-                                                    .addComponent(label6, GroupLayout.DEFAULT_SIZE, 248, Short.MAX_VALUE)
-                                                    .addComponent(txtPass, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                    .addComponent(label5)
-                                                    .addComponent(txtEmail, GroupLayout.DEFAULT_SIZE, 248, Short.MAX_VALUE))
                                                 .addGroup(loginCardLayout.createSequentialGroup()
-                                                    .addGap(6, 6, 6)
+                                                    .addGap(8, 8, 8)
                                                     .addComponent(label7)
                                                     .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                                    .addComponent(btnShowRegisterCard))))
-                                        .addGroup(loginCardLayout.createSequentialGroup()
-                                            .addGap(29, 29, 29)
-                                            .addComponent(btnLogin, GroupLayout.PREFERRED_SIZE, 248, GroupLayout.PREFERRED_SIZE)))
-                                    .addGap(0, 39, Short.MAX_VALUE)))
+                                                    .addComponent(btnShowRegisterCard))
+                                                .addComponent(btnLogin, GroupLayout.PREFERRED_SIZE, 248, GroupLayout.PREFERRED_SIZE)))
+                                        .addGroup(GroupLayout.Alignment.TRAILING, loginCardLayout.createSequentialGroup()
+                                            .addContainerGap()
+                                            .addComponent(cbShowPass, GroupLayout.PREFERRED_SIZE, 129, GroupLayout.PREFERRED_SIZE)))
+                                    .addGap(0, 37, Short.MAX_VALUE)))
                             .addContainerGap())
                 );
                 loginCardLayout.setVerticalGroup(
@@ -205,13 +215,15 @@ public class LoginForm extends JFrame {
                             .addComponent(txtPass, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
                             .addComponent(panel3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                            .addGap(18, 18, 18)
+                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(cbShowPass)
+                            .addGap(31, 31, 31)
                             .addComponent(btnLogin, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                             .addGap(8, 8, 8)
                             .addGroup(loginCardLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                                 .addComponent(btnShowRegisterCard)
                                 .addComponent(label7))
-                            .addContainerGap(72, Short.MAX_VALUE))
+                            .addContainerGap(62, Short.MAX_VALUE))
                 );
             }
             mainPanel.add(loginCard, "loginCard");
@@ -375,36 +387,46 @@ public class LoginForm extends JFrame {
                     );
                 }
 
+                //---- cbIsRoleAdmin ----
+                cbIsRoleAdmin.setText("Role admin");
+
                 GroupLayout registerCardLayout = new GroupLayout(registerCard);
                 registerCard.setLayout(registerCardLayout);
                 registerCardLayout.setHorizontalGroup(
                     registerCardLayout.createParallelGroup()
                         .addGroup(registerCardLayout.createSequentialGroup()
+                            .addGap(43, 43, 43)
                             .addGroup(registerCardLayout.createParallelGroup()
-                                .addGroup(GroupLayout.Alignment.TRAILING, registerCardLayout.createSequentialGroup()
-                                    .addContainerGap()
-                                    .addComponent(panel6, GroupLayout.DEFAULT_SIZE, 312, Short.MAX_VALUE))
                                 .addGroup(registerCardLayout.createSequentialGroup()
-                                    .addGap(43, 43, 43)
                                     .addGroup(registerCardLayout.createParallelGroup()
-                                        .addComponent(panel2, GroupLayout.DEFAULT_SIZE, 275, Short.MAX_VALUE)
-                                        .addComponent(panel1, GroupLayout.DEFAULT_SIZE, 275, Short.MAX_VALUE)
-                                        .addGroup(registerCardLayout.createSequentialGroup()
+                                        .addComponent(txtPassRegister, GroupLayout.PREFERRED_SIZE, 248, GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(label2)
+                                        .addComponent(label1)
+                                        .addComponent(label3, GroupLayout.PREFERRED_SIZE, 248, GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(txtEmailRegister, GroupLayout.PREFERRED_SIZE, 248, GroupLayout.PREFERRED_SIZE))
+                                    .addGap(0, 26, Short.MAX_VALUE))
+                                .addComponent(panel2, GroupLayout.DEFAULT_SIZE, 274, Short.MAX_VALUE)
+                                .addComponent(panel1, GroupLayout.DEFAULT_SIZE, 274, Short.MAX_VALUE))
+                            .addContainerGap())
+                        .addGroup(registerCardLayout.createSequentialGroup()
+                            .addContainerGap()
+                            .addGroup(registerCardLayout.createParallelGroup()
+                                .addComponent(panel6, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 317, Short.MAX_VALUE)
+                                .addGroup(registerCardLayout.createSequentialGroup()
+                                    .addGap(37, 37, 37)
+                                    .addGroup(registerCardLayout.createParallelGroup()
+                                        .addComponent(panel5, GroupLayout.PREFERRED_SIZE, 275, GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(label8)
+                                        .addComponent(txtPassConfirm, GroupLayout.PREFERRED_SIZE, 248, GroupLayout.PREFERRED_SIZE)
+                                        .addGroup(registerCardLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
                                             .addGroup(registerCardLayout.createParallelGroup()
-                                                .addComponent(panel5, GroupLayout.PREFERRED_SIZE, 275, GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(label8)
-                                                .addComponent(txtPassConfirm, GroupLayout.PREFERRED_SIZE, 248, GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(txtPassRegister, GroupLayout.PREFERRED_SIZE, 248, GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(label2)
-                                                .addComponent(label1)
-                                                .addComponent(label3, GroupLayout.PREFERRED_SIZE, 248, GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(btnRegister, GroupLayout.PREFERRED_SIZE, 244, GroupLayout.PREFERRED_SIZE)
                                                 .addGroup(registerCardLayout.createSequentialGroup()
                                                     .addGap(6, 6, 6)
                                                     .addComponent(btnShowLoginCard))
-                                                .addComponent(txtEmailRegister, GroupLayout.PREFERRED_SIZE, 248, GroupLayout.PREFERRED_SIZE))
-                                            .addGap(0, 0, Short.MAX_VALUE)))))
-                            .addContainerGap())
+                                                .addComponent(btnRegister, GroupLayout.PREFERRED_SIZE, 244, GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(registerCardLayout.createSequentialGroup()
+                                                .addGap(125, 125, 125)
+                                                .addComponent(cbIsRoleAdmin, GroupLayout.PREFERRED_SIZE, 119, GroupLayout.PREFERRED_SIZE)))))))
                 );
                 registerCardLayout.setVerticalGroup(
                     registerCardLayout.createParallelGroup()
@@ -423,7 +445,7 @@ public class LoginForm extends JFrame {
                             .addComponent(txtPassRegister, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                             .addGap(2, 2, 2)
                             .addComponent(panel2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(label8)
                             .addGap(6, 6, 6)
                             .addComponent(txtPassConfirm, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
@@ -431,11 +453,13 @@ public class LoginForm extends JFrame {
                             .addComponent(panel5, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                             .addGap(12, 12, 12)
                             .addComponent(panel6, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(cbIsRoleAdmin, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
                             .addComponent(btnRegister, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
                             .addComponent(btnShowLoginCard)
-                            .addGap(31, 31, 31))
+                            .addContainerGap(35, Short.MAX_VALUE))
                 );
             }
             mainPanel.add(registerCard, "registerCard");
@@ -470,6 +494,7 @@ public class LoginForm extends JFrame {
     public JLabel lbEmailOrPassWrong;
     private JLabel label7;
     public JLabel btnShowRegisterCard;
+    public JCheckBox cbShowPass;
     public JPanel registerCard;
     private JLabel label1;
     private JLabel label2;
@@ -488,5 +513,6 @@ public class LoginForm extends JFrame {
     public JLabel lbPassIncorrectConfirm;
     private JPanel panel6;
     public JLabel lbEmptyInforRegister;
+    public JCheckBox cbIsRoleAdmin;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }
