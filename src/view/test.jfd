@@ -1,0 +1,36 @@
+JFDML JFormDesigner: "7.0.7.0.1134" Java: "11.0.15" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+			"$horizontalGroup": "par l {seq {space :::p, par l {comp button2::l::148:x, comp label1::t::148:x, comp button1::l::148:x}, space :::p}}"
+			"$verticalGroup": "par l {seq l {space :p:23:p, comp label1:::p:82:p, space ::31:x, comp button1:::p::p, space u:::p, comp button2:::p::p, space :p:12:p}}"
+		} ) {
+			name: "this"
+			"background": new java.awt.Color( 250, 176, 5, 255 )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "button1"
+				"text": "text"
+				"cursor": &Cursor0 new java.awt.Cursor( 12 )
+				"foreground": sfield java.awt.Color white
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "button2"
+				"text": "text"
+				"cursor": #Cursor0
+				"foreground": sfield java.awt.Color white
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label1"
+				"text": "nsdfkasdfs"
+				"horizontalAlignment": 0
+				"font": new java.awt.Font( "HYWenHei-85W", 0, 16 )
+				"foreground": sfield java.awt.Color white
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 0, 0 )
+			"size": new java.awt.Dimension( 160, 220 )
+		} )
+	}
+}

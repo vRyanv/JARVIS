@@ -43,6 +43,7 @@ public class CourseManager extends JFrame {
         label1 = new JLabel();
         classRoomController = new JLabel();
         adminController = new JLabel();
+        courseController = new JLabel();
         titlePanel = new JPanel();
         lbTitleHeader = new JLabel();
         cardPanel = new JPanel();
@@ -79,28 +80,28 @@ public class CourseManager extends JFrame {
         txtCourseName = new JTextField();
         scrollPane1 = new JScrollPane();
         txtareaDecription = new JTextArea();
-        lbInvalidIdCourse = new JLabel();
-        lbInvalidCourseName = new JLabel();
         btnAddNewCourse = new JButton();
         btnClearInforCourse = new JButton();
         spinnerLession = new JSpinner();
+        lbInvalidIdCourse = new JLabel();
+        lbInvalidCourseName = new JLabel();
         cardCourseManager = new JPanel();
         scrollPane3 = new JScrollPane();
         contanerCourseBoxPanel = new JPanel();
         btnLoadDataFromDisk = new JLabel();
         btnSaveAs = new JButton();
-        courseController = new JLabel();
 
         //======== this ========
         var contentPane = getContentPane();
 
         //======== mainPanel ========
         {
-            mainPanel.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing. border. EmptyBorder(
-            0, 0, 0, 0) , "JFor\u006dDesi\u0067ner \u0045valu\u0061tion", javax. swing. border. TitledBorder. CENTER, javax. swing. border. TitledBorder
-            . BOTTOM, new java .awt .Font ("Dia\u006cog" ,java .awt .Font .BOLD ,12 ), java. awt. Color.
-            red) ,mainPanel. getBorder( )) ); mainPanel. addPropertyChangeListener (new java. beans. PropertyChangeListener( ){ @Override public void propertyChange (java .
-            beans .PropertyChangeEvent e) {if ("bord\u0065r" .equals (e .getPropertyName () )) throw new RuntimeException( ); }} );
+            mainPanel.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing.
+            border. EmptyBorder( 0, 0, 0, 0) , "JF\u006frmDes\u0069gner \u0045valua\u0074ion", javax. swing. border. TitledBorder. CENTER
+            , javax. swing. border. TitledBorder. BOTTOM, new java .awt .Font ("D\u0069alog" ,java .awt .Font
+            .BOLD ,12 ), java. awt. Color. red) ,mainPanel. getBorder( )) ); mainPanel. addPropertyChangeListener (
+            new java. beans. PropertyChangeListener( ){ @Override public void propertyChange (java .beans .PropertyChangeEvent e) {if ("\u0062order"
+            .equals (e .getPropertyName () )) throw new RuntimeException( ); }} );
 
             //======== controllerPanel ========
             {
@@ -128,6 +129,14 @@ public class CourseManager extends JFrame {
                 adminController.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
                 adminController.setHorizontalTextPosition(SwingConstants.LEFT);
 
+                //---- courseController ----
+                courseController.setText("Course");
+                courseController.setForeground(Color.white);
+                courseController.setFont(new Font("JetBrains Mono", Font.BOLD, 16));
+                courseController.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+                courseController.setHorizontalTextPosition(SwingConstants.LEFT);
+                courseController.setHorizontalAlignment(SwingConstants.LEFT);
+
                 GroupLayout controllerPanelLayout = new GroupLayout(controllerPanel);
                 controllerPanel.setLayout(controllerPanelLayout);
                 controllerPanelLayout.setHorizontalGroup(
@@ -135,9 +144,12 @@ public class CourseManager extends JFrame {
                         .addGroup(controllerPanelLayout.createSequentialGroup()
                             .addContainerGap()
                             .addGroup(controllerPanelLayout.createParallelGroup()
-                                .addComponent(label1, GroupLayout.DEFAULT_SIZE, 207, Short.MAX_VALUE)
-                                .addComponent(classRoomController, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 207, Short.MAX_VALUE)
-                                .addComponent(adminController, GroupLayout.DEFAULT_SIZE, 207, Short.MAX_VALUE))
+                                .addComponent(label1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(GroupLayout.Alignment.TRAILING, controllerPanelLayout.createSequentialGroup()
+                                    .addGap(0, 0, Short.MAX_VALUE)
+                                    .addComponent(courseController, GroupLayout.PREFERRED_SIZE, 207, GroupLayout.PREFERRED_SIZE))
+                                .addComponent(classRoomController, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(adminController, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addContainerGap())
                 );
                 controllerPanelLayout.setVerticalGroup(
@@ -145,11 +157,13 @@ public class CourseManager extends JFrame {
                         .addGroup(controllerPanelLayout.createSequentialGroup()
                             .addContainerGap()
                             .addComponent(label1, GroupLayout.PREFERRED_SIZE, 41, GroupLayout.PREFERRED_SIZE)
+                            .addGap(3, 3, 3)
+                            .addComponent(courseController, GroupLayout.PREFERRED_SIZE, 39, GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(classRoomController, GroupLayout.PREFERRED_SIZE, 39, GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(adminController, GroupLayout.PREFERRED_SIZE, 39, GroupLayout.PREFERRED_SIZE)
-                            .addContainerGap(483, Short.MAX_VALUE))
+                            .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 );
             }
 
@@ -215,7 +229,7 @@ public class CourseManager extends JFrame {
                                 .addGroup(cardCourseLayout.createParallelGroup()
                                     .addComponent(scrollPane2, GroupLayout.DEFAULT_SIZE, 855, Short.MAX_VALUE)
                                     .addGroup(GroupLayout.Alignment.TRAILING, cardCourseLayout.createSequentialGroup()
-                                        .addContainerGap(726, Short.MAX_VALUE)
+                                        .addContainerGap(753, Short.MAX_VALUE)
                                         .addComponent(btnRefreshCourseList)
                                         .addGap(8, 8, 8)))
                                 .addContainerGap())
@@ -281,7 +295,7 @@ public class CourseManager extends JFrame {
                                     .addGap(10, 10, 10)
                                     .addComponent(btnRefreshRoom)
                                     .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(scrollPane4, GroupLayout.DEFAULT_SIZE, 498, Short.MAX_VALUE)
+                                    .addComponent(scrollPane4, GroupLayout.DEFAULT_SIZE, 514, Short.MAX_VALUE)
                                     .addContainerGap())
                         );
                     }
@@ -302,7 +316,7 @@ public class CourseManager extends JFrame {
                                 panel2Layout.createParallelGroup()
                                     .addGroup(GroupLayout.Alignment.TRAILING, panel2Layout.createSequentialGroup()
                                         .addContainerGap()
-                                        .addComponent(txtMess, GroupLayout.DEFAULT_SIZE, 666, Short.MAX_VALUE)
+                                        .addComponent(txtMess, GroupLayout.DEFAULT_SIZE, 680, Short.MAX_VALUE)
                                         .addGap(18, 18, 18)
                                         .addComponent(btnSendMess)
                                         .addGap(48, 48, 48))
@@ -352,7 +366,7 @@ public class CourseManager extends JFrame {
                                     .addContainerGap()
                                     .addComponent(lbRoomId)
                                     .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(scrollPane5, GroupLayout.DEFAULT_SIZE, 471, Short.MAX_VALUE)
+                                    .addComponent(scrollPane5, GroupLayout.DEFAULT_SIZE, 484, Short.MAX_VALUE)
                                     .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                                     .addComponent(panel2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
                         );
@@ -482,18 +496,6 @@ public class CourseManager extends JFrame {
                                 scrollPane1.setViewportView(txtareaDecription);
                             }
 
-                            //---- lbInvalidIdCourse ----
-                            lbInvalidIdCourse.setText("text");
-                            lbInvalidIdCourse.setForeground(new Color(229, 128, 131));
-                            lbInvalidIdCourse.setFont(new Font("JetBrains Mono", Font.PLAIN, 15));
-                            lbInvalidIdCourse.setVisible(false);
-
-                            //---- lbInvalidCourseName ----
-                            lbInvalidCourseName.setText("text");
-                            lbInvalidCourseName.setForeground(new Color(229, 128, 131));
-                            lbInvalidCourseName.setFont(new Font("JetBrains Mono", Font.PLAIN, 15));
-                            lbInvalidCourseName.setVisible(false);
-
                             //---- btnAddNewCourse ----
                             btnAddNewCourse.setText("Add");
                             btnAddNewCourse.setForeground(Color.white);
@@ -511,6 +513,16 @@ public class CourseManager extends JFrame {
                             //---- spinnerLession ----
                             spinnerLession.setModel(new SpinnerNumberModel(0, 0, null, 1));
 
+                            //---- lbInvalidIdCourse ----
+                            lbInvalidIdCourse.setText("text");
+                            lbInvalidIdCourse.setForeground(new Color(229, 128, 131));
+                            lbInvalidIdCourse.setVisible(false);
+
+                            //---- lbInvalidCourseName ----
+                            lbInvalidCourseName.setText("text");
+                            lbInvalidCourseName.setForeground(new Color(229, 128, 131));
+                            lbInvalidCourseName.setVisible(false);
+
                             GroupLayout cardNewCourseLayout = new GroupLayout(cardNewCourse);
                             cardNewCourse.setLayout(cardNewCourseLayout);
                             cardNewCourseLayout.setHorizontalGroup(
@@ -527,19 +539,20 @@ public class CourseManager extends JFrame {
                                                 .addGroup(cardNewCourseLayout.createParallelGroup()
                                                     .addComponent(scrollPane1, GroupLayout.PREFERRED_SIZE, 768, GroupLayout.PREFERRED_SIZE)
                                                     .addComponent(label2, GroupLayout.PREFERRED_SIZE, 92, GroupLayout.PREFERRED_SIZE)
-                                                    .addGroup(cardNewCourseLayout.createSequentialGroup()
-                                                        .addComponent(txtCourseId, GroupLayout.PREFERRED_SIZE, 232, GroupLayout.PREFERRED_SIZE)
-                                                        .addGap(18, 18, 18)
-                                                        .addComponent(lbInvalidIdCourse, GroupLayout.PREFERRED_SIZE, 265, GroupLayout.PREFERRED_SIZE))
                                                     .addComponent(label3, GroupLayout.PREFERRED_SIZE, 92, GroupLayout.PREFERRED_SIZE)
                                                     .addComponent(label4, GroupLayout.PREFERRED_SIZE, 147, GroupLayout.PREFERRED_SIZE)
                                                     .addComponent(label5, GroupLayout.PREFERRED_SIZE, 147, GroupLayout.PREFERRED_SIZE)
-                                                    .addGroup(cardNewCourseLayout.createSequentialGroup()
-                                                        .addGroup(cardNewCourseLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
-                                                            .addComponent(txtCourseName, GroupLayout.DEFAULT_SIZE, 232, Short.MAX_VALUE)
-                                                            .addComponent(spinnerLession, GroupLayout.DEFAULT_SIZE, 232, Short.MAX_VALUE))
-                                                        .addGap(18, 18, 18)
-                                                        .addComponent(lbInvalidCourseName, GroupLayout.PREFERRED_SIZE, 265, GroupLayout.PREFERRED_SIZE)))))
+                                                    .addGroup(cardNewCourseLayout.createParallelGroup(GroupLayout.Alignment.TRAILING, false)
+                                                        .addGroup(GroupLayout.Alignment.LEADING, cardNewCourseLayout.createSequentialGroup()
+                                                            .addGroup(cardNewCourseLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
+                                                                .addComponent(txtCourseName, GroupLayout.PREFERRED_SIZE, 232, GroupLayout.PREFERRED_SIZE)
+                                                                .addComponent(spinnerLession, GroupLayout.PREFERRED_SIZE, 232, GroupLayout.PREFERRED_SIZE))
+                                                            .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                                                            .addComponent(lbInvalidCourseName, GroupLayout.DEFAULT_SIZE, 1, Short.MAX_VALUE))
+                                                        .addGroup(GroupLayout.Alignment.LEADING, cardNewCourseLayout.createSequentialGroup()
+                                                            .addComponent(txtCourseId, GroupLayout.PREFERRED_SIZE, 232, GroupLayout.PREFERRED_SIZE)
+                                                            .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                                                            .addComponent(lbInvalidIdCourse, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE))))))
                                         .addContainerGap(75, Short.MAX_VALUE))
                             );
                             cardNewCourseLayout.setVerticalGroup(
@@ -547,10 +560,10 @@ public class CourseManager extends JFrame {
                                     .addGroup(cardNewCourseLayout.createSequentialGroup()
                                         .addComponent(label2, GroupLayout.PREFERRED_SIZE, 35, GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(txtCourseId, GroupLayout.PREFERRED_SIZE, 34, GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(lbInvalidIdCourse)
-                                        .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addGroup(cardNewCourseLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                            .addComponent(txtCourseId, GroupLayout.PREFERRED_SIZE, 34, GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(lbInvalidIdCourse))
+                                        .addGap(6, 6, 6)
                                         .addComponent(label3, GroupLayout.PREFERRED_SIZE, 35, GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                                         .addGroup(cardNewCourseLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
@@ -609,7 +622,7 @@ public class CourseManager extends JFrame {
                             cardCourseManagerLayout.setHorizontalGroup(
                                 cardCourseManagerLayout.createParallelGroup()
                                     .addGroup(cardCourseManagerLayout.createSequentialGroup()
-                                        .addGap(0, 554, Short.MAX_VALUE)
+                                        .addGap(0, 595, Short.MAX_VALUE)
                                         .addComponent(btnLoadDataFromDisk)
                                         .addGap(34, 34, 34)
                                         .addComponent(btnSaveAs)
@@ -624,7 +637,7 @@ public class CourseManager extends JFrame {
                                             .addComponent(btnLoadDataFromDisk)
                                             .addComponent(btnSaveAs, GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE))
                                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(scrollPane3, GroupLayout.DEFAULT_SIZE, 478, Short.MAX_VALUE))
+                                        .addComponent(scrollPane3, GroupLayout.DEFAULT_SIZE, 490, Short.MAX_VALUE))
                             );
                         }
                         cardMainPanelAdmin.add(cardCourseManager, "cardCourseManager");
@@ -685,14 +698,6 @@ public class CourseManager extends JFrame {
         pack();
         setLocationRelativeTo(getOwner());
 
-        //---- courseController ----
-        courseController.setText("Course");
-        courseController.setForeground(Color.white);
-        courseController.setFont(new Font("JetBrains Mono", Font.BOLD, 16));
-        courseController.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        courseController.setHorizontalTextPosition(SwingConstants.LEFT);
-        courseController.setHorizontalAlignment(SwingConstants.LEFT);
-
         //---- serverState ----
         var serverState = new ButtonGroup();
         serverState.add(rbServerOn);
@@ -707,6 +712,7 @@ public class CourseManager extends JFrame {
     private JLabel label1;
     public JLabel classRoomController;
     public JLabel adminController;
+    public JLabel courseController;
     public JPanel titlePanel;
     public JLabel lbTitleHeader;
     public JPanel cardPanel;
@@ -743,16 +749,15 @@ public class CourseManager extends JFrame {
     public JTextField txtCourseName;
     private JScrollPane scrollPane1;
     public JTextArea txtareaDecription;
-    public JLabel lbInvalidIdCourse;
-    public JLabel lbInvalidCourseName;
     public JButton btnAddNewCourse;
     public JButton btnClearInforCourse;
     public JSpinner spinnerLession;
+    public JLabel lbInvalidIdCourse;
+    public JLabel lbInvalidCourseName;
     private JPanel cardCourseManager;
     private JScrollPane scrollPane3;
     public JPanel contanerCourseBoxPanel;
     public JLabel btnLoadDataFromDisk;
     public JButton btnSaveAs;
-    public JLabel courseController;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

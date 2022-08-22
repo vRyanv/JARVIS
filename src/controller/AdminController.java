@@ -25,7 +25,6 @@ public class AdminController {
     private CardLayout cardLayout;
     private String currentCard = "cardNewCourse";
     private TreeMap<String, Course> courseTreeMap;
-    private List<CourseBox> courseBoxList;
     private String pathCourse = System.getProperty("user.dir")+"\\src\\model\\course\\courseList.dat";
     public CourseManager courseManager;
     private EditCourseDialog editCourseDialog;
@@ -240,18 +239,17 @@ public class AdminController {
         }
         else
         {
-            this.courseBoxList = new ArrayList<>();
             courseManager.contanerCourseBoxPanel.removeAll();
             for (Course course: this.courseTreeMap.values())
             {
                 CourseBox courseBox = new CourseBox(course.getName(), course.getId());
+                courseBox.btnRegisterCourse.setVisible(false);
                 courseBox.btnCourseId.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         ShowDialogCourseDetail(e.getActionCommand());
                     }
                 });
-                this.courseBoxList.add(courseBox);
                 courseManager.contanerCourseBoxPanel.add(courseBox, FlowLayout.LEFT);
             }
             courseManager.contanerCourseBoxPanel.revalidate();
@@ -486,7 +484,7 @@ public class AdminController {
         }
         if(type.equals("newCourse"))
         {
-            Course course = new Course(id, name, numOfLession, description);
+            Course course = new Course(id, name, numOfLession, description, new ArrayList<>());
             courseTreeMap.put(id, course);
         }
         else

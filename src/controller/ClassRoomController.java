@@ -82,6 +82,7 @@ public class ClassRoomController {
             for (Course course: this.room.values())
             {
                 CourseBox courseBox = new CourseBox(course.getName(), course.getId());
+                courseBox.btnRegisterCourse.setVisible(false);
                 courseBox.btnCourseId.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
@@ -104,7 +105,7 @@ public class ClassRoomController {
         if(Connect())
         {
             try{
-                this.currentModel = new DefaultListModel<>();
+                this.currentModel =  new DefaultListModel();
                 this.courseManager.listMess.setModel(this.currentModel);
                 this.currentRoom = roomId;
                 this.courseManager.lbRoomId.setText("Room ID: "+roomId);
@@ -116,7 +117,6 @@ public class ClassRoomController {
                 cardLayout.show(courseManager.cardClassRoom, "cardRoom");
 
             }catch (Exception ex){
-                System.err.println(ex);
                 JOptionPane.showMessageDialog(courseManager.cardClassRoom, "Can't into  room", "Error", JOptionPane.ERROR_MESSAGE);
             }
 
@@ -150,7 +150,6 @@ public class ClassRoomController {
             this.currentModel.addElement(this.username +": "+mess);
             return true;
         }catch (Exception ex){
-            System.err.println(ex);
             return false;
         }
     }
@@ -161,13 +160,13 @@ class Receiver implements Runnable
 {
     private DataInputStream dis;
     private CourseManager courseManager;
-    private DefaultListModel currentModel;
+    private DefaultListModel messListModel;
 
-    public Receiver(DataInputStream dis, CourseManager courseManager, DefaultListModel currentModel)
+    public Receiver(DataInputStream dis, CourseManager courseManager, DefaultListModel messListModel)
     {
         this.dis = dis;
         this.courseManager = courseManager;
-        this.currentModel = currentModel;
+        this.messListModel = messListModel;
     }
     @Override
     public void run() {
@@ -194,7 +193,7 @@ class Receiver implements Runnable
     private void NewMess(String mess)
     {
         System.out.println(mess);
-        this.currentModel.addElement(mess);
+        this.messListModel.addElement(mess);
     }
 }
 

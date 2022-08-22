@@ -98,7 +98,7 @@ class handler implements Runnable
                     String mess = "message,"+username+": "+requestElement[2];
                     for (handler handlers: Server.clients.get(requestElement[1]))
                     {
-                        if(handlers.username.equals(username))
+                        if(!handlers.username.equals(username))
                         {
                             handlers.dos.writeUTF(mess);
                         }

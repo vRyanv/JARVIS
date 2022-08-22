@@ -1,6 +1,10 @@
 package controller;
 
 import library.colorCustom.ColorCustom;
+import library.fileProcess.FileProcess;
+import model.course.Course;
+import model.user.User;
+import view.CourseBox.CourseBox;
 import view.CourseManager.CourseManager;
 
 import javax.swing.*;
@@ -9,17 +13,83 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.TreeMap;
 
 public class CourseManagerController {
     private String email;
     private CardLayout cardLayout;
     public String currentCard = "cardCourse";
     private CourseManager courseManager;
+    private TreeMap<String, Course> courseTreeMap;
+    private TreeMap<String, List<String>> registerList;
+    private String path = System.getProperty("user.dir")+"\\src\\model\\course\\courseList.dat";
+    private String pathRegisterList = System.getProperty("user.dir")+"\\src\\model\\course\\studentRegisterCourse.dat";
 
     public CourseManagerController(CourseManager courseManager, String email, String role)
     {
         this.courseManager = courseManager;
+
         CourseConfig(email, role);
+        LoadData();
+    }
+    private void LoadData()
+    {
+        courseManager.containerCourseList.removeAll();
+        this.courseTreeMap = (TreeMap<String, Course>) FileProcess.readObject(path);
+        this.registerList = (TreeMap<String, List<String>>) FileProcess.readObject(pathRegisterList);
+
+        if(courseTreeMap != null)
+        {
+            for (Course course: this.courseTreeMap.values())
+            {
+                CourseBox courseBox = new CourseBox(course.getName(), course.getId());
+                courseBox.btnCourseId.setVisible(false);
+
+                if(registerList.containsKey(course.getId()) && registerList.get(course.getId()).contains(email))
+                {
+                    courseBox.btnRegisterCourse.setEnabled(false);
+                    courseBox.btnRegisterCourse.setText("Registered");
+                }
+                courseBox.btnRegisterCourse.addMouseListener(new MouseAdapter() {
+                    @Override
+                    public void mouseReleased(MouseEvent e) {
+                        RegisterCourse(course.getId(), courseBox);
+                    }
+                });
+                courseManager.containerCourseList.add(courseBox, FlowLayout.LEFT);
+            }
+            courseManager.containerCourseList.revalidate();
+            courseManager.containerCourseList.repaint();
+        }
+    }
+
+    private void RegisterCourse(String courseId, CourseBox courseBox)
+    {
+        if(this.registerList.containsKey(courseId) && !this.registerList.containsValue(email) )
+        {
+            this.registerList.get(courseId).add(email);
+            System.out.println("success");
+        }
+        else
+        {
+            if(!registerList.containsKey(courseId))
+            {
+                this.registerList.put(courseId,  new ArrayList<>());
+                System.out.println("new");
+            }
+        }
+        if(!FileProcess.writeObject(pathRegisterList,registerList))
+        {
+            JOptionPane.showMessageDialog(courseManager, "Something wrong!", "Register error", JOptionPane.ERROR_MESSAGE);
+        }
+        courseBox.btnRegisterCourse.setEnabled(false);
+        courseBox.btnRegisterCourse.setText("Registered");
+        for (String tr:registerList.keySet())
+        {
+            System.out.println(tr);
+        }
     }
 
     private void CourseConfig(String email, String role)
@@ -47,6 +117,12 @@ public class CourseManagerController {
             new AdminController(this.courseManager);
         }
 
+        this.courseManager.btnRefreshCourseList.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                LoadData();
+            }
+        });
     }
 
     private void ChangeView()
@@ -111,4 +187,6 @@ public class CourseManagerController {
         this.courseManager.adminController.setHorizontalAlignment(SwingConstants.LEFT);
         this.courseManager.adminController.setOpaque(false);
     }
+
+
 }

@@ -17,11 +17,15 @@ public class Course implements Serializable {
     private int numberOfLessons;
     private String description;
 
-    public Course(String id, String name, int numberOfLessons, String description) {
+    public Course(String id, String name, int numberOfLessons, String description, List<User> studentList) {
         this.id = id;
         this.name = name;
         this.numberOfLessons = numberOfLessons;
         this.description = description;
+    }
+
+    public static void main(String[] args) {
+        FileProcess.writeObject("src/model/course/courseList.dat", new TreeMap<String, Course>());
     }
 
     public boolean createCourseList(String path)
