@@ -35,7 +35,6 @@ public class LoginForm extends JFrame {
         try{
             UIManager.setLookAndFeel("com.formdev.flatlaf.FlatDarculaLaf");
         }catch (Exception ex){
-
         }
         new LoginForm();
     }
@@ -82,13 +81,12 @@ public class LoginForm extends JFrame {
 
         //======== mainPanel ========
         {
-            mainPanel.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new
-            javax. swing. border. EmptyBorder( 0, 0, 0, 0) , "JF\u006frmDes\u0069gner \u0045valua\u0074ion", javax
-            . swing. border. TitledBorder. CENTER, javax. swing. border. TitledBorder. BOTTOM, new java
-            .awt .Font ("D\u0069alog" ,java .awt .Font .BOLD ,12 ), java. awt
-            . Color. red) ,mainPanel. getBorder( )) ); mainPanel. addPropertyChangeListener (new java. beans.
-            PropertyChangeListener( ){ @Override public void propertyChange (java .beans .PropertyChangeEvent e) {if ("\u0062order" .
-            equals (e .getPropertyName () )) throw new RuntimeException( ); }} );
+            mainPanel.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing. border
+            . EmptyBorder( 0, 0, 0, 0) , "JF\u006frmD\u0065sig\u006eer \u0045val\u0075ati\u006fn", javax. swing. border. TitledBorder. CENTER, javax
+            . swing. border. TitledBorder. BOTTOM, new java .awt .Font ("Dia\u006cog" ,java .awt .Font .BOLD ,
+            12 ), java. awt. Color. red) ,mainPanel. getBorder( )) ); mainPanel. addPropertyChangeListener (new java. beans
+            . PropertyChangeListener( ){ @Override public void propertyChange (java .beans .PropertyChangeEvent e) {if ("\u0062ord\u0065r" .equals (e .
+            getPropertyName () )) throw new RuntimeException( ); }} );
             mainPanel.setLayout(new CardLayout());
 
             //======== loginCard ========
@@ -331,7 +329,7 @@ public class LoginForm extends JFrame {
                 txtPassConfirm.setPreferredSize(new Dimension(60, 25));
 
                 //---- label8 ----
-                label8.setText("PASSWORD");
+                label8.setText("CONFIRM PASSWORD");
                 label8.setFont(label8.getFont().deriveFont(label8.getFont().getStyle() | Font.BOLD));
 
                 //======== panel5 ========
@@ -416,7 +414,6 @@ public class LoginForm extends JFrame {
                                     .addGap(37, 37, 37)
                                     .addGroup(registerCardLayout.createParallelGroup()
                                         .addComponent(panel5, GroupLayout.PREFERRED_SIZE, 275, GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(label8)
                                         .addComponent(txtPassConfirm, GroupLayout.PREFERRED_SIZE, 248, GroupLayout.PREFERRED_SIZE)
                                         .addGroup(registerCardLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
                                             .addGroup(registerCardLayout.createParallelGroup()
@@ -426,7 +423,8 @@ public class LoginForm extends JFrame {
                                                 .addComponent(btnRegister, GroupLayout.PREFERRED_SIZE, 244, GroupLayout.PREFERRED_SIZE))
                                             .addGroup(registerCardLayout.createSequentialGroup()
                                                 .addGap(125, 125, 125)
-                                                .addComponent(cbIsRoleAdmin, GroupLayout.PREFERRED_SIZE, 119, GroupLayout.PREFERRED_SIZE)))))))
+                                                .addComponent(cbIsRoleAdmin, GroupLayout.PREFERRED_SIZE, 119, GroupLayout.PREFERRED_SIZE)))
+                                        .addComponent(label8, GroupLayout.PREFERRED_SIZE, 151, GroupLayout.PREFERRED_SIZE)))))
                 );
                 registerCardLayout.setVerticalGroup(
                     registerCardLayout.createParallelGroup()
@@ -447,7 +445,7 @@ public class LoginForm extends JFrame {
                             .addComponent(panel2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(label8)
-                            .addGap(6, 6, 6)
+                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(txtPassConfirm, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(panel5, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)

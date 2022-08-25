@@ -98,8 +98,7 @@ public class CourseManagerController {
         this.courseManager.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.courseManager.setTitle("Jarvis");
         this.courseManager.setIconImage(Toolkit.getDefaultToolkit().getImage("src/images/iconTitle.jpg"));
-        this.courseManager.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//        this.courseManager.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        this.courseManager.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         AddController(role);
         ChangeView();
     }

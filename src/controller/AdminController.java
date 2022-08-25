@@ -13,7 +13,10 @@ import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.File;
+import java.net.Socket;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +32,12 @@ public class AdminController {
     public CourseManager courseManager;
     private EditCourseDialog editCourseDialog;
     private Thread threadServer;
+    private Server server;
+    private String host = "localhost";
+    private int port = 2108;
+    private Socket socket;
+    private DataInputStream dis;
+    private DataOutputStream dos;
 
 
     public AdminController(CourseManager courseManager)
@@ -115,7 +124,7 @@ public class AdminController {
             public void mousePressed(MouseEvent e) {
                 if(Server.serverIsOn == false)
                 {
-                    System.out.println("start server");
+                    System.out.println("Server: start!");
                     Server.serverIsOn = true;
                     NewServer();
                     courseManager.lbServerTitle.setForeground(ColorCustom.green);
@@ -128,8 +137,20 @@ public class AdminController {
             public void mouseReleased(MouseEvent e) {
                 if(Server.serverIsOn)
                 {
-                    Server.serverIsOn = false;
-                    courseManager.lbServerTitle.setForeground(Color.white);
+                    if(ConnectKillServer())
+                    {
+                        try {
+                            dos.writeUTF("killServer,");
+                            courseManager.lbServerTitle.setForeground(Color.white);
+                        }catch (Exception ex){
+                            JOptionPane.showMessageDialog(courseManager.cardMainPanelAdmin, "Server Error!", "Admin: Error", JOptionPane.ERROR_MESSAGE);
+                        }
+                    }
+                    else
+                    {
+                        JOptionPane.showMessageDialog(courseManager.cardMainPanelAdmin, "Can't close Server!", "Admin: Error", JOptionPane.ERROR_MESSAGE);
+                    }
+
                 }
             }
         });
@@ -162,13 +183,25 @@ public class AdminController {
         });
     }
 
+    private boolean ConnectKillServer()
+    {
+        try{
+            this.socket = new Socket(this.host, this.port);
+            this.dis = new DataInputStream(this.socket.getInputStream());
+            this.dos = new DataOutputStream(this.socket.getOutputStream());
+            return true;
+        }catch (Exception ex){
+            return false;
+        }
+    }
+
     private void NewServer()
     {
         this.threadServer = new Thread(){
             @Override
             public void run() {
                 try{
-                    new Server(courseManager);
+                    server = new Server(courseManager);
                 }catch (Exception ex){
                     JOptionPane.showMessageDialog(courseManager.cardMainPanelAdmin, "Server Error!", "Admin: Error", JOptionPane.ERROR_MESSAGE);
                 }

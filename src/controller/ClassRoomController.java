@@ -1,6 +1,7 @@
 package controller;
 
 import model.course.Course;
+import server.Server;
 import view.CourseBox.CourseBox;
 import view.CourseManager.CourseManager;
 
@@ -25,9 +26,9 @@ public class ClassRoomController {
     private DataInputStream dis;
     private DataOutputStream dos;
     private TreeMap<String, Course> room;
-    private String currentRoom;
     private List<CourseBox> courseBoxList;
-    private DefaultListModel currentModel;
+    private DefaultListModel messListModel;
+    private DefaultListModel userListModel;
     private String email;
     private String username;
     private String path = System.getProperty("user.dir")+"\\src\\model\\course\\courseList.dat";
@@ -67,11 +68,14 @@ public class ClassRoomController {
                 if(choice == JOptionPane.OK_OPTION)
                 {
                     try {
-                        dos.writeUTF("logout,"+username);
+                        if(socket != null)
+                        {
+                            dos.writeUTF("logout,");
+                        }
+                        System.exit(0);
                     }catch (Exception ex){
                         JOptionPane.showMessageDialog(courseManager, "Something wrong!", "Error", JOptionPane.ERROR_MESSAGE);
                     }
-
                 }
             }
         });
@@ -82,7 +86,6 @@ public class ClassRoomController {
         String roomId = courseManager.lbRoomId.getText().substring(courseManager.lbRoomId.getText().lastIndexOf(" ")+1);
         try {
             dos.writeUTF("leaveRoom,"+roomId);
-            System.out.println(roomId);
         }catch (Exception ex)
         {
             System.out.println(ex);
@@ -123,12 +126,15 @@ public class ClassRoomController {
         if(Connect())
         {
             try{
-                this.currentModel =  new DefaultListModel();
-                this.courseManager.listMess.setModel(this.currentModel);
-                this.currentRoom = roomId;
+                this.messListModel =  new DefaultListModel();
+                this.courseManager.listMess.setModel(this.messListModel);
+
+                this.userListModel = new DefaultListModel<>();
+                this.courseManager.listUserInRoom.setModel(this.userListModel);
+
                 this.courseManager.lbRoomId.setText("Room ID: "+roomId);
 
-                receiver = new Thread(new Receiver(dis, courseManager, this.currentModel, cardLayout));
+                receiver = new Thread(new Receiver(socket, dis, courseManager, this.messListModel, this.userListModel, cardLayout));
                 receiver.start();
                 dos.writeUTF("intoRoom,"+roomId+","+email);
 
@@ -161,15 +167,14 @@ public class ClassRoomController {
         }
     }
 
-    private boolean SendMess(String mess)
+    private void SendMess(String mess)
     {
         try {
-            dos.writeUTF("Mess,"+currentRoom+","+mess);
-            this.currentModel.addElement(this.username +": "+mess);
+            dos.writeUTF("Mess,"+mess);
+            this.messListModel.addElement(this.username +": "+mess);
             AutoScroll();
-            return true;
         }catch (Exception ex){
-            return false;
+            JOptionPane.showMessageDialog(courseManager, "Can't send message", "Room: error", JOptionPane.ERROR_MESSAGE);
         }
     }
 }
@@ -177,17 +182,23 @@ public class ClassRoomController {
 
 class Receiver implements Runnable
 {
+    private Socket socket;
     private DataInputStream dis;
     private CourseManager courseManager;
     private DefaultListModel messListModel;
+    private DefaultListModel userListModel;
 
     private CardLayout cardLayout;
 
-    public Receiver(DataInputStream dis, CourseManager courseManager, DefaultListModel messListModel, CardLayout cardLayout)
+    public Receiver(Socket socket, DataInputStream dis, CourseManager courseManager,
+                    DefaultListModel messListModel, DefaultListModel userListModel,
+                    CardLayout cardLayout)
     {
+        this.socket = socket;
         this.dis = dis;
         this.courseManager = courseManager;
         this.messListModel = messListModel;
+        this.userListModel = userListModel;
         this.cardLayout = cardLayout;
     }
     @Override
@@ -199,16 +210,41 @@ class Receiver implements Runnable
                 String[] ResponseElement = getResponseFromServer.split(",");
                 if(ResponseElement[0].equals("message"))
                 {
-                    NewMess(ResponseElement[1]);
+                    String mess = ResponseElement[1];
+                    System.out.println(mess);
+                    NewMess(mess);
+                }
+                else if(ResponseElement[0].equals("intoRoom"))
+                {
+                    System.out.println(ResponseElement[1]);
+                    this.userListModel.addElement(ResponseElement[1]);
                 }
                 else if (ResponseElement[0].equals("leaveRoom"))
                 {
-                    System.out.println("out");
                     cardLayout.show(courseManager.cardClassRoom, "cardChooseRoom");
                     break;
                 }
+                else if (ResponseElement[0].equals("userLeaveRoom"))
+                {
+                    String email = ResponseElement[0];
+                    userListModel.removeElement(email);
+                }
+                else if(ResponseElement[0].equals("offline"))
+                {
+                    JOptionPane.showMessageDialog(courseManager, "server down", "Warning", JOptionPane.WARNING_MESSAGE);
+                    cardLayout.show(courseManager.cardClassRoom, "cardChooseRoom");
+                    break;
+                }
+                else if (ResponseElement[0].equals("serverDead"))
+                {
+                    JOptionPane.showMessageDialog(courseManager, "server down", "Warning", JOptionPane.WARNING_MESSAGE);
+                    cardLayout.show(courseManager.cardClassRoom, "cardChooseRoom");
+                    break;
+                }
+
             }
         }catch (Exception ex){
+            this.socket = null;
             JOptionPane.showMessageDialog(courseManager.cardClassRoom, "Something wrong", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }

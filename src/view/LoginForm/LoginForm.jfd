@@ -113,8 +113,8 @@ new FormModel {
 					"value": "loginCard"
 				} )
 				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-					"$horizontalGroup": "par l {seq {space :43:43:p, par l {seq {par l {comp txtPassRegister::l:p:248:p, comp label2::l:p::p, comp label1::l:p::p, comp label3::l:p:248:p, comp txtEmailRegister::l:p:248:p}, space :0:26:x}, comp panel2::::274:x, comp panel1::::274:x}, space :::p}, seq l {space :::p, par l {comp panel6::t::317:x, seq l {space :p:37:p, par l {comp panel5::l:p:275:p, comp label8:::p::p, comp txtPassConfirm:::p:248:p, par t:l {par l {seq l {space :6:6:p, comp btnShowLoginCard:::p::p}, comp btnRegister::l:p:244:p}, seq {space :p:125:p, comp cbIsRoleAdmin:::p:119:p}}}}}}}"
-					"$verticalGroup": "par l {seq l {space :p:13:p, comp label3:::p:57:p, space :::p, comp label1:::p::p, space :::p, comp txtEmailRegister:::p:31:p, space :::p, comp panel1:::p::p, space :::p, comp label2:::p::p, space :::p, comp txtPassRegister:::p::p, space :p:2:p, comp panel2:::p::p, space :::p, comp label8:::p::p, space :6:6:p, comp txtPassConfirm:::p::p, space :::p, comp panel5:::p::p, space :p:12:p, comp panel6:::p:25:p, space :::p, comp cbIsRoleAdmin:::p:30:p, space u:::p, comp btnRegister:::p::p, space u:::p, comp btnShowLoginCard:::p::p, space ::35:x}}"
+					"$horizontalGroup": "par l {seq {space :43:43:p, par l {seq {par l {comp txtPassRegister::l:p:248:p, comp label2::l:p::p, comp label1::l:p::p, comp label3::l:p:248:p, comp txtEmailRegister::l:p:248:p}, space :0:26:x}, comp panel2::::274:x, comp panel1::::274:x}, space :::p}, seq l {space :::p, par l {comp panel6::t::317:x, seq l {space :p:37:p, par l {comp panel5::l:p:275:p, comp txtPassConfirm:::p:248:p, par t:l {par l {seq l {space :6:6:p, comp btnShowLoginCard:::p::p}, comp btnRegister::l:p:244:p}, seq {space :p:125:p, comp cbIsRoleAdmin:::p:119:p}}, comp label8::l:p:151:p}}}}}"
+					"$verticalGroup": "par l {seq l {space :p:13:p, comp label3:::p:57:p, space :::p, comp label1:::p::p, space :::p, comp txtEmailRegister:::p:31:p, space :::p, comp panel1:::p::p, space :::p, comp label2:::p::p, space :::p, comp txtPassRegister:::p::p, space :p:2:p, comp panel2:::p::p, space :::p, comp label8:::p::p, space :::p, comp txtPassConfirm:::p::p, space :::p, comp panel5:::p::p, space :p:12:p, comp panel6:::p:25:p, space :::p, comp cbIsRoleAdmin:::p:30:p, space u:::p, comp btnRegister:::p::p, space u:::p, comp btnShowLoginCard:::p::p, space ::35:x}}"
 				} ) {
 					name: "registerCard"
 					auxiliary() {
@@ -224,7 +224,7 @@ new FormModel {
 					} )
 					add( new FormComponent( "javax.swing.JLabel" ) {
 						name: "label8"
-						"text": "PASSWORD"
+						"text": "CONFIRM PASSWORD"
 						"font": #SwingDerivedFont0
 					} )
 					add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {

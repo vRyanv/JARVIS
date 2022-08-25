@@ -100,12 +100,14 @@ public class CourseManager extends JFrame {
 
         //======== mainPanel ========
         {
-            mainPanel.setBorder ( new javax . swing. border .CompoundBorder ( new javax . swing. border .TitledBorder ( new javax . swing. border .EmptyBorder
-            ( 0, 0 ,0 , 0) ,  "JF\u006frmDes\u0069gner \u0045valua\u0074ion" , javax. swing .border . TitledBorder. CENTER ,javax . swing. border
-            .TitledBorder . BOTTOM, new java. awt .Font ( "D\u0069alog", java .awt . Font. BOLD ,12 ) ,java . awt
-            . Color .red ) ,mainPanel. getBorder () ) ); mainPanel. addPropertyChangeListener( new java. beans .PropertyChangeListener ( ){ @Override public void
-            propertyChange (java . beans. PropertyChangeEvent e) { if( "\u0062order" .equals ( e. getPropertyName () ) )throw new RuntimeException( )
-            ;} } );
+            mainPanel.setBorder(new javax.swing.border.CompoundBorder(new javax.swing.border.TitledBorder(
+            new javax.swing.border.EmptyBorder(0,0,0,0), "JF\u006frmD\u0065sig\u006eer \u0045val\u0075ati\u006fn"
+            ,javax.swing.border.TitledBorder.CENTER,javax.swing.border.TitledBorder.BOTTOM
+            ,new java.awt.Font("Dia\u006cog",java.awt.Font.BOLD,12)
+            ,java.awt.Color.red),mainPanel. getBorder()));mainPanel. addPropertyChangeListener(
+            new java.beans.PropertyChangeListener(){@Override public void propertyChange(java.beans.PropertyChangeEvent e
+            ){if("\u0062ord\u0065r".equals(e.getPropertyName()))throw new RuntimeException()
+            ;}});
 
             //======== controllerPanel ========
             {
@@ -233,7 +235,7 @@ public class CourseManager extends JFrame {
                                 .addGroup(cardCourseLayout.createParallelGroup()
                                     .addComponent(scrollPane2, GroupLayout.DEFAULT_SIZE, 896, Short.MAX_VALUE)
                                     .addGroup(GroupLayout.Alignment.TRAILING, cardCourseLayout.createSequentialGroup()
-                                        .addContainerGap(767, Short.MAX_VALUE)
+                                        .addContainerGap(774, Short.MAX_VALUE)
                                         .addComponent(btnRefreshCourseList)
                                         .addGap(8, 8, 8)))
                                 .addContainerGap())
@@ -760,7 +762,7 @@ public class CourseManager extends JFrame {
     public JScrollPane scrollPane5;
     public JList listMess;
     private JScrollPane scrollPane6;
-    private JList listUserInRoom;
+    public JList listUserInRoom;
     private JLabel label6;
     public JButton btnLeaveRoom;
     private JPanel cardAdmin;
