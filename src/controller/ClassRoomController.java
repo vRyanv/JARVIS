@@ -17,7 +17,7 @@ import java.util.TreeMap;
 
 public class ClassRoomController {
     private CourseManager courseManager;
-    private CardLayout cardLayout;
+    public CardLayout cardLayout;
     private String host = "localhost";
     private int port = 2108;
     private Socket socket;
@@ -38,7 +38,15 @@ public class ClassRoomController {
         this.username = email.substring(0, email.indexOf("@"));
         this.courseManager = courseManager;
         this.courseBoxList = new ArrayList<>();
+        this.cardLayout = (CardLayout) courseManager.cardClassRoom.getLayout();
         this.LoadRoom();
+
+        this.courseManager.btnLeaveRoom.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                LeaveRoom();
+            }
+        });
         this.courseManager.btnRefreshRoom.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseReleased(MouseEvent e) {
@@ -51,22 +59,34 @@ public class ClassRoomController {
                 SendMess(courseManager.txtMess.getText());
             }
         });
-        this.cardLayout = (CardLayout) courseManager.cardClassRoom.getLayout();
-//        this.courseManager.addWindowListener(new WindowAdapter() {
-//            @Override
-//            public void windowClosing(WindowEvent e) {
-//                int choice = JOptionPane.showConfirmDialog(courseManager, "Logout ?", "Confirm",JOptionPane.OK_CANCEL_OPTION);
-//                if(choice == JOptionPane.OK_OPTION)
-//                {
-//                    try {
-//                        dos.writeUTF("logout,"+username);
-//                    }catch (Exception ex){
-//                        JOptionPane.showMessageDialog(courseManager, "Something wrong!", "Error", JOptionPane.ERROR_MESSAGE);
-//                    }
-//
-//                }
-//            }
-//        });
+
+        this.courseManager.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                int choice = JOptionPane.showConfirmDialog(courseManager, "Logout ?", "Confirm",JOptionPane.OK_CANCEL_OPTION);
+                if(choice == JOptionPane.OK_OPTION)
+                {
+                    try {
+                        dos.writeUTF("logout,"+username);
+                    }catch (Exception ex){
+                        JOptionPane.showMessageDialog(courseManager, "Something wrong!", "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+
+                }
+            }
+        });
+    }
+
+    private void LeaveRoom()
+    {
+        String roomId = courseManager.lbRoomId.getText().substring(courseManager.lbRoomId.getText().lastIndexOf(" ")+1);
+        try {
+            dos.writeUTF("leaveRoom,"+roomId);
+            System.out.println(roomId);
+        }catch (Exception ex)
+        {
+            System.out.println(ex);
+        }
     }
 
     private void LoadRoom()
@@ -97,8 +117,6 @@ public class ClassRoomController {
         }
     }
 
-
-
     //====== chat =====
     private void enrollRoom(String roomId, String email)
     {
@@ -110,9 +128,9 @@ public class ClassRoomController {
                 this.currentRoom = roomId;
                 this.courseManager.lbRoomId.setText("Room ID: "+roomId);
 
-                receiver = new Thread(new Receiver(dis, courseManager, this.currentModel ));
+                receiver = new Thread(new Receiver(dis, courseManager, this.currentModel, cardLayout));
                 receiver.start();
-                dos.writeUTF("intoRoom,"+roomId+","+username);
+                dos.writeUTF("intoRoom,"+roomId+","+email);
 
                 cardLayout.show(courseManager.cardClassRoom, "cardRoom");
 
@@ -148,6 +166,7 @@ public class ClassRoomController {
         try {
             dos.writeUTF("Mess,"+currentRoom+","+mess);
             this.currentModel.addElement(this.username +": "+mess);
+            AutoScroll();
             return true;
         }catch (Exception ex){
             return false;
@@ -162,11 +181,14 @@ class Receiver implements Runnable
     private CourseManager courseManager;
     private DefaultListModel messListModel;
 
-    public Receiver(DataInputStream dis, CourseManager courseManager, DefaultListModel messListModel)
+    private CardLayout cardLayout;
+
+    public Receiver(DataInputStream dis, CourseManager courseManager, DefaultListModel messListModel, CardLayout cardLayout)
     {
         this.dis = dis;
         this.courseManager = courseManager;
         this.messListModel = messListModel;
+        this.cardLayout = cardLayout;
     }
     @Override
     public void run() {
@@ -179,11 +201,12 @@ class Receiver implements Runnable
                 {
                     NewMess(ResponseElement[1]);
                 }
-//                else if (ResponseElement[0].equals("logout"))
-//                {
-//                    System.out.println("out");
-//                    break;
-//                }
+                else if (ResponseElement[0].equals("leaveRoom"))
+                {
+                    System.out.println("out");
+                    cardLayout.show(courseManager.cardClassRoom, "cardChooseRoom");
+                    break;
+                }
             }
         }catch (Exception ex){
             JOptionPane.showMessageDialog(courseManager.cardClassRoom, "Something wrong", "Error", JOptionPane.ERROR_MESSAGE);
@@ -194,6 +217,12 @@ class Receiver implements Runnable
     {
         System.out.println(mess);
         this.messListModel.addElement(mess);
+        AutoScroll();
+    }
+
+    private void AutoScroll()
+    {
+        courseManager.scrollPane5.getVerticalScrollBar().setValue(courseManager.scrollPane5.getVerticalScrollBar().getMaximum());
     }
 }
 

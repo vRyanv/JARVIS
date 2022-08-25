@@ -18,8 +18,7 @@ public class Server
     public static boolean serverIsOn = false;
     private ServerSocket serverSocket;
     private Socket socket;
-//    static TreeMap<String, List<handler>> clients = new TreeMap<>();
-    static TreeMap<String, List<handler>> clients = new TreeMap<>();
+    static TreeMap<String, List<handler>> clients = new TreeMap<>(); //TreeMap<roomId, client>
     private CourseManager courseManager;
     public Server(CourseManager courseManager)
     {
@@ -38,10 +37,10 @@ public class Server
 
                 String request = dis.readUTF();
                 String[] requestElement = request.split(",");
-                String username = requestElement[2];
+                String email = requestElement[2];
                 if(requestElement[0].equals("intoRoom"))
                 {
-                    handler handler = new handler(socket, username);
+                    handler handler = new handler(socket, email);
                     if(clients.containsKey(requestElement[1]))
                     {
                         clients.get(requestElement[1]).add(handler);
@@ -69,16 +68,18 @@ class handler implements Runnable
     private Socket socket;
     private DataInputStream dis;
     private DataOutputStream dos;
+    private String email;
     private String username;
-    public handler(Socket socket, String username)
+    public handler(Socket socket, String email)
     {
-        HandlerConfig(socket, username);
+        HandlerConfig(socket, email);
     }
 
-    private void HandlerConfig(Socket socket, String username)
+    private void HandlerConfig(Socket socket, String email)
     {
         try {
-            this.username = username;
+            this.email = email;
+            this.username = email.substring(0, email.indexOf("@"));
             this.socket = socket;
             this.dis = new DataInputStream(socket.getInputStream());
             this.dos = new DataOutputStream(socket.getOutputStream());
@@ -104,22 +105,25 @@ class handler implements Runnable
                         }
                     }
                 }
-//                else if(requestElement[0].equals("logout"))
-//                {
-//                    System.out.println(requestElement[1]);
-//                    for (handler handlers: Server.clients.get(requestElement[1]))
-//                    {
-//                        if(handlers.username.equals(username))
-//                        {
-//                            handlers.dos.writeUTF("logout, ");
-//                        }
-//                    }
-//                    this.socket.close();
-//                    break;
-//                }
+                else if(requestElement[0].equals("leaveRoom"))
+                {
+                    System.out.println(requestElement[1]);
+                    for (handler handlers: Server.clients.get(requestElement[1]))
+                    {
+                        if(handlers.email.equals(email))
+                        {
+                            handlers.dos.writeUTF("leaveRoom, ");
+                            this.socket.close();
+                            Server.clients.get(requestElement[1]).remove(handlers);
+                            break;
+                        }
+                    }
+                    break;
+                }
             }catch (IOException ioException){
             }
 
         }
+
     }
 }

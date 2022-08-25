@@ -63,6 +63,10 @@ public class CourseManager extends JFrame {
         lbRoomId = new JLabel();
         scrollPane5 = new JScrollPane();
         listMess = new JList();
+        scrollPane6 = new JScrollPane();
+        listUserInRoom = new JList();
+        label6 = new JLabel();
+        btnLeaveRoom = new JButton();
         cardAdmin = new JPanel();
         toolbarAdmin = new JPanel();
         lbCourseManager = new JLabel();
@@ -96,12 +100,12 @@ public class CourseManager extends JFrame {
 
         //======== mainPanel ========
         {
-            mainPanel.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing.
-            border. EmptyBorder( 0, 0, 0, 0) , "JF\u006frmDes\u0069gner \u0045valua\u0074ion", javax. swing. border. TitledBorder. CENTER
-            , javax. swing. border. TitledBorder. BOTTOM, new java .awt .Font ("D\u0069alog" ,java .awt .Font
-            .BOLD ,12 ), java. awt. Color. red) ,mainPanel. getBorder( )) ); mainPanel. addPropertyChangeListener (
-            new java. beans. PropertyChangeListener( ){ @Override public void propertyChange (java .beans .PropertyChangeEvent e) {if ("\u0062order"
-            .equals (e .getPropertyName () )) throw new RuntimeException( ); }} );
+            mainPanel.setBorder ( new javax . swing. border .CompoundBorder ( new javax . swing. border .TitledBorder ( new javax . swing. border .EmptyBorder
+            ( 0, 0 ,0 , 0) ,  "JF\u006frmDes\u0069gner \u0045valua\u0074ion" , javax. swing .border . TitledBorder. CENTER ,javax . swing. border
+            .TitledBorder . BOTTOM, new java. awt .Font ( "D\u0069alog", java .awt . Font. BOLD ,12 ) ,java . awt
+            . Color .red ) ,mainPanel. getBorder () ) ); mainPanel. addPropertyChangeListener( new java. beans .PropertyChangeListener ( ){ @Override public void
+            propertyChange (java . beans. PropertyChangeEvent e) { if( "\u0062order" .equals ( e. getPropertyName () ) )throw new RuntimeException( )
+            ;} } );
 
             //======== controllerPanel ========
             {
@@ -227,9 +231,9 @@ public class CourseManager extends JFrame {
                         cardCourseLayout.createParallelGroup()
                             .addGroup(cardCourseLayout.createSequentialGroup()
                                 .addGroup(cardCourseLayout.createParallelGroup()
-                                    .addComponent(scrollPane2, GroupLayout.DEFAULT_SIZE, 855, Short.MAX_VALUE)
+                                    .addComponent(scrollPane2, GroupLayout.DEFAULT_SIZE, 896, Short.MAX_VALUE)
                                     .addGroup(GroupLayout.Alignment.TRAILING, cardCourseLayout.createSequentialGroup()
-                                        .addContainerGap(753, Short.MAX_VALUE)
+                                        .addContainerGap(767, Short.MAX_VALUE)
                                         .addComponent(btnRefreshCourseList)
                                         .addGap(8, 8, 8)))
                                 .addContainerGap())
@@ -295,7 +299,7 @@ public class CourseManager extends JFrame {
                                     .addGap(10, 10, 10)
                                     .addComponent(btnRefreshRoom)
                                     .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(scrollPane4, GroupLayout.DEFAULT_SIZE, 514, Short.MAX_VALUE)
+                                    .addComponent(scrollPane4, GroupLayout.DEFAULT_SIZE, 498, Short.MAX_VALUE)
                                     .addContainerGap())
                         );
                     }
@@ -315,19 +319,18 @@ public class CourseManager extends JFrame {
                             panel2Layout.setHorizontalGroup(
                                 panel2Layout.createParallelGroup()
                                     .addGroup(GroupLayout.Alignment.TRAILING, panel2Layout.createSequentialGroup()
-                                        .addContainerGap()
-                                        .addComponent(txtMess, GroupLayout.DEFAULT_SIZE, 680, Short.MAX_VALUE)
-                                        .addGap(18, 18, 18)
+                                        .addComponent(txtMess, GroupLayout.PREFERRED_SIZE, 510, GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                                         .addComponent(btnSendMess)
-                                        .addGap(48, 48, 48))
+                                        .addGap(20, 20, 20))
                             );
                             panel2Layout.setVerticalGroup(
                                 panel2Layout.createParallelGroup()
                                     .addGroup(GroupLayout.Alignment.TRAILING, panel2Layout.createSequentialGroup()
                                         .addGap(7, 7, 7)
                                         .addGroup(panel2Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                            .addComponent(txtMess, GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
-                                            .addComponent(btnSendMess))
+                                            .addComponent(btnSendMess)
+                                            .addComponent(txtMess, GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE))
                                         .addContainerGap())
                             );
                         }
@@ -342,33 +345,57 @@ public class CourseManager extends JFrame {
                             scrollPane5.setViewportView(listMess);
                         }
 
+                        //======== scrollPane6 ========
+                        {
+                            scrollPane6.setViewportView(listUserInRoom);
+                        }
+
+                        //---- label6 ----
+                        label6.setText("Member");
+
+                        //---- btnLeaveRoom ----
+                        btnLeaveRoom.setText("Leave");
+                        btnLeaveRoom.setFont(new Font("JetBrains Mono", Font.BOLD, 12));
+
                         GroupLayout cardRoomLayout = new GroupLayout(cardRoom);
                         cardRoom.setLayout(cardRoomLayout);
                         cardRoomLayout.setHorizontalGroup(
                             cardRoomLayout.createParallelGroup()
                                 .addGroup(cardRoomLayout.createSequentialGroup()
                                     .addContainerGap()
+                                    .addComponent(btnLeaveRoom)
+                                    .addGap(170, 170, 170)
+                                    .addComponent(lbRoomId, GroupLayout.PREFERRED_SIZE, 138, GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(label6, GroupLayout.PREFERRED_SIZE, 70, GroupLayout.PREFERRED_SIZE)
+                                    .addGap(86, 86, 86))
+                                .addGroup(cardRoomLayout.createSequentialGroup()
                                     .addGroup(cardRoomLayout.createParallelGroup()
                                         .addGroup(cardRoomLayout.createSequentialGroup()
-                                            .addGroup(cardRoomLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
-                                                .addComponent(panel2, GroupLayout.Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addGroup(cardRoomLayout.createSequentialGroup()
-                                                    .addGap(0, 694, Short.MAX_VALUE)
-                                                    .addComponent(lbRoomId, GroupLayout.PREFERRED_SIZE, 138, GroupLayout.PREFERRED_SIZE)))
-                                            .addGap(23, 23, 23))
-                                        .addGroup(cardRoomLayout.createSequentialGroup()
-                                            .addComponent(scrollPane5, GroupLayout.PREFERRED_SIZE, 846, GroupLayout.PREFERRED_SIZE)
-                                            .addContainerGap(9, Short.MAX_VALUE))))
+                                            .addContainerGap()
+                                            .addComponent(scrollPane5, GroupLayout.PREFERRED_SIZE, 646, GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                                            .addComponent(scrollPane6, GroupLayout.PREFERRED_SIZE, 238, GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(panel2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                                    .addGap(0, 0, Short.MAX_VALUE))
                         );
                         cardRoomLayout.setVerticalGroup(
                             cardRoomLayout.createParallelGroup()
                                 .addGroup(cardRoomLayout.createSequentialGroup()
                                     .addContainerGap()
-                                    .addComponent(lbRoomId)
+                                    .addGroup(cardRoomLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                        .addComponent(label6)
+                                        .addComponent(lbRoomId)
+                                        .addComponent(btnLeaveRoom, GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE))
                                     .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(scrollPane5, GroupLayout.DEFAULT_SIZE, 484, Short.MAX_VALUE)
-                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(panel2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(cardRoomLayout.createParallelGroup()
+                                        .addGroup(cardRoomLayout.createSequentialGroup()
+                                            .addComponent(scrollPane5, GroupLayout.DEFAULT_SIZE, 469, Short.MAX_VALUE)
+                                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(panel2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(cardRoomLayout.createSequentialGroup()
+                                            .addComponent(scrollPane6, GroupLayout.DEFAULT_SIZE, 524, Short.MAX_VALUE)
+                                            .addContainerGap())))
                         );
                     }
                     cardClassRoom.add(cardRoom, "cardRoom");
@@ -553,7 +580,7 @@ public class CourseManager extends JFrame {
                                                             .addComponent(txtCourseId, GroupLayout.PREFERRED_SIZE, 232, GroupLayout.PREFERRED_SIZE)
                                                             .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
                                                             .addComponent(lbInvalidIdCourse, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE))))))
-                                        .addContainerGap(75, Short.MAX_VALUE))
+                                        .addContainerGap(116, Short.MAX_VALUE))
                             );
                             cardNewCourseLayout.setVerticalGroup(
                                 cardNewCourseLayout.createParallelGroup()
@@ -627,7 +654,7 @@ public class CourseManager extends JFrame {
                                         .addGap(34, 34, 34)
                                         .addComponent(btnSaveAs)
                                         .addContainerGap())
-                                    .addComponent(scrollPane3, GroupLayout.DEFAULT_SIZE, 861, Short.MAX_VALUE)
+                                    .addComponent(scrollPane3, GroupLayout.DEFAULT_SIZE, 902, Short.MAX_VALUE)
                             );
                             cardCourseManagerLayout.setVerticalGroup(
                                 cardCourseManagerLayout.createParallelGroup()
@@ -637,7 +664,7 @@ public class CourseManager extends JFrame {
                                             .addComponent(btnLoadDataFromDisk)
                                             .addComponent(btnSaveAs, GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE))
                                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(scrollPane3, GroupLayout.DEFAULT_SIZE, 490, Short.MAX_VALUE))
+                                        .addComponent(scrollPane3, GroupLayout.DEFAULT_SIZE, 478, Short.MAX_VALUE))
                             );
                         }
                         cardMainPanelAdmin.add(cardCourseManager, "cardCourseManager");
@@ -732,6 +759,10 @@ public class CourseManager extends JFrame {
     public JLabel lbRoomId;
     public JScrollPane scrollPane5;
     public JList listMess;
+    private JScrollPane scrollPane6;
+    private JList listUserInRoom;
+    private JLabel label6;
+    public JButton btnLeaveRoom;
     private JPanel cardAdmin;
     private JPanel toolbarAdmin;
     public JLabel lbCourseManager;
