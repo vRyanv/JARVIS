@@ -1,6 +1,8 @@
 package controller;
 
+import library.fileProcess.FileProcess;
 import model.course.Course;
+import model.user.User;
 import server.Server;
 import view.CourseBox.CourseBox;
 import view.CourseManager.CourseManager;
@@ -67,18 +69,45 @@ public class ClassRoomController {
                 int choice = JOptionPane.showConfirmDialog(courseManager, "Logout ?", "Confirm",JOptionPane.OK_CANCEL_OPTION);
                 if(choice == JOptionPane.OK_OPTION)
                 {
-                    try {
-                        if(socket != null)
+                    if(IsAdminRole())
+                    {
+                        if(Connect())
                         {
-                            dos.writeUTF("logout,");
+                            try {
+                                dos.writeUTF("killServer,");
+                                System.exit(0);
+                            }catch (Exception ex){
+                                JOptionPane.showMessageDialog(courseManager.cardMainPanelAdmin, "Server Error!", "Admin: Error", JOptionPane.ERROR_MESSAGE);
+                            }
                         }
-                        System.exit(0);
-                    }catch (Exception ex){
-                        JOptionPane.showMessageDialog(courseManager, "Something wrong!", "Error", JOptionPane.ERROR_MESSAGE);
+                        else
+                        {
+                            JOptionPane.showMessageDialog(courseManager, "Something wrong!", "Error", JOptionPane.ERROR_MESSAGE);
+                        }
+                    }
+                    else
+                    {
+                        try {
+                            if(socket != null && !socket.isClosed())
+                            {
+                                dos.writeUTF("logout,");
+                            }
+                            System.exit(0);
+                        }catch (Exception ex){
+                            JOptionPane.showMessageDialog(courseManager, "Something wrong! can't exit T_T", "Error", JOptionPane.ERROR_MESSAGE);
+                        }
                     }
                 }
             }
         });
+    }
+
+    private boolean IsAdminRole()
+    {
+        String pathUserList = System.getProperty("user.dir") + "\\src\\model\\user\\userList.dat";
+        TreeMap<String, User> userList =  (TreeMap<String, User>) FileProcess.readObject(pathUserList);
+
+        return userList.get(this.email).getRole().equals("admin");
     }
 
     private void LeaveRoom()
@@ -134,7 +163,7 @@ public class ClassRoomController {
 
                 this.courseManager.lbRoomId.setText("Room ID: "+roomId);
 
-                receiver = new Thread(new Receiver(socket, dis, courseManager, this.messListModel, this.userListModel, cardLayout));
+                receiver = new Thread(new Receiver(socket, dis, courseManager, this.messListModel, this.userListModel, cardLayout, email));
                 receiver.start();
                 dos.writeUTF("intoRoom,"+roomId+","+email);
 
@@ -189,10 +218,11 @@ class Receiver implements Runnable
     private DefaultListModel userListModel;
 
     private CardLayout cardLayout;
+    private String email;
 
     public Receiver(Socket socket, DataInputStream dis, CourseManager courseManager,
                     DefaultListModel messListModel, DefaultListModel userListModel,
-                    CardLayout cardLayout)
+                    CardLayout cardLayout, String email)
     {
         this.socket = socket;
         this.dis = dis;
@@ -200,6 +230,7 @@ class Receiver implements Runnable
         this.messListModel = messListModel;
         this.userListModel = userListModel;
         this.cardLayout = cardLayout;
+        this.email = email;
     }
     @Override
     public void run() {
@@ -221,31 +252,39 @@ class Receiver implements Runnable
                 }
                 else if (ResponseElement[0].equals("leaveRoom"))
                 {
+                    LeaveRoom(this.email);
                     cardLayout.show(courseManager.cardClassRoom, "cardChooseRoom");
                     break;
                 }
                 else if (ResponseElement[0].equals("userLeaveRoom"))
                 {
-                    String email = ResponseElement[0];
-                    userListModel.removeElement(email);
-                }
-                else if(ResponseElement[0].equals("offline"))
-                {
-                    JOptionPane.showMessageDialog(courseManager, "server down", "Warning", JOptionPane.WARNING_MESSAGE);
-                    cardLayout.show(courseManager.cardClassRoom, "cardChooseRoom");
-                    break;
+                    String email = ResponseElement[1];
+                    LeaveRoom(email);
                 }
                 else if (ResponseElement[0].equals("serverDead"))
                 {
                     JOptionPane.showMessageDialog(courseManager, "server down", "Warning", JOptionPane.WARNING_MESSAGE);
                     cardLayout.show(courseManager.cardClassRoom, "cardChooseRoom");
+                    socket.close();
+                    System.out.println(socket.isConnected());
                     break;
                 }
-
             }
         }catch (Exception ex){
             this.socket = null;
             JOptionPane.showMessageDialog(courseManager.cardClassRoom, "Something wrong", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    private void LeaveRoom(String email)
+    {
+        for (int i = 0; i < userListModel.size(); i++)
+        {
+            System.out.println(userListModel.getElementAt(i));
+            if(userListModel.getElementAt(i).equals(email))
+            {
+                userListModel.removeElementAt(i);
+            }
         }
     }
 

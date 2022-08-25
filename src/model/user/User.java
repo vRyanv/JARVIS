@@ -1,6 +1,9 @@
 package model.user;
 
+import library.fileProcess.FileProcess;
+
 import java.io.Serializable;
+import java.util.List;
 import java.util.TreeMap;
 
 public class User implements Serializable
