@@ -112,6 +112,7 @@ new FormModel {
 						"text": "Save"
 						"foreground": sfield java.awt.Color white
 						"background": new java.awt.Color( 33, 204, 121, 255 )
+						"cursor": &Cursor0 new java.awt.Cursor( 12 )
 						auxiliary() {
 							"JavaCodeGenerator.variableModifiers": 1
 						}
@@ -121,7 +122,7 @@ new FormModel {
 					add( new FormComponent( "javax.swing.JButton" ) {
 						name: "btnDeleteCourse"
 						"text": "Delete"
-						"cursor": &Cursor0 new java.awt.Cursor( 12 )
+						"cursor": #Cursor0
 						"background": new java.awt.Color( 229, 53, 37, 255 )
 						"foreground": sfield java.awt.Color white
 						auxiliary() {

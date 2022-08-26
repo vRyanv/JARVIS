@@ -26,6 +26,7 @@ public class CourseBox extends JPanel
         btnRegisterCourse.setBackground(new Color(33, 204, 121));
 
         btnCourseId.setText(id);
+        btnCourseId.setCursor((Cursor.getPredefinedCursor(Cursor.HAND_CURSOR)));
         btnCourseId.setForeground(Color.white);
         btnCourseId.setBackground(new Color(33, 204, 121));
 

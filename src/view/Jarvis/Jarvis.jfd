@@ -130,6 +130,7 @@ new FormModel {
 						add( new FormComponent( "javax.swing.JButton" ) {
 							name: "btnRefreshCourseList"
 							"text": "Refresh"
+							"cursor": &Cursor1 new java.awt.Cursor( 12 )
 							auxiliary() {
 								"JavaCodeGenerator.variableModifiers": 1
 							}
@@ -146,8 +147,8 @@ new FormModel {
 							"JavaCodeGenerator.variableModifiers": 1
 						}
 						add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-							"$horizontalGroup": "par l {seq {space :::p, par l {comp scrollPane4::l:::x, seq t {space :0:0:x, comp btnRefreshRoom:::p::p}}, space :::p}}"
-							"$verticalGroup": "par l {seq {space :p:10:p, comp btnRefreshRoom:::p::p, space u:::p, comp scrollPane4::::498:x, space :::p}}"
+							"$horizontalGroup": "par l {seq {comp scrollPane4::::917:x, space :::p}, seq t {space :0:796:x, comp btnRefreshRoom:::p:102:p, space :p:25:p}}"
+							"$verticalGroup": "par l {seq {space :p:12:p, comp btnRefreshRoom:::p:32:p, space :::p, comp scrollPane4:::p:514:p, space :::p}}"
 						} ) {
 							name: "cardChooseRoom"
 							"background": new java.awt.Color( 26, 27, 63, 255 )
@@ -174,7 +175,7 @@ new FormModel {
 							add( new FormComponent( "javax.swing.JButton" ) {
 								name: "btnRefreshRoom"
 								"text": "Refresh"
-								"horizontalAlignment": 4
+								"cursor": #Cursor1
 								auxiliary() {
 									"JavaCodeGenerator.variableModifiers": 1
 								}
@@ -207,7 +208,7 @@ new FormModel {
 								add( new FormComponent( "javax.swing.JButton" ) {
 									name: "btnSendMess"
 									"text": "Send"
-									"cursor": &Cursor1 new java.awt.Cursor( 12 )
+									"cursor": &Cursor2 new java.awt.Cursor( 12 )
 									"foreground": sfield java.awt.Color white
 									"background": new java.awt.Color( 33, 204, 121, 255 )
 									auxiliary() {
@@ -256,7 +257,7 @@ new FormModel {
 								"font": new java.awt.Font( "JetBrains Mono", 1, 12 )
 								"background": new java.awt.Color( 250, 176, 5, 255 )
 								"foreground": sfield java.awt.Color white
-								"cursor": #Cursor1
+								"cursor": #Cursor2
 								auxiliary() {
 									"JavaCodeGenerator.variableModifiers": 1
 								}
@@ -286,7 +287,7 @@ new FormModel {
 								"background": new java.awt.Color( 44, 52, 72, 255 )
 								"foreground": &Color1 new java.awt.Color( 255, 255, 255, 255 )
 								"opaque": true
-								"cursor": &Cursor2 new java.awt.Cursor( 12 )
+								"cursor": &Cursor3 new java.awt.Cursor( 12 )
 								"font": &Font1 new java.awt.Font( "JetBrains Mono", 1, 15 )
 								auxiliary() {
 									"JavaCodeGenerator.variableModifiers": 1
@@ -299,7 +300,7 @@ new FormModel {
 								"background": new java.awt.Color( 33, 204, 121, 255 )
 								"foreground": #Color1
 								"opaque": true
-								"cursor": #Cursor2
+								"cursor": #Cursor3
 								"font": #Font1
 								auxiliary() {
 									"JavaCodeGenerator.variableModifiers": 1
@@ -317,7 +318,7 @@ new FormModel {
 								name: "rbServerOn"
 								"text": "On"
 								"$buttonGroup": new FormReference( "serverState" )
-								"cursor": &Cursor3 new java.awt.Cursor( 12 )
+								"cursor": &Cursor4 new java.awt.Cursor( 12 )
 								"foreground": &Color2 new java.awt.Color( 255, 255, 255, 255 )
 								auxiliary() {
 									"JavaCodeGenerator.variableModifiers": 1
@@ -327,7 +328,7 @@ new FormModel {
 								name: "rbServerOff"
 								"text": "Off"
 								"$buttonGroup": new FormReference( "serverState" )
-								"cursor": #Cursor3
+								"cursor": #Cursor4
 								"foreground": #Color2
 								"selected": true
 								auxiliary() {
@@ -403,7 +404,7 @@ new FormModel {
 									"text": "Add"
 									"foreground": sfield java.awt.Color white
 									"background": new java.awt.Color( 33, 204, 121, 255 )
-									"cursor": #Cursor2
+									"cursor": #Cursor3
 									"font": &Font2 new java.awt.Font( "JetBrains Mono", 1, 15 )
 									auxiliary() {
 										"JavaCodeGenerator.variableModifiers": 1
@@ -413,7 +414,7 @@ new FormModel {
 									name: "btnClearInforCourse"
 									"text": "Clear"
 									"background": new java.awt.Color( 250, 176, 5, 255 )
-									"cursor": #Cursor2
+									"cursor": #Cursor3
 									"foreground": sfield java.awt.Color white
 									"font": #Font2
 									auxiliary() {

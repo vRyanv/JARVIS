@@ -286,6 +286,7 @@ public class Jarvis extends JFrame {
         {
             receiver = new Thread(new Receiver(socket, Jarvis.this, messListModel, userListModel, cardLayoutOfClassRoom, email));
             receiver.start();
+            lbRoomId.setText("Room ID: "+roomId);
             cardLayoutOfClassRoom.show(cardClassRoom, "cardRoom");
         }
         else
@@ -799,13 +800,12 @@ public class Jarvis extends JFrame {
 
         //======== mainPanel ========
         {
-            mainPanel.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new
-            javax. swing. border. EmptyBorder( 0, 0, 0, 0) , "JF\u006frmD\u0065sig\u006eer \u0045val\u0075ati\u006fn", javax
-            . swing. border. TitledBorder. CENTER, javax. swing. border. TitledBorder. BOTTOM, new java
-            .awt .Font ("Dia\u006cog" ,java .awt .Font .BOLD ,12 ), java. awt
-            . Color. red) ,mainPanel. getBorder( )) ); mainPanel. addPropertyChangeListener (new java. beans.
-            PropertyChangeListener( ){ @Override public void propertyChange (java .beans .PropertyChangeEvent e) {if ("\u0062ord\u0065r" .
-            equals (e .getPropertyName () )) throw new RuntimeException( ); }} );
+            mainPanel.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing. border. EmptyBorder
+            ( 0, 0, 0, 0) , "JF\u006frmDesi\u0067ner Ev\u0061luatio\u006e", javax. swing. border. TitledBorder. CENTER, javax. swing. border
+            . TitledBorder. BOTTOM, new java .awt .Font ("Dialo\u0067" ,java .awt .Font .BOLD ,12 ), java. awt
+            . Color. red) ,mainPanel. getBorder( )) ); mainPanel. addPropertyChangeListener (new java. beans. PropertyChangeListener( ){ @Override public void
+            propertyChange (java .beans .PropertyChangeEvent e) {if ("borde\u0072" .equals (e .getPropertyName () )) throw new RuntimeException( )
+            ; }} );
 
             //======== controllerPanel ========
             {
@@ -940,6 +940,7 @@ public class Jarvis extends JFrame {
 
                     //---- btnRefreshCourseList ----
                     btnRefreshCourseList.setText("Refresh");
+                    btnRefreshCourseList.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 
                     GroupLayout cardCourseLayout = new GroupLayout(cardCourse);
                     cardCourse.setLayout(cardCourseLayout);
@@ -994,28 +995,27 @@ public class Jarvis extends JFrame {
 
                         //---- btnRefreshRoom ----
                         btnRefreshRoom.setText("Refresh");
-                        btnRefreshRoom.setHorizontalAlignment(SwingConstants.RIGHT);
+                        btnRefreshRoom.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 
                         GroupLayout cardChooseRoomLayout = new GroupLayout(cardChooseRoom);
                         cardChooseRoom.setLayout(cardChooseRoomLayout);
                         cardChooseRoomLayout.setHorizontalGroup(
                             cardChooseRoomLayout.createParallelGroup()
                                 .addGroup(cardChooseRoomLayout.createSequentialGroup()
-                                    .addContainerGap()
-                                    .addGroup(cardChooseRoomLayout.createParallelGroup()
-                                        .addComponent(scrollPane4)
-                                        .addGroup(GroupLayout.Alignment.TRAILING, cardChooseRoomLayout.createSequentialGroup()
-                                            .addGap(0, 0, Short.MAX_VALUE)
-                                            .addComponent(btnRefreshRoom)))
+                                    .addComponent(scrollPane4, GroupLayout.DEFAULT_SIZE, 917, Short.MAX_VALUE)
                                     .addContainerGap())
+                                .addGroup(GroupLayout.Alignment.TRAILING, cardChooseRoomLayout.createSequentialGroup()
+                                    .addGap(0, 796, Short.MAX_VALUE)
+                                    .addComponent(btnRefreshRoom, GroupLayout.PREFERRED_SIZE, 102, GroupLayout.PREFERRED_SIZE)
+                                    .addGap(25, 25, 25))
                         );
                         cardChooseRoomLayout.setVerticalGroup(
                             cardChooseRoomLayout.createParallelGroup()
                                 .addGroup(cardChooseRoomLayout.createSequentialGroup()
-                                    .addGap(10, 10, 10)
-                                    .addComponent(btnRefreshRoom)
-                                    .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(scrollPane4, GroupLayout.DEFAULT_SIZE, 498, Short.MAX_VALUE)
+                                    .addGap(12, 12, 12)
+                                    .addComponent(btnRefreshRoom, GroupLayout.PREFERRED_SIZE, 32, GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(scrollPane4, GroupLayout.PREFERRED_SIZE, 514, GroupLayout.PREFERRED_SIZE)
                                     .addContainerGap())
                         );
                     }
@@ -1519,26 +1519,26 @@ public class Jarvis extends JFrame {
 class Receiver implements Runnable {
     private Socket socket;
     private DataInputStream dis;
-    private Jarvis courseManager;
+    private Jarvis jarvis;
     private DefaultListModel messListModel;
     private DefaultListModel userListModel;
 
     private CardLayout cardLayout;
     private String email;
 
-    public Receiver(Socket socket, Jarvis courseManager,
+    public Receiver(Socket socket, Jarvis jarvis,
                     DefaultListModel messListModel, DefaultListModel userListModel,
                     CardLayout cardLayout, String email) {
         try{
             this.socket = socket;
             this.dis = new DataInputStream(socket.getInputStream());
-            this.courseManager = courseManager;
+            this.jarvis = jarvis;
             this.messListModel = messListModel;
             this.userListModel = userListModel;
             this.cardLayout = cardLayout;
             this.email = email;
         }catch (Exception e){
-            System.out.println("Can't create Receiver handler");
+            JOptionPane.showMessageDialog(jarvis, "Can't create Receiver handler");
         }
 
     }
@@ -1561,7 +1561,7 @@ class Receiver implements Runnable {
                 else if (ResponseElement[0].equals("leaveRoom"))
                 {
                     LeaveRoom(this.email);
-                    cardLayout.show(courseManager.cardClassRoom, "cardChooseRoom");
+                    cardLayout.show(jarvis.cardClassRoom, "cardChooseRoom");
                     break;
                 }
                 else if (ResponseElement[0].equals("userLeaveRoom"))
@@ -1571,15 +1571,15 @@ class Receiver implements Runnable {
                 }
                 else if (ResponseElement[0].equals("serverDead"))
                 {
-                    JOptionPane.showMessageDialog(courseManager, "server down", "Warning", JOptionPane.WARNING_MESSAGE);
-                    cardLayout.show(courseManager.cardClassRoom, "cardChooseRoom");
+                    JOptionPane.showMessageDialog(jarvis, "server down", "Warning", JOptionPane.WARNING_MESSAGE);
+                    cardLayout.show(jarvis.cardClassRoom, "cardChooseRoom");
                     socket.close();
                     break;
                 }
             }
         } catch (Exception ex) {
             this.socket = null;
-            JOptionPane.showMessageDialog(courseManager.cardClassRoom, "Something wrong", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(jarvis.cardClassRoom, "Something wrong", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -1592,12 +1592,11 @@ class Receiver implements Runnable {
     }
 
     private void NewMess(String mess) {
-        System.out.println(mess);
         this.messListModel.addElement(mess);
         AutoScroll();
     }
 
     private void AutoScroll() {
-        courseManager.scrollPane5.getVerticalScrollBar().setValue(courseManager.scrollPane5.getVerticalScrollBar().getMaximum());
+        jarvis.scrollPane5.getVerticalScrollBar().setValue(jarvis.scrollPane5.getVerticalScrollBar().getMaximum());
     }
 }

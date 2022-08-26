@@ -138,7 +138,7 @@ class handler implements Runnable
                             handlers.dos.writeUTF("leaveRoom, ");
                             this.socket.close();
                             Server.clients.get(this.roomId).remove(handlers);
-                            System.out.println(username + " has leave room: " + this.roomId);
+                            System.out.println(email + " has leave room: " + this.roomId);
                         }
                         else
                         {

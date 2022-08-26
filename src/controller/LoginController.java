@@ -10,18 +10,18 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class LoginController{
-    private TreeMap<String, User> userTreeMap;
+
     public boolean LoadData()
     {
-        this.userTreeMap = (TreeMap<String, User>) FileProcess.readObject(Data.pathUserList);
-        return this.userTreeMap == null;
+        TreeMap<String, User> userTreeMap = (TreeMap<String, User>) FileProcess.readObject(Data.pathUserList);
+        return userTreeMap == null;
     }
 
     public boolean loginProcess(String email, char[] pass)
     {
-        if(this.userTreeMap.containsKey(email))
+        if(Data.userList.containsKey(email))
         {
-            return Arrays.equals(this.userTreeMap.get(email).getPassword(), pass);
+            return Arrays.equals(Data.userList.get(email).getPassword(), pass);
         }
         return false;
     }
@@ -52,7 +52,7 @@ public class LoginController{
             }
             else
             {
-                if(saveAccount(email, pass,role))
+                if(saveAccount(email, pass, role))
                 {
                     return "success";
                 }
@@ -75,7 +75,7 @@ public class LoginController{
 
     private boolean checkEmailExisted(String email)
     {
-        return userTreeMap == null ? false : userTreeMap.containsKey(email);
+        return Data.userList == null ? false : Data.userList.containsKey(email);
 
     }
 
@@ -91,8 +91,8 @@ public class LoginController{
 
     private boolean saveAccount(String email, char[] pass, String role)
     {
-        this.userTreeMap.put(email, new User(email, pass, role));
-        return FileProcess.writeObject(Data.pathUserList ,this.userTreeMap);
+        Data.userList.put(email, new User(email, pass, role));
+        return FileProcess.writeObject(Data.pathUserList , Data.userList);
     }
 
 
