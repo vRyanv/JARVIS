@@ -162,17 +162,17 @@ public class AdminController {
         }
     }
 
-    public boolean saveCourse(String id, String name, int numOfLession, String description, String type)
+    public boolean saveCourse(String id, String name, int numOfLesson, String description, String type)
     {
         if(type.equals("newCourse"))
         {
-            Course course = new Course(id, name, numOfLession, description, new ArrayList<>());
+            Course course = new Course(id, name, numOfLesson, description, new ArrayList<>());
             Data.courseList.put(id, course);
         }
         else
         {
             Data.courseList.get(id).setName(name);
-            Data.courseList.get(id).setNumberOfLessons(numOfLession);
+            Data.courseList.get(id).setNumberOfLessons(numOfLesson);
             Data.courseList.get(id).setDescription(description);
         }
         return Data.SaveCourseList();
