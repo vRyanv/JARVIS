@@ -7,10 +7,10 @@ import java.util.List;
 import java.util.TreeMap;
 
 public class Data {
-    public static TreeMap<String, Course> courseList = (TreeMap<String, Course>)
-            FileProcess.readObject(System.getProperty("user.dir")+"\\src\\model\\course\\courseList.dat");
+    public static String pathCourseList = System.getProperty("user.dir")+"\\src\\model\\course\\courseList.dat";
+    public static TreeMap<String, Course> courseList = (TreeMap<String, Course>) FileProcess.readObject(Data.pathCourseList);
     public static boolean SaveCourseList()
     {
-        return FileProcess.writeObject(System.getProperty("user.dir")+"\\src\\model\\course\\courseList.dat", courseList);
+        return FileProcess.writeObject(Data.pathCourseList, courseList);
     }
 }

@@ -62,6 +62,16 @@ public class ClassRoomController {
             }
         });
 
+        this.courseManager.txtMess.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if(e.getKeyCode() == KeyEvent.VK_ENTER)
+                {
+                    SendMess(courseManager.txtMess.getText());
+                }
+            }
+        });
+
         this.courseManager.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
@@ -203,6 +213,7 @@ public class ClassRoomController {
         try {
             dos.writeUTF("Mess,"+mess);
             this.messListModel.addElement(this.username +": "+mess);
+            this.courseManager.txtMess.setText("");
             AutoScroll();
         }catch (Exception ex){
             JOptionPane.showMessageDialog(courseManager, "Can't send message", "Room: error", JOptionPane.ERROR_MESSAGE);

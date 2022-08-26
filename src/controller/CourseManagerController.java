@@ -34,7 +34,7 @@ public class CourseManagerController {
     private void LoadData()
     {
         courseManager.containerCourseList.removeAll();
-
+        Data.courseList = (TreeMap<String, Course>) FileProcess.readObject(Data.pathCourseList);
         if(Data.courseList != null)
         {
             for (Course course: Data.courseList.values())

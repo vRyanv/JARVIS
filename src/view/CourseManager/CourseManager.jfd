@@ -183,16 +183,16 @@ new FormModel {
 							"value": "cardChooseRoom"
 						} )
 						add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-							"$horizontalGroup": "par l {seq l {space :::p, comp btnLeaveRoom:::p::p, space :p:170:p, comp lbRoomId:::p:138:p, space :::x, comp label6:::p:70:p, space :p:86:p}, seq {par l {seq {space :::p, comp scrollPane5:::p:646:p, space u:::p, comp scrollPane6:::p:238:p}, comp panel2::l:p::p}, space :0:0:x}}"
-							"$verticalGroup": "par l {seq l {space :::p, par b {comp label6::b:p::p, comp lbRoomId::b:p::p, comp btnLeaveRoom::b:p:22:p}, space :::p, par l {seq {comp scrollPane5::::469:x, space :::p, comp panel2:::p::p}, seq {comp scrollPane6::::524:x, space :::p}}}}"
+							"$horizontalGroup": "par l {seq l {space :::p, comp btnLeaveRoom:::p::p, space :p:170:p, comp lbRoomId:::p:138:p, space :::x, comp label6:::p:70:p, space :p:86:p}, seq {par l {seq {space :::p, comp scrollPane5:::p:646:p}, comp panel2::l:p::p}, space ::13:x, comp scrollPane6:::p:238:p, space :::p}}"
+							"$verticalGroup": "par l {seq l {space :::p, par b {comp label6::b:p::p, comp lbRoomId::b:p::p, comp btnLeaveRoom::b:p:22:p}, space :::p, par l {seq {comp scrollPane5::::469:x, space :::p, comp panel2:::p::p}, comp scrollPane6::::530:x}}}"
 						} ) {
 							name: "cardRoom"
 							auxiliary() {
 								"JavaCodeGenerator.variableModifiers": 1
 							}
 							add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-								"$horizontalGroup": "par l {seq t {comp txtMess:::p:510:p, space ::28:x, comp btnSendMess:::p::p, space :p:20:p}}"
-								"$verticalGroup": "par l {seq t {space :p:7:p, par b {comp btnSendMess::b:p::p, comp txtMess::b::42:x}, space :::p}}"
+								"$horizontalGroup": "par l {seq t {comp txtMess::::540:x, space :p:12:p, comp btnSendMess:::p:94:p, space :::p}}"
+								"$verticalGroup": "par l {seq t {space :p:7:p, comp txtMess::::42:x, space :::p}, seq t {space :::p, comp btnSendMess::::49:x}}"
 							} ) {
 								name: "panel2"
 								auxiliary() {
@@ -207,6 +207,9 @@ new FormModel {
 								add( new FormComponent( "javax.swing.JButton" ) {
 									name: "btnSendMess"
 									"text": "Send"
+									"cursor": &Cursor1 new java.awt.Cursor( 12 )
+									"foreground": sfield java.awt.Color white
+									"background": new java.awt.Color( 33, 204, 121, 255 )
 									auxiliary() {
 										"JavaCodeGenerator.variableModifiers": 1
 										"JavaCodeGenerator.variableName": "btnSendMess"
@@ -251,6 +254,9 @@ new FormModel {
 								name: "btnLeaveRoom"
 								"text": "Leave"
 								"font": new java.awt.Font( "JetBrains Mono", 1, 12 )
+								"background": new java.awt.Color( 250, 176, 5, 255 )
+								"foreground": sfield java.awt.Color white
+								"cursor": #Cursor1
 								auxiliary() {
 									"JavaCodeGenerator.variableModifiers": 1
 								}
@@ -280,7 +286,7 @@ new FormModel {
 								"background": new java.awt.Color( 44, 52, 72, 255 )
 								"foreground": &Color1 new java.awt.Color( 255, 255, 255, 255 )
 								"opaque": true
-								"cursor": &Cursor1 new java.awt.Cursor( 12 )
+								"cursor": &Cursor2 new java.awt.Cursor( 12 )
 								"font": &Font1 new java.awt.Font( "JetBrains Mono", 1, 15 )
 								auxiliary() {
 									"JavaCodeGenerator.variableModifiers": 1
@@ -293,7 +299,7 @@ new FormModel {
 								"background": new java.awt.Color( 33, 204, 121, 255 )
 								"foreground": #Color1
 								"opaque": true
-								"cursor": #Cursor1
+								"cursor": #Cursor2
 								"font": #Font1
 								auxiliary() {
 									"JavaCodeGenerator.variableModifiers": 1
@@ -311,7 +317,7 @@ new FormModel {
 								name: "rbServerOn"
 								"text": "On"
 								"$buttonGroup": new FormReference( "serverState" )
-								"cursor": &Cursor2 new java.awt.Cursor( 12 )
+								"cursor": &Cursor3 new java.awt.Cursor( 12 )
 								"foreground": &Color2 new java.awt.Color( 255, 255, 255, 255 )
 								auxiliary() {
 									"JavaCodeGenerator.variableModifiers": 1
@@ -321,7 +327,7 @@ new FormModel {
 								name: "rbServerOff"
 								"text": "Off"
 								"$buttonGroup": new FormReference( "serverState" )
-								"cursor": #Cursor2
+								"cursor": #Cursor3
 								"foreground": #Color2
 								"selected": true
 								auxiliary() {
@@ -397,7 +403,7 @@ new FormModel {
 									"text": "Add"
 									"foreground": sfield java.awt.Color white
 									"background": new java.awt.Color( 33, 204, 121, 255 )
-									"cursor": #Cursor1
+									"cursor": #Cursor2
 									"font": &Font2 new java.awt.Font( "JetBrains Mono", 1, 15 )
 									auxiliary() {
 										"JavaCodeGenerator.variableModifiers": 1
@@ -407,7 +413,7 @@ new FormModel {
 									name: "btnClearInforCourse"
 									"text": "Clear"
 									"background": new java.awt.Color( 250, 176, 5, 255 )
-									"cursor": #Cursor1
+									"cursor": #Cursor2
 									"foreground": sfield java.awt.Color white
 									"font": #Font2
 									auxiliary() {

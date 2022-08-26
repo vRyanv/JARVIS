@@ -7,15 +7,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="34a4562e-e422-4f6a-9647-613949237cee" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/model/data/Data.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controller/AdminController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/AdminController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JARVIS.jar" beforeDir="false" afterPath="$PROJECT_DIR$/JARVIS.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/controller/ClassRoomController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/ClassRoomController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/controller/CourseManagerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/CourseManagerController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/course/Course.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/course/Course.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/course/courseList.dat" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/course/courseList.dat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/course/studentRegisterCourse.dat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/server/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/Server.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/data/Data.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/data/Data.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/view/CourseManager/CourseManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/CourseManager/CourseManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/view/CourseManager/CourseManager.jfd" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/CourseManager/CourseManager.jfd" afterDir="false" />
     </list>

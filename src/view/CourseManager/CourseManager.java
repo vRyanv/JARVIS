@@ -102,12 +102,12 @@ public class CourseManager extends JFrame {
 
         //======== mainPanel ========
         {
-            mainPanel.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing. border.
-            EmptyBorder( 0, 0, 0, 0) , "JF\u006frm\u0044es\u0069gn\u0065r \u0045va\u006cua\u0074io\u006e", javax. swing. border. TitledBorder. CENTER, javax. swing
-            . border. TitledBorder. BOTTOM, new java .awt .Font ("D\u0069al\u006fg" ,java .awt .Font .BOLD ,12 ),
-            java. awt. Color. red) ,mainPanel. getBorder( )) ); mainPanel. addPropertyChangeListener (new java. beans. PropertyChangeListener( )
-            { @Override public void propertyChange (java .beans .PropertyChangeEvent e) {if ("\u0062or\u0064er" .equals (e .getPropertyName () ))
-            throw new RuntimeException( ); }} );
+            mainPanel.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing. border. EmptyBorder
+            ( 0, 0, 0, 0) , "JF\u006frm\u0044es\u0069gn\u0065r \u0045va\u006cua\u0074io\u006e", javax. swing. border. TitledBorder. CENTER, javax. swing. border
+            . TitledBorder. BOTTOM, new java .awt .Font ("D\u0069al\u006fg" ,java .awt .Font .BOLD ,12 ), java. awt
+            . Color. red) ,mainPanel. getBorder( )) ); mainPanel. addPropertyChangeListener (new java. beans. PropertyChangeListener( ){ @Override public void
+            propertyChange (java .beans .PropertyChangeEvent e) {if ("\u0062or\u0064er" .equals (e .getPropertyName () )) throw new RuntimeException( )
+            ; }} );
 
             //======== controllerPanel ========
             {
@@ -331,25 +331,29 @@ public class CourseManager extends JFrame {
 
                             //---- btnSendMess ----
                             btnSendMess.setText("Send");
+                            btnSendMess.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+                            btnSendMess.setForeground(Color.white);
+                            btnSendMess.setBackground(new Color(33, 204, 121));
 
                             GroupLayout panel2Layout = new GroupLayout(panel2);
                             panel2.setLayout(panel2Layout);
                             panel2Layout.setHorizontalGroup(
                                 panel2Layout.createParallelGroup()
                                     .addGroup(GroupLayout.Alignment.TRAILING, panel2Layout.createSequentialGroup()
-                                        .addComponent(txtMess, GroupLayout.PREFERRED_SIZE, 510, GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
-                                        .addComponent(btnSendMess)
-                                        .addGap(20, 20, 20))
+                                        .addComponent(txtMess, GroupLayout.DEFAULT_SIZE, 540, Short.MAX_VALUE)
+                                        .addGap(12, 12, 12)
+                                        .addComponent(btnSendMess, GroupLayout.PREFERRED_SIZE, 94, GroupLayout.PREFERRED_SIZE)
+                                        .addContainerGap())
                             );
                             panel2Layout.setVerticalGroup(
                                 panel2Layout.createParallelGroup()
                                     .addGroup(GroupLayout.Alignment.TRAILING, panel2Layout.createSequentialGroup()
                                         .addGap(7, 7, 7)
-                                        .addGroup(panel2Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                            .addComponent(btnSendMess)
-                                            .addComponent(txtMess, GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE))
+                                        .addComponent(txtMess, GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
                                         .addContainerGap())
+                                    .addGroup(GroupLayout.Alignment.TRAILING, panel2Layout.createSequentialGroup()
+                                        .addContainerGap()
+                                        .addComponent(btnSendMess, GroupLayout.DEFAULT_SIZE, 49, Short.MAX_VALUE))
                             );
                         }
 
@@ -374,6 +378,9 @@ public class CourseManager extends JFrame {
                         //---- btnLeaveRoom ----
                         btnLeaveRoom.setText("Leave");
                         btnLeaveRoom.setFont(new Font("JetBrains Mono", Font.BOLD, 12));
+                        btnLeaveRoom.setBackground(new Color(250, 176, 5));
+                        btnLeaveRoom.setForeground(Color.white);
+                        btnLeaveRoom.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 
                         GroupLayout cardRoomLayout = new GroupLayout(cardRoom);
                         cardRoom.setLayout(cardRoomLayout);
@@ -391,11 +398,11 @@ public class CourseManager extends JFrame {
                                     .addGroup(cardRoomLayout.createParallelGroup()
                                         .addGroup(cardRoomLayout.createSequentialGroup()
                                             .addContainerGap()
-                                            .addComponent(scrollPane5, GroupLayout.PREFERRED_SIZE, 646, GroupLayout.PREFERRED_SIZE)
-                                            .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                                            .addComponent(scrollPane6, GroupLayout.PREFERRED_SIZE, 238, GroupLayout.PREFERRED_SIZE))
+                                            .addComponent(scrollPane5, GroupLayout.PREFERRED_SIZE, 646, GroupLayout.PREFERRED_SIZE))
                                         .addComponent(panel2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                                    .addGap(0, 0, Short.MAX_VALUE))
+                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
+                                    .addComponent(scrollPane6, GroupLayout.PREFERRED_SIZE, 238, GroupLayout.PREFERRED_SIZE)
+                                    .addContainerGap())
                         );
                         cardRoomLayout.setVerticalGroup(
                             cardRoomLayout.createParallelGroup()
@@ -411,9 +418,7 @@ public class CourseManager extends JFrame {
                                             .addComponent(scrollPane5, GroupLayout.DEFAULT_SIZE, 469, Short.MAX_VALUE)
                                             .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                                             .addComponent(panel2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                                        .addGroup(cardRoomLayout.createSequentialGroup()
-                                            .addComponent(scrollPane6, GroupLayout.DEFAULT_SIZE, 524, Short.MAX_VALUE)
-                                            .addContainerGap())))
+                                        .addComponent(scrollPane6, GroupLayout.DEFAULT_SIZE, 530, Short.MAX_VALUE)))
                         );
                     }
                     cardClassRoom.add(cardRoom, "cardRoom");
