@@ -14,8 +14,8 @@ new FormModel {
 			} ) {
 				name: "mainPanel"
 				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-					"$horizontalGroup": "par l {seq {space :::p, par l {comp label1:::::x, seq t {space :0:0:x, comp courseController:::p:207:p}, comp classRoomController::l:::x, comp adminController::l:::x, comp lbEmail::t:::x, seq l {comp label7:::p:71:p, space :0:0:x}}, space :::p}}"
-					"$verticalGroup": "par l {seq l {space :::p, comp label1:::p:41:p, space :p:3:p, comp courseController:::p:39:p, space :::p, comp classRoomController:::p:39:p, space :::p, comp adminController:::p:39:p, space ::371:x, comp label7:::p::p, space :::p, comp lbEmail:::p::p, space :p:24:p}}"
+					"$horizontalGroup": "par l {seq {space :::p, par l {comp label1:::::x, seq t {space :0:0:x, comp btnShowCardCourse:::p:207:p}, comp btnShowCardClassRoom::l:::x, comp btnShowCardAdmin::l:::x, comp lbEmail::t:::x, seq l {comp label7:::p:71:p, space :0:0:x}}, space :::p}}"
+					"$verticalGroup": "par l {seq l {space :::p, comp label1:::p:41:p, space :p:3:p, comp btnShowCardCourse:::p:39:p, space :::p, comp btnShowCardClassRoom:::p:39:p, space :::p, comp btnShowCardAdmin:::p:39:p, space ::371:x, comp label7:::p::p, space :::p, comp lbEmail:::p::p, space :p:24:p}}"
 				} ) {
 					name: "controllerPanel"
 					"background": new java.awt.Color( 26, 27, 63, 255 )
@@ -27,7 +27,7 @@ new FormModel {
 						"foreground": new java.awt.Color( 255, 255, 255, 255 )
 					} )
 					add( new FormComponent( "javax.swing.JLabel" ) {
-						name: "classRoomController"
+						name: "btnShowCardClassRoom"
 						"text": "Class room"
 						"horizontalAlignment": 2
 						"foreground": &Color0 new java.awt.Color( 255, 255, 255, 255 )
@@ -39,7 +39,7 @@ new FormModel {
 						}
 					} )
 					add( new FormComponent( "javax.swing.JLabel" ) {
-						name: "adminController"
+						name: "btnShowCardAdmin"
 						"text": "Admin"
 						"horizontalAlignment": 2
 						"foreground": #Color0
@@ -51,7 +51,7 @@ new FormModel {
 						}
 					} )
 					add( new FormComponent( "javax.swing.JLabel" ) {
-						name: "courseController"
+						name: "btnShowCardCourse"
 						"text": "Course"
 						"foreground": new java.awt.Color( 255, 255, 255, 255 )
 						"font": #Font0
@@ -103,7 +103,7 @@ new FormModel {
 						"JavaCodeGenerator.variableModifiers": 1
 					}
 					add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-						"$horizontalGroup": "par l {seq {par l {comp scrollPane2::::903:x, seq t {space ::774:x, comp btnRefreshCourseList:::p::p, space :p:8:p}}, space :::p}}"
+						"$horizontalGroup": "par l {seq {par l {comp scrollPane2::::917:x, seq t {space ::788:x, comp btnRefreshCourseList:::p::p, space :p:8:p}}, space :::p}}"
 						"$verticalGroup": "par l {seq t {space :::x, comp btnRefreshCourseList:::p:32:p, space :::p, comp scrollPane2:::p:522:p, space :::p}}"
 					} ) {
 						name: "cardCourse"
@@ -183,8 +183,8 @@ new FormModel {
 							"value": "cardChooseRoom"
 						} )
 						add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-							"$horizontalGroup": "par l {seq l {space :::p, comp btnLeaveRoom:::p::p, space :p:170:p, comp lbRoomId:::p:138:p, space :::x, comp label6:::p:70:p, space :p:86:p}, seq {par l {seq {space :::p, comp scrollPane5:::p:646:p}, comp panel2::l:p::p}, space ::13:x, comp scrollPane6:::p:238:p, space :::p}}"
-							"$verticalGroup": "par l {seq l {space :::p, par b {comp label6::b:p::p, comp lbRoomId::b:p::p, comp btnLeaveRoom::b:p:22:p}, space :::p, par l {seq {comp scrollPane5::::469:x, space :::p, comp panel2:::p::p}, comp scrollPane6::::530:x}}}"
+							"$horizontalGroup": "par l {seq l {space :::p, comp btnLeaveRoom:::p::p, space :p:170:p, comp lbRoomId:::p:138:p, space ::327:x, comp label6:::p:70:p, space :p:109:p}, seq {par l {seq {space :::p, comp scrollPane5:::p:646:p}, comp panel2::l:p::p}, space :::p, comp scrollPane6::::259:x, space :::p}}"
+							"$verticalGroup": "par l {seq l {space :::p, par b {comp lbRoomId::b:p::p, comp btnLeaveRoom::b:p:22:p, comp label6::b:p::p}, space :::p, par l {seq {comp scrollPane5::::469:x, space :::p, comp panel2:::p::p}, comp scrollPane6::::530:x}}}"
 						} ) {
 							name: "cardRoom"
 							auxiliary() {
@@ -342,7 +342,7 @@ new FormModel {
 								"JavaCodeGenerator.variableModifiers": 1
 							}
 							add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-								"$horizontalGroup": "par l {seq l {par t {seq t {space :::x, comp btnClearInforCourse:::p:81:p, space :p:29:p, comp btnAddNewCourse:::p:81:p}, seq l {space :p:18:p, par l {comp scrollPane1:::p:768:p, comp label2::l:p:92:p, comp label3::l:p:92:p, comp label4::l:p:147:p, comp label5::l:p:147:p, par t:l::p {seq l {par l:::p {comp txtCourseName:::p:232:p, comp spinnerLession:::p:232:p}, space u:::p, comp lbInvalidCourseName::::0:x}, seq l {comp txtCourseId:::p:232:p, space u:::p, comp lbInvalidIdCourse:::p:200:p}}}}}, space ::123:x}}"
+								"$horizontalGroup": "par l {seq l {par t {seq t {space :::x, comp btnClearInforCourse:::p:81:p, space :p:29:p, comp btnAddNewCourse:::p:81:p}, seq l {space :p:18:p, par l {comp scrollPane1:::p:768:p, comp label2::l:p:92:p, comp label3::l:p:92:p, comp label4::l:p:147:p, comp label5::l:p:147:p, par t:l::p {seq l {par l:::p {comp txtCourseName:::p:232:p, comp spinnerLession:::p:232:p}, space u:::p, comp lbInvalidCourseName::::0:x}, seq l {comp txtCourseId:::p:232:p, space u:::p, comp lbInvalidIdCourse:::p:200:p}}}}}, space ::137:x}}"
 								"$verticalGroup": "par l {seq l {comp label2:::p:35:p, space :::p, par b {comp txtCourseId::b:p:34:p, comp lbInvalidIdCourse::b:p::p}, space :p:6:p, comp label3:::p:35:p, space :::p, par b {comp txtCourseName::b:p:34:p, comp lbInvalidCourseName::b:p::p}, space :::p, comp label4:::p:35:p, space :::p, comp spinnerLession:::p:39:p, space u:::p, comp label5:::p:35:p, space :::p, comp scrollPane1:::p:135:p, space s:::p, par b {comp btnClearInforCourse::b:::x, comp btnAddNewCourse::b:::x}, space :p:18:p}}"
 							} ) {
 								name: "cardNewCourse"
@@ -451,7 +451,7 @@ new FormModel {
 								"value": "cardNewCourse"
 							} )
 							add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-								"$horizontalGroup": "par l {seq {space :0:602:x, comp btnLoadDataFromDisk:::p::p, space :p:34:p, comp btnSaveAs:::p::p, space :::p}, comp scrollPane3::l::909:x}"
+								"$horizontalGroup": "par l {seq {space :0:602:x, comp btnLoadDataFromDisk:::p::p, space :p:34:p, comp btnSaveAs:::p::p, space :::p}, comp scrollPane3::l::923:x}"
 								"$verticalGroup": "par l {seq t {space :::p, par b {comp btnLoadDataFromDisk::b:p::p, comp btnSaveAs::b::0:x}, space :::p, comp scrollPane3::::478:x}}"
 							} ) {
 								name: "cardCourseManager"
@@ -504,7 +504,7 @@ new FormModel {
 			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 0, 0 )
-			"size": new java.awt.Dimension( 1130, 660 )
+			"size": new java.awt.Dimension( 1150, 660 )
 		} )
 		add( new FormNonVisual( "javax.swing.ButtonGroup" ) {
 			name: "serverState"

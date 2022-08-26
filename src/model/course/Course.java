@@ -27,9 +27,6 @@ public class Course implements Serializable {
         this.studentList = new ArrayList<>();
     }
 
-    public static void main(String[] args) {
-        FileProcess.writeObject("src/model/course/courseList.dat", new TreeMap<String, Course>());
-    }
 
     public static Object readCourseList(String path)
     {

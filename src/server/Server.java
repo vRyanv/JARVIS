@@ -1,8 +1,9 @@
 package server;
 
-import view.CourseManager.CourseManager;
+import view.Jarvis.Jarvis;
 
 import javax.swing.*;
+import java.awt.*;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -11,7 +12,6 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.TreeMap;
-import java.util.logging.Handler;
 
 public class Server
 {
@@ -19,11 +19,11 @@ public class Server
     private ServerSocket serverSocket;
     private Socket socket;
     static TreeMap<String, List<handler>> clients = new TreeMap<>(); //TreeMap<roomId, client>
-    private CourseManager courseManager;
-    public Server(CourseManager courseManager)
+    private Jarvis jarvis;
+    public Server(Jarvis jarvis)
     {
         try {
-            this.courseManager = courseManager;
+            this.jarvis = jarvis;
             this.serverSocket = new ServerSocket(2108);
             System.out.println("Server: running!");
             while (serverIsOn)
@@ -50,6 +50,7 @@ public class Server
                     String email = requestElement[2];
                     if(requestElement[0].equals("intoRoom"))
                     {
+                        System.out.println(email+" joined room "+roomId);
                         handler handler = new handler(socket, roomId,email);
                         if(clients.containsKey(roomId))
                         {
@@ -68,7 +69,7 @@ public class Server
             this.serverSocket.close();
             System.out.println("Server: stop!");
         }catch (Exception exception){
-            JOptionPane.showMessageDialog(courseManager, "server has stopped", "Server: Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(jarvis, "server has stopped", "Server: Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -104,7 +105,8 @@ class handler implements Runnable
     public void run() {
 
         try {
-            for (handler handlers : Server.clients.get(this.roomId)) {
+            for (handler handlers : Server.clients.get(this.roomId))
+            {
                 if (!handlers.username.equals(username)) {
                     handlers.dos.writeUTF("intoRoom,"+email);
                 }
@@ -126,7 +128,9 @@ class handler implements Runnable
                             handlers.dos.writeUTF(messResponse);
                         }
                     }
-                } else if (requestElement[0].equals("leaveRoom")) {
+                }
+                else if (requestElement[0].equals("leaveRoom"))
+                {
                     for (handler handlers : Server.clients.get(this.roomId))
                     {
                         if (handlers.email.equals(email))
@@ -150,3 +154,4 @@ class handler implements Runnable
 
     }
 }
+

@@ -2,38 +2,735 @@
  * Created by JFormDesigner on Wed Aug 17 10:08:18 ICT 2022
  */
 
-package view.CourseManager;
+package view.Jarvis;
 
-import javax.swing.border.*;
 import controller.AdminController;
 import controller.ClassRoomController;
-import controller.CourseManagerController;
+import controller.CourseController;
 import library.colorCustom.ColorCustom;
 import library.fileProcess.FileProcess;
-import model.user.User;
+import model.course.Course;
+import model.data.Data;
+import server.Server;
 import view.CourseBox.CourseBox;
 import view.EditCourseDialog.EditCourseDialog;
 
 import javax.swing.*;
 import javax.swing.GroupLayout;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
 import java.io.DataInputStream;
-import java.io.DataOutputStream;
+import java.io.File;
+import java.net.Socket;
+import java.util.List;
 import java.util.TreeMap;
 
 /**
  * @author khang
  */
-public class CourseManager extends JFrame {
+public class Jarvis extends JFrame {
     private String email;
+    private CardLayout cardLayoutOfMain;
+    private CardLayout cardLayoutOfAdmin;
+    private CardLayout cardLayoutOfClassRoom;
+    public String currentCard = "cardCourse";
+    private AdminController adminController;
+    private CourseController courseController;
+    private ClassRoomController classRoomController;
+    private EditCourseDialog editCourseDialog;
+    private DefaultListModel messListModel;
+    private DefaultListModel userListModel;
+    private Thread receiver;
 
-    public CourseManager(String email, String role) {
+    private String username;
+
+    public Jarvis(String email) {
         initComponents();
-        new CourseManagerController(this, email, role);
+        Config(email);
         this.setVisible(true);
     }
+
+    private void Config(String email)
+    {
+        cardLayoutOfMain = (CardLayout) cardPanel.getLayout();
+        setTitle("Jarvis");
+        setIconImage(Toolkit.getDefaultToolkit().getImage("src/images/iconTitle.jpg"));
+        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        setLocationRelativeTo(null);
+        lbEmail.setText(email);
+        ChangeViews();
+
+        this.email = email;
+        this.username = email.substring(0, email.indexOf("@"));
+        if(Data.IsAdminRole(email))
+        {
+            adminController = new AdminController();
+            cardLayoutOfAdmin = (CardLayout) cardMainPanelAdmin.getLayout();
+            RenderCourseForAdmin();
+            EventListenerAdmin();
+
+            editCourseDialog = new EditCourseDialog(Jarvis.this.getOwner());
+            editCourseDialog.setVisible(false);
+            EventListenerEditDialog();
+        }
+        else
+        {
+            this.btnShowCardAdmin.setVisible(false);
+        }
+        courseController = new CourseController();
+        RenderCourseForStudent();
+        EventListenerCourse();
+
+        cardLayoutOfClassRoom = (CardLayout) cardClassRoom.getLayout();
+        classRoomController = new ClassRoomController();
+        EventListenerClassRoom();
+        RenderRoom();
+    }
+
+    //============================================= Jarvis ===========================================
+    private void ChangeViews()
+    {
+        activeController(btnShowCardCourse, "cardCourse","COURSE", ColorCustom.orange);
+        btnShowCardCourse.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                if(!currentCard.equals("cardCourse") )
+                {
+                    defaultController();
+                    activeController(btnShowCardCourse, "cardCourse","COURSE", ColorCustom.orange);
+                }
+            }
+        });
+        btnShowCardClassRoom.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                if(!currentCard.equals("cardClassRoom"))
+                {
+                    defaultController();
+                    activeController(btnShowCardClassRoom, "cardClassRoom","CLASS ROOM", ColorCustom.yellow);
+
+                }
+            }
+        });
+        btnShowCardAdmin.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                if(!currentCard.equals("cardAdmin"))
+                {
+                    defaultController();
+                    activeController(btnShowCardAdmin, "cardAdmin","ADMIN", ColorCustom.red);
+                }
+            }
+        });
+
+    }
+
+    private void activeController(JLabel controller, String _currentCard, String title, Color color)
+    {
+        lbTitleHeader.setText(title);
+        lbTitleHeader.setForeground(Color.white);
+        titlePanel.setBackground(color);
+        controller.setHorizontalAlignment(SwingConstants.CENTER);
+        controller.setBackground(color);
+        controller.setOpaque(true);
+        currentCard = _currentCard;
+        cardLayoutOfMain.show(cardPanel, _currentCard);
+    }
+
+    private void defaultController()
+    {
+        btnShowCardCourse.setHorizontalAlignment(SwingConstants.LEFT);
+        btnShowCardCourse.setOpaque(false);
+
+        btnShowCardClassRoom.setHorizontalAlignment(SwingConstants.LEFT);
+        btnShowCardClassRoom.setOpaque(false);
+
+        btnShowCardAdmin.setHorizontalAlignment(SwingConstants.LEFT);
+        btnShowCardAdmin.setOpaque(false);
+    }
+
+    //=================================================================================================
+
+    //============================================= CourseController ==================================
+    private void RenderCourseForStudent()
+    {
+        if(courseController.LoadData())
+        {
+            containerCourseList.removeAll();
+            for (Course course: Data.courseList.values())
+            {
+                CourseBox courseBox = new CourseBox(course.getName(), course.getId());
+                courseBox.btnCourseId.setVisible(false);
+
+                if(course.getStudentList().contains(this.email))
+                {
+                    courseBox.btnRegisterCourse.setEnabled(false);
+                    courseBox.btnRegisterCourse.setText("Registered");
+                }
+                courseBox.btnRegisterCourse.addMouseListener(new MouseAdapter() {
+                    @Override
+                    public void mouseReleased(MouseEvent e) {
+                        if(courseController.RegisterCourse(course.getId(), email))
+                        {
+                            courseBox.btnRegisterCourse.setEnabled(false);
+                            courseBox.btnRegisterCourse.setText("Registered");
+                        }
+                        else
+                        {
+                            JOptionPane.showMessageDialog(Jarvis.this, "Can't register this course", "Course: error", JOptionPane.ERROR_MESSAGE);
+                        }
+                    }
+                });
+                containerCourseList.add(courseBox, FlowLayout.LEFT);
+            }
+            containerCourseList.revalidate();
+            containerCourseList.repaint();
+        }
+    }
+    private void EventListenerCourse()
+    {
+        btnRefreshCourseList.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                RenderCourseForStudent();
+            }
+        });
+    }
+
+    //============================================= ClassRoomController ==================================
+    private void EventListenerClassRoom()
+    {
+        btnLeaveRoom.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                LeaveRoom();
+            }
+        });
+        btnRefreshRoom.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                RenderRoom();
+            }
+        });
+        btnSendMess.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                SendMess();
+            }
+        });
+
+        txtMess.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if(e.getKeyCode() == KeyEvent.VK_ENTER)
+                {
+                    SendMess();
+                }
+            }
+        });
+
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                int choice = JOptionPane.showConfirmDialog(Jarvis.this, "Logout ?", "Confirm",JOptionPane.OK_CANCEL_OPTION);
+                if(choice == JOptionPane.OK_OPTION)
+                {
+                    ExitProgram();
+                }
+            }
+        });
+    }
+
+    private void ExitProgram()
+    {
+        if(!classRoomController.ExitRoom(email))
+        {
+            JOptionPane.showMessageDialog(Jarvis.this, "Something wrong! can't exit T_T", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    private void RenderRoom()
+    {
+        List<Course> roomList = classRoomController.GetRoom(email);
+
+        if(!roomList.isEmpty())
+        {
+            containerRoomPanel.removeAll();
+            for (Course course:roomList)
+            {
+                CourseBox courseBox = new CourseBox(course.getName(), course.getId());
+                courseBox.btnRegisterCourse.setVisible(false);
+                courseBox.btnCourseId.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        JoinRoom(e.getActionCommand());
+                    }
+                });
+                containerRoomPanel.add(courseBox, FlowLayout.LEFT);
+
+            }
+            containerRoomPanel.revalidate();
+            containerRoomPanel.repaint();
+        }
+    }
+    private void JoinRoom(String roomId)
+    {
+        this.messListModel =  new DefaultListModel();
+        listMess.setModel(this.messListModel);
+        this.userListModel = new DefaultListModel<>();
+        listUserInRoom.setModel(this.userListModel);
+
+        Socket socket = classRoomController.enrollRoom(roomId, email);
+        if(socket != null)
+        {
+            receiver = new Thread(new Receiver(socket, Jarvis.this, messListModel, userListModel, cardLayoutOfClassRoom, email));
+            receiver.start();
+            cardLayoutOfClassRoom.show(cardClassRoom, "cardRoom");
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(cardClassRoom, "Can't into  room", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+
+
+    }
+
+    private void SendMess()
+    {
+        if(classRoomController.SendMess(txtMess.getText()))
+        {
+            messListModel.addElement( username+": "+txtMess.getText());
+            txtMess.setText("");
+            AutoScroll();
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(Jarvis.this, "Can't send message", "Room: error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    private void AutoScroll()
+    {
+        scrollPane5.getVerticalScrollBar().setValue(scrollPane5.getVerticalScrollBar().getMaximum());
+    }
+
+    private void LeaveRoom()
+    {
+        String roomId = lbRoomId.getText().substring(lbRoomId.getText().lastIndexOf(" ")+1);
+        if(classRoomController.LeaveRoom(roomId))
+        {
+            cardLayoutOfClassRoom.show(cardClassRoom, "cardChooseRoom");
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(Jarvis.this, "Can't leave this room, something wrong!",
+                    "Class room: error", JOptionPane.ERROR_MESSAGE);
+        }
+
+    }
+    //====================================================================================================
+
+    //============================================= AdminController ======================================
+    private void EventListenerAdmin()
+    {
+        lbNewCourse.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                DefaultStateController(lbCourseManager, lbNewCourse);
+                ChangeStateActive(lbNewCourse, "press", "cardNewCourse");
+                showCard(cardLayoutOfAdmin,cardMainPanelAdmin, "cardNewCourse");
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                ChangeStateActive(lbNewCourse, "mouseEnter", "cardNewCourse");
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                ChangeStateLeave(lbNewCourse, "cardNewCourse");
+            }
+        });
+
+        lbCourseManager.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                DefaultStateController(lbCourseManager, lbNewCourse);
+                ChangeStateActive(lbCourseManager, "press","cardCourseManager");
+                showCard(cardLayoutOfAdmin, cardMainPanelAdmin, "cardCourseManager");
+                RenderCourseForAdmin();
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                ChangeStateActive(lbCourseManager, "mouseEnter","cardCourseManager");
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                ChangeStateLeave(lbCourseManager,"cardCourseManager");
+            }
+        });
+
+        btnAddNewCourse.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                NewCourse();
+            }
+        });
+
+        btnClearInforCourse.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                txtCourseName.setText("");
+                txtCourseId.setText("");
+                txtareaDecription.setText("");
+                spinnerLession.setValue(0);
+            }
+        });
+
+
+        txtCourseId.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                lbInvalidIdCourse.setVisible(false);
+            }
+        });
+
+        txtCourseName.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                lbInvalidCourseName.setVisible(false);
+            }
+        });
+
+        rbServerOn.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                    CreateServer();
+            }
+        });
+
+        rbServerOff.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                StopServer();
+            }
+        });
+
+
+        btnLoadDataFromDisk.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                String[] choices = {"Ok","Save as","Cancel"};
+                int choice = JOptionPane.showOptionDialog(null,
+                        "This action will overwrite the data on the current file, you should \"save as\" your current file before loading another file from disk",
+                        "Confirm", 0, JOptionPane.QUESTION_MESSAGE, null, choices,"Save as");
+               if(choice != -1)
+               {
+                   if(choices[choice].equals("Ok"))
+                   {
+                       LoadDataFromDisk();
+                   }
+                   if(choices[choice].equals("Save as"))
+                   {
+                       SaveAsCourse();
+                   }
+               }
+            }
+        });
+
+        btnSaveAs.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                SaveAsCourse();
+            }
+        });
+    }
+
+    private void SaveAsCourse()
+    {
+        JFileChooser FileSave = new JFileChooser();
+        FileSave.setSelectedFile(new File("courseList.dat"));
+        FileSave.setFileFilter(new FileNameExtensionFilter("DAT file (*.dat)","dat"));
+        int choice = FileSave.showSaveDialog(cardMainPanelAdmin);
+
+        if(choice == JFileChooser.APPROVE_OPTION)
+        {
+            if(!adminController.SaveAs(FileSave.getSelectedFile().getPath()))
+            {
+                JOptionPane.showMessageDialog(cardMainPanelAdmin,
+                        "Save as fail", "Admin: error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }
+
+    private void LoadDataFromDisk()
+    {
+
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setFileFilter(new FileNameExtensionFilter("DAT file (*.dat)","dat"));
+        int choice = fileChooser.showOpenDialog(cardMainPanelAdmin);
+
+        if(choice == JFileChooser.APPROVE_OPTION)
+        {
+            File file = fileChooser.getSelectedFile();
+            String result = adminController.LoadDataFromDisk(file);
+            if(result.equals("success"))
+            {
+                RenderCourseForAdmin();
+            }
+            else if (result.equals("null"))
+            {
+                JOptionPane.showMessageDialog(cardMainPanelAdmin,
+                        "Only accept file .dat, the file you just selected is "+result,
+                        "Admin: Error", JOptionPane.ERROR_MESSAGE);
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(cardMainPanelAdmin,
+                        "Only accept file .dat, the file you just selected is "+result,
+                        "Admin: error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }
+
+    private void CreateServer()
+    {
+        if(adminController.NewServer(Jarvis.this))
+        {
+            lbServerTitle.setForeground(ColorCustom.green);
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(cardMainPanelAdmin, "Server Error!", "Admin: error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    private void StopServer()
+    {
+        if(adminController.ConnectKillServer())
+        {
+            if(adminController.KillServer())
+            {
+                lbServerTitle.setForeground(Color.white);
+                JOptionPane.showMessageDialog(cardMainPanelAdmin, "Server has stopped", "Admin: warning", JOptionPane.WARNING_MESSAGE);
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(cardMainPanelAdmin, "Can't close Server!", "Admin: error", JOptionPane.ERROR_MESSAGE);
+            }
+
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(cardMainPanelAdmin, "Can't connect to Server to stop!!", "Admin: error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    private void RenderCourseForAdmin()
+    {
+        if (Data.courseList == null) {
+            JOptionPane.showMessageDialog(Jarvis.this, "Can't load course data", "Admin: Error", JOptionPane.ERROR_MESSAGE);
+        }
+        else
+        {
+            contanerCourseBoxPanel.removeAll();
+            for (Course course: Data.courseList.values())
+            {
+                CourseBox courseBox = new CourseBox(course.getName(), course.getId());
+                courseBox.btnRegisterCourse.setVisible(false);
+                courseBox.btnCourseId.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        ShowDialogCourseDetail(e.getActionCommand());
+                    }
+                });
+                contanerCourseBoxPanel.add(courseBox, FlowLayout.LEFT);
+            }
+            contanerCourseBoxPanel.revalidate();
+            contanerCourseBoxPanel.repaint();
+        }
+    }
+
+    private void NewCourse()
+    {
+        String result = adminController.AddNewCourse(txtCourseId.getText(),
+                txtCourseName.getText(),
+                Integer.parseInt(spinnerLession.getValue().toString()),
+                txtareaDecription.getText());
+        switch (result)
+        {
+            case "idBlank" -> {
+                lbInvalidIdCourse.setText("Enter id*");
+                lbInvalidIdCourse.setVisible(true);
+            }
+            case "idExisted" -> {
+                lbInvalidIdCourse.setText("ID existed*");
+                lbInvalidIdCourse.setVisible(true);
+            }
+            case "nameBlank" -> {
+                lbInvalidCourseName.setText("Enter name*");
+                lbInvalidCourseName.setVisible(true);
+            }
+            case "idMustPositive" -> {
+                lbInvalidIdCourse.setText("Id must be positive number*");
+                lbInvalidIdCourse.setVisible(true);
+            }
+            case "success" ->
+                JOptionPane.showMessageDialog(cardMainPanelAdmin, "Add new Success", "Admin:Message", JOptionPane.PLAIN_MESSAGE);
+        }
+
+    }
+
+    private void ShowDialogCourseDetail(String courseId)
+    {
+        Course course = adminController.getCourseDetail(courseId);
+        if(course != null)
+        {
+            editCourseDialog.txtCourseId.setText(course.getId());
+            editCourseDialog.txtCourseName.setText(course.getName());
+            editCourseDialog.spinnerLession.setValue(course.getNumberOfLessons());
+            editCourseDialog.txtareaDecription.setText(course.getDescription());
+            editCourseDialog.setVisible(true);
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(cardMainPanelAdmin, "Can't found course ID: "+courseId);
+        }
+
+    }
+
+    private void ChangeStateActive(JLabel controller, String type, String _currentCard)
+    {
+
+        if(type.equals("press"))
+        {
+            currentCard = _currentCard;
+            controller.setBackground(ColorCustom.green);
+        }
+        else
+        {
+            controller.setBackground(ColorCustom.lightGreen);
+        }
+
+    }
+
+    private void ChangeStateLeave(JLabel controller, String _currentCard)
+    {
+        if(!currentCard.equals(_currentCard))
+        {
+            controller.setBackground(ColorCustom.grayBlack);
+        }
+        else
+        {
+            controller.setBackground(ColorCustom.green);
+        }
+    }
+
+    private void DefaultStateController(JLabel... controllers)
+    {
+        for (JLabel controller: controllers)
+        {
+            controller.setBackground(ColorCustom.grayBlack);
+        }
+    }
+
+    private void showCard(CardLayout cardLayout, JPanel cardMainAdmin, String cardName)
+    {
+        cardLayout.show(cardMainAdmin, cardName);
+    }
+    //===========================================================================================================
+
+    //=========================================== EditCourseDialog ==============================================
+    private void EventListenerEditDialog()
+    {
+        editCourseDialog.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                SaveEditCourse();
+            }
+        });
+
+        editCourseDialog.btnSaveEdit.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                SaveEditCourse();
+            }
+        });
+
+        editCourseDialog.btnDeleteCourse.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                DeleteCourse(editCourseDialog.txtCourseId.getText());
+            }
+        });
+
+        editCourseDialog.btnCancelEdit.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                editCourseDialog.dispose();
+            }
+        });
+
+
+    }
+
+    private void SaveEditCourse()
+    {
+        int choice = JOptionPane.showConfirmDialog(editCourseDialog,
+                "Want to save changes ?", "Confirm",
+                JOptionPane.OK_CANCEL_OPTION);
+
+        if(choice == JOptionPane.OK_OPTION)
+        {
+            boolean result = adminController.saveCourse(editCourseDialog.txtCourseId.getText(),
+                    editCourseDialog.txtCourseName.getText(),
+                    Integer.parseInt(editCourseDialog.spinnerLession.getValue().toString()),
+                    editCourseDialog.txtareaDecription.getText(),
+                    "editCourse");
+            if(result)
+            {
+                contanerCourseBoxPanel.removeAll();
+                RenderCourseForAdmin();
+                editCourseDialog.dispose();
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(editCourseDialog, "Can't save this course!", "Dialog: error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        else
+        {
+            editCourseDialog.dispose();
+        }
+    }
+
+    private void DeleteCourse(String courseId)
+    {
+            int choice = JOptionPane.showConfirmDialog(editCourseDialog,
+                    "Delete course with ID: "+ courseId,
+                    "Confirm", JOptionPane.OK_CANCEL_OPTION);
+            if(choice == JOptionPane.OK_OPTION)
+            {
+                if(adminController.DeleteCourse(courseId))
+                {
+                    contanerCourseBoxPanel.removeAll();
+                    RenderCourseForAdmin();
+                    editCourseDialog.dispose();
+                }
+                else
+                {
+                    JOptionPane.showMessageDialog(editCourseDialog,
+                            "Not found course ID: "+courseId,"Admin: Error",
+                            JOptionPane.ERROR_MESSAGE);
+                }
+            }
+    }
+    //===============================================================================
+
+
+
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
@@ -41,9 +738,9 @@ public class CourseManager extends JFrame {
         mainPanel = new JPanel();
         controllerPanel = new JPanel();
         label1 = new JLabel();
-        classRoomController = new JLabel();
-        adminController = new JLabel();
-        courseController = new JLabel();
+        btnShowCardClassRoom = new JLabel();
+        btnShowCardAdmin = new JLabel();
+        btnShowCardCourse = new JLabel();
         lbEmail = new JLabel();
         label7 = new JLabel();
         titlePanel = new JPanel();
@@ -102,12 +799,13 @@ public class CourseManager extends JFrame {
 
         //======== mainPanel ========
         {
-            mainPanel.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing. border. EmptyBorder
-            ( 0, 0, 0, 0) , "JF\u006frm\u0044es\u0069gn\u0065r \u0045va\u006cua\u0074io\u006e", javax. swing. border. TitledBorder. CENTER, javax. swing. border
-            . TitledBorder. BOTTOM, new java .awt .Font ("D\u0069al\u006fg" ,java .awt .Font .BOLD ,12 ), java. awt
-            . Color. red) ,mainPanel. getBorder( )) ); mainPanel. addPropertyChangeListener (new java. beans. PropertyChangeListener( ){ @Override public void
-            propertyChange (java .beans .PropertyChangeEvent e) {if ("\u0062or\u0064er" .equals (e .getPropertyName () )) throw new RuntimeException( )
-            ; }} );
+            mainPanel.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new
+            javax. swing. border. EmptyBorder( 0, 0, 0, 0) , "JF\u006frmD\u0065sig\u006eer \u0045val\u0075ati\u006fn", javax
+            . swing. border. TitledBorder. CENTER, javax. swing. border. TitledBorder. BOTTOM, new java
+            .awt .Font ("Dia\u006cog" ,java .awt .Font .BOLD ,12 ), java. awt
+            . Color. red) ,mainPanel. getBorder( )) ); mainPanel. addPropertyChangeListener (new java. beans.
+            PropertyChangeListener( ){ @Override public void propertyChange (java .beans .PropertyChangeEvent e) {if ("\u0062ord\u0065r" .
+            equals (e .getPropertyName () )) throw new RuntimeException( ); }} );
 
             //======== controllerPanel ========
             {
@@ -119,29 +817,29 @@ public class CourseManager extends JFrame {
                 label1.setFont(new Font("JetBrains Mono", Font.BOLD | Font.ITALIC, 18));
                 label1.setForeground(Color.white);
 
-                //---- classRoomController ----
-                classRoomController.setText("Class room");
-                classRoomController.setHorizontalAlignment(SwingConstants.LEFT);
-                classRoomController.setForeground(Color.white);
-                classRoomController.setFont(new Font("JetBrains Mono", Font.BOLD, 16));
-                classRoomController.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-                classRoomController.setHorizontalTextPosition(SwingConstants.LEFT);
+                //---- btnShowCardClassRoom ----
+                btnShowCardClassRoom.setText("Class room");
+                btnShowCardClassRoom.setHorizontalAlignment(SwingConstants.LEFT);
+                btnShowCardClassRoom.setForeground(Color.white);
+                btnShowCardClassRoom.setFont(new Font("JetBrains Mono", Font.BOLD, 16));
+                btnShowCardClassRoom.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+                btnShowCardClassRoom.setHorizontalTextPosition(SwingConstants.LEFT);
 
-                //---- adminController ----
-                adminController.setText("Admin");
-                adminController.setHorizontalAlignment(SwingConstants.LEFT);
-                adminController.setForeground(Color.white);
-                adminController.setFont(new Font("JetBrains Mono", Font.BOLD, 16));
-                adminController.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-                adminController.setHorizontalTextPosition(SwingConstants.LEFT);
+                //---- btnShowCardAdmin ----
+                btnShowCardAdmin.setText("Admin");
+                btnShowCardAdmin.setHorizontalAlignment(SwingConstants.LEFT);
+                btnShowCardAdmin.setForeground(Color.white);
+                btnShowCardAdmin.setFont(new Font("JetBrains Mono", Font.BOLD, 16));
+                btnShowCardAdmin.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+                btnShowCardAdmin.setHorizontalTextPosition(SwingConstants.LEFT);
 
-                //---- courseController ----
-                courseController.setText("Course");
-                courseController.setForeground(Color.white);
-                courseController.setFont(new Font("JetBrains Mono", Font.BOLD, 16));
-                courseController.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-                courseController.setHorizontalTextPosition(SwingConstants.LEFT);
-                courseController.setHorizontalAlignment(SwingConstants.LEFT);
+                //---- btnShowCardCourse ----
+                btnShowCardCourse.setText("Course");
+                btnShowCardCourse.setForeground(Color.white);
+                btnShowCardCourse.setFont(new Font("JetBrains Mono", Font.BOLD, 16));
+                btnShowCardCourse.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+                btnShowCardCourse.setHorizontalTextPosition(SwingConstants.LEFT);
+                btnShowCardCourse.setHorizontalAlignment(SwingConstants.LEFT);
 
                 //---- lbEmail ----
                 lbEmail.setText("khang@123");
@@ -161,9 +859,9 @@ public class CourseManager extends JFrame {
                                 .addComponent(label1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(GroupLayout.Alignment.TRAILING, controllerPanelLayout.createSequentialGroup()
                                     .addGap(0, 0, Short.MAX_VALUE)
-                                    .addComponent(courseController, GroupLayout.PREFERRED_SIZE, 207, GroupLayout.PREFERRED_SIZE))
-                                .addComponent(classRoomController, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(adminController, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btnShowCardCourse, GroupLayout.PREFERRED_SIZE, 207, GroupLayout.PREFERRED_SIZE))
+                                .addComponent(btnShowCardClassRoom, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnShowCardAdmin, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(lbEmail, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(controllerPanelLayout.createSequentialGroup()
                                     .addComponent(label7, GroupLayout.PREFERRED_SIZE, 71, GroupLayout.PREFERRED_SIZE)
@@ -176,11 +874,11 @@ public class CourseManager extends JFrame {
                             .addContainerGap()
                             .addComponent(label1, GroupLayout.PREFERRED_SIZE, 41, GroupLayout.PREFERRED_SIZE)
                             .addGap(3, 3, 3)
-                            .addComponent(courseController, GroupLayout.PREFERRED_SIZE, 39, GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnShowCardCourse, GroupLayout.PREFERRED_SIZE, 39, GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(classRoomController, GroupLayout.PREFERRED_SIZE, 39, GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnShowCardClassRoom, GroupLayout.PREFERRED_SIZE, 39, GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(adminController, GroupLayout.PREFERRED_SIZE, 39, GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnShowCardAdmin, GroupLayout.PREFERRED_SIZE, 39, GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 371, Short.MAX_VALUE)
                             .addComponent(label7)
                             .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
@@ -249,9 +947,9 @@ public class CourseManager extends JFrame {
                         cardCourseLayout.createParallelGroup()
                             .addGroup(cardCourseLayout.createSequentialGroup()
                                 .addGroup(cardCourseLayout.createParallelGroup()
-                                    .addComponent(scrollPane2, GroupLayout.DEFAULT_SIZE, 903, Short.MAX_VALUE)
+                                    .addComponent(scrollPane2, GroupLayout.DEFAULT_SIZE, 917, Short.MAX_VALUE)
                                     .addGroup(GroupLayout.Alignment.TRAILING, cardCourseLayout.createSequentialGroup()
-                                        .addContainerGap(774, Short.MAX_VALUE)
+                                        .addContainerGap(788, Short.MAX_VALUE)
                                         .addComponent(btnRefreshCourseList)
                                         .addGap(8, 8, 8)))
                                 .addContainerGap())
@@ -391,17 +1089,17 @@ public class CourseManager extends JFrame {
                                     .addComponent(btnLeaveRoom)
                                     .addGap(170, 170, 170)
                                     .addComponent(lbRoomId, GroupLayout.PREFERRED_SIZE, 138, GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 327, Short.MAX_VALUE)
                                     .addComponent(label6, GroupLayout.PREFERRED_SIZE, 70, GroupLayout.PREFERRED_SIZE)
-                                    .addGap(86, 86, 86))
+                                    .addGap(109, 109, 109))
                                 .addGroup(cardRoomLayout.createSequentialGroup()
                                     .addGroup(cardRoomLayout.createParallelGroup()
                                         .addGroup(cardRoomLayout.createSequentialGroup()
                                             .addContainerGap()
                                             .addComponent(scrollPane5, GroupLayout.PREFERRED_SIZE, 646, GroupLayout.PREFERRED_SIZE))
                                         .addComponent(panel2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
-                                    .addComponent(scrollPane6, GroupLayout.PREFERRED_SIZE, 238, GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(scrollPane6, GroupLayout.DEFAULT_SIZE, 259, Short.MAX_VALUE)
                                     .addContainerGap())
                         );
                         cardRoomLayout.setVerticalGroup(
@@ -409,9 +1107,9 @@ public class CourseManager extends JFrame {
                                 .addGroup(cardRoomLayout.createSequentialGroup()
                                     .addContainerGap()
                                     .addGroup(cardRoomLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                        .addComponent(label6)
                                         .addComponent(lbRoomId)
-                                        .addComponent(btnLeaveRoom, GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(btnLeaveRoom, GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(label6))
                                     .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                                     .addGroup(cardRoomLayout.createParallelGroup()
                                         .addGroup(cardRoomLayout.createSequentialGroup()
@@ -603,7 +1301,7 @@ public class CourseManager extends JFrame {
                                                             .addComponent(txtCourseId, GroupLayout.PREFERRED_SIZE, 232, GroupLayout.PREFERRED_SIZE)
                                                             .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
                                                             .addComponent(lbInvalidIdCourse, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE))))))
-                                        .addContainerGap(123, Short.MAX_VALUE))
+                                        .addContainerGap(137, Short.MAX_VALUE))
                             );
                             cardNewCourseLayout.setVerticalGroup(
                                 cardNewCourseLayout.createParallelGroup()
@@ -677,7 +1375,7 @@ public class CourseManager extends JFrame {
                                         .addGap(34, 34, 34)
                                         .addComponent(btnSaveAs)
                                         .addContainerGap())
-                                    .addComponent(scrollPane3, GroupLayout.DEFAULT_SIZE, 909, Short.MAX_VALUE)
+                                    .addComponent(scrollPane3, GroupLayout.DEFAULT_SIZE, 923, Short.MAX_VALUE)
                             );
                             cardCourseManagerLayout.setVerticalGroup(
                                 cardCourseManagerLayout.createParallelGroup()
@@ -760,9 +1458,9 @@ public class CourseManager extends JFrame {
     private JPanel mainPanel;
     private JPanel controllerPanel;
     private JLabel label1;
-    public JLabel classRoomController;
-    public JLabel adminController;
-    public JLabel courseController;
+    public JLabel btnShowCardClassRoom;
+    public JLabel btnShowCardAdmin;
+    public JLabel btnShowCardCourse;
     public JLabel lbEmail;
     private JLabel label7;
     public JPanel titlePanel;
@@ -816,4 +1514,90 @@ public class CourseManager extends JFrame {
     public JLabel btnLoadDataFromDisk;
     public JButton btnSaveAs;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
+}
+
+class Receiver implements Runnable {
+    private Socket socket;
+    private DataInputStream dis;
+    private Jarvis courseManager;
+    private DefaultListModel messListModel;
+    private DefaultListModel userListModel;
+
+    private CardLayout cardLayout;
+    private String email;
+
+    public Receiver(Socket socket, Jarvis courseManager,
+                    DefaultListModel messListModel, DefaultListModel userListModel,
+                    CardLayout cardLayout, String email) {
+        try{
+            this.socket = socket;
+            this.dis = new DataInputStream(socket.getInputStream());
+            this.courseManager = courseManager;
+            this.messListModel = messListModel;
+            this.userListModel = userListModel;
+            this.cardLayout = cardLayout;
+            this.email = email;
+        }catch (Exception e){
+            System.out.println("Can't create Receiver handler");
+        }
+
+    }
+
+    @Override
+    public void run() {
+        try {
+            while (true) {
+                String getResponseFromServer = dis.readUTF();
+                String[] ResponseElement = getResponseFromServer.split(",");
+                if (ResponseElement[0].equals("message"))
+                {
+                    String mess = ResponseElement[1];
+                    NewMess(mess);
+                }
+                else if (ResponseElement[0].equals("intoRoom"))
+                {
+                    this.userListModel.addElement(ResponseElement[1]);
+                }
+                else if (ResponseElement[0].equals("leaveRoom"))
+                {
+                    LeaveRoom(this.email);
+                    cardLayout.show(courseManager.cardClassRoom, "cardChooseRoom");
+                    break;
+                }
+                else if (ResponseElement[0].equals("userLeaveRoom"))
+                {
+                    String email = ResponseElement[1];
+                    LeaveRoom(email);
+                }
+                else if (ResponseElement[0].equals("serverDead"))
+                {
+                    JOptionPane.showMessageDialog(courseManager, "server down", "Warning", JOptionPane.WARNING_MESSAGE);
+                    cardLayout.show(courseManager.cardClassRoom, "cardChooseRoom");
+                    socket.close();
+                    break;
+                }
+            }
+        } catch (Exception ex) {
+            this.socket = null;
+            JOptionPane.showMessageDialog(courseManager.cardClassRoom, "Something wrong", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    private void LeaveRoom(String email) {
+        for (int i = 0; i < userListModel.size(); i++) {
+            if (userListModel.getElementAt(i).equals(email)) {
+                userListModel.removeElementAt(i);
+            }
+        }
+    }
+
+    private void NewMess(String mess) {
+        System.out.println(mess);
+        this.messListModel.addElement(mess);
+        AutoScroll();
+    }
+
+    private void AutoScroll() {
+        courseManager.scrollPane5.getVerticalScrollBar().setValue(courseManager.scrollPane5.getVerticalScrollBar().getMaximum());
+    }
 }

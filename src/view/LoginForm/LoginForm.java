@@ -5,8 +5,13 @@
 package view.LoginForm;
 
 import controller.LoginController;
+import view.Jarvis.Jarvis;
 
 import java.awt.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import javax.swing.*;
 import javax.swing.GroupLayout;
 
@@ -14,6 +19,8 @@ import javax.swing.GroupLayout;
  * @author khang
  */
 public class LoginForm extends JFrame {
+    private LoginController loginController;
+    private CardLayout cardLayout;
     public LoginForm() {
         initComponents();
         loginConfig();
@@ -26,9 +33,152 @@ public class LoginForm extends JFrame {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLocationRelativeTo(null);
         this.setVisible(true);
+        cardLayout = (CardLayout) mainPanel.getLayout();
 
-        //event listener
-        new LoginController(this, (CardLayout) this.mainPanel.getLayout());
+        loginController = new LoginController();
+        LoadUserData();
+        EventListenerLogin();
+        EventListenerRegister();
+    }
+
+    private void LoadUserData()
+    {
+        if(loginController.LoadData())
+        {
+            JOptionPane.showMessageDialog(LoginForm.this, "Can't load user data", "login: error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    private void EventListenerLogin()
+    {
+        //===== login form =====
+        txtPass.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if(e.getKeyCode() == KeyEvent.VK_ENTER)
+                {
+                    LoginProcess();
+                }
+            }
+        });
+        btnLogin.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                LoginProcess();
+            }
+        });
+
+        btnShowLoginCard.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                cardLayout.show(mainPanel, "loginCard");
+            }
+        });
+
+        cbShowPass.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                if(txtPass.getEchoChar() == (char)0)
+                {
+                    txtPass.setEchoChar('\u2022');
+                }
+                else
+                {
+                    txtPass.setEchoChar((char)0);
+                }
+            }
+        });
+    }
+
+    private void LoginProcess()
+    {
+        String email = txtEmail.getText();
+        char[] pass = txtPass.getPassword();
+        if(loginController.loginProcess(email, pass))
+        {
+            LoginForm.this.dispose();
+            new Jarvis(email);
+        }
+        else
+        {
+            lbEmailOrPassWrong.setVisible(true);
+        }
+    }
+
+    private void EventListenerRegister()
+    {
+//====== register form =====
+        btnShowRegisterCard.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                cardLayout.show(mainPanel, "registerCard");
+            }
+        });
+        btnRegister.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                lbEmptyInforRegister.setVisible(false);
+                lbPassIncorrectRegister.setVisible(false);
+                lbEmailIncorrectRegister.setVisible(false);
+                ShowStateRegister();
+
+            }
+        });
+        txtEmailRegister.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                lbEmailIncorrectRegister.setVisible(false);
+            }
+        });
+        txtPassRegister.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                lbPassIncorrectRegister.setVisible(false);
+            }
+        });
+        txtPassConfirm.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                lbPassIncorrectConfirm.setVisible(false);
+            }
+        });
+    }
+
+    private void ShowStateRegister()
+    {
+        String result = loginController.registerProcess(txtEmailRegister.getText(),
+                txtPassRegister.getPassword(),
+                txtPassConfirm.getPassword(), cbIsRoleAdmin.isSelected() ? "admin":"user");
+
+        switch (result) {
+            case "blank" -> lbEmptyInforRegister.setVisible(true);
+            case "emailExisted" -> {
+                lbEmailIncorrectRegister.setText("Email existed!");
+                lbEmailIncorrectRegister.setVisible(true);
+            }
+            case "emailInvalid" -> {
+                lbEmailIncorrectRegister.setText("Invalid email!");
+                lbEmailIncorrectRegister.setVisible(true);
+            }
+            case "passInvalid" -> {
+                lbPassIncorrectRegister.setText("Password must be greater than 5 character!");
+                lbPassIncorrectRegister.setVisible(true);
+            }
+            case "confirmPassInvalid" -> {
+                lbPassIncorrectConfirm.setText("Confirm password not match!");
+                lbPassIncorrectConfirm.setVisible(true);
+            }
+            case "success" -> {
+                lbEmptyInforRegister.setText("Register success <3");
+                lbEmptyInforRegister.setForeground(new Color(35, 177, 77));
+                lbEmptyInforRegister.setVisible(true);
+            }
+            case "fail" -> {
+                lbEmptyInforRegister.setText("System error!");
+                lbEmptyInforRegister.setVisible(true);
+            }
+        }
+
     }
 
     public static void main(String[] args) {
