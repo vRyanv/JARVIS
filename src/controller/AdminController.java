@@ -3,6 +3,7 @@ package controller;
 import library.colorCustom.ColorCustom;
 import model.course.Course;
 import library.fileProcess.FileProcess;
+import model.data.Data;
 import model.user.User;
 import server.Server;
 import view.CourseBox.CourseBox;
@@ -27,7 +28,7 @@ import java.util.regex.Pattern;
 public class AdminController {
     private CardLayout cardLayout;
     private String currentCard = "cardNewCourse";
-    private TreeMap<String, Course> courseTreeMap;
+
     private String pathCourse = System.getProperty("user.dir")+"\\src\\model\\course\\courseList.dat";
     public CourseManager courseManager;
     private EditCourseDialog editCourseDialog;
@@ -38,7 +39,6 @@ public class AdminController {
     private Socket socket;
     private DataInputStream dis;
     private DataOutputStream dos;
-
 
     public AdminController(CourseManager courseManager)
     {
@@ -225,7 +225,7 @@ public class AdminController {
             {
                 path =  path + ".dat";
             }
-            if(!FileProcess.writeObject(path, courseTreeMap))
+            if(!FileProcess.writeObject(path, Data.courseList))
             {
                 JOptionPane.showMessageDialog(courseManager.cardMainPanelAdmin,
                         "Admin: Save as fail", "Error", JOptionPane.ERROR_MESSAGE);
@@ -239,41 +239,42 @@ public class AdminController {
     {
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setFileFilter(new FileNameExtensionFilter("DAT file (*.dat)","dat"));
-        fileChooser.showOpenDialog(courseManager.cardMainPanelAdmin);
+        int choice = fileChooser.showOpenDialog(courseManager.cardMainPanelAdmin);
 
-        File file = fileChooser.getSelectedFile();
 
-        if(file != null)
+        if(choice == JFileChooser.APPROVE_OPTION)
         {
-            String extension = file.getName().substring(file.getName().lastIndexOf("."));
+            File file = fileChooser.getSelectedFile();
+            if(file != null)
+            {
+                String extension = file.getName().substring(file.getName().lastIndexOf("."));
 
-            if(extension.equals(".dat"))
-            {
-                courseTreeMap = (TreeMap<String, Course>) FileProcess.readObject(file);
-                FileProcess.writeObject(pathCourse, courseTreeMap);
-                LoadData();
-            }
-            else
-            {
-                JOptionPane.showMessageDialog(courseManager.cardMainPanelAdmin,
-                        "Only accept file .dat, the file you just selected is "+extension,
-                        "Admin: Error", JOptionPane.ERROR_MESSAGE);
+                if(extension.equals(".dat"))
+                {
+                    Data.courseList = (TreeMap<String, Course>) FileProcess.readObject(file);
+                    FileProcess.writeObject(pathCourse, Data.courseList);
+                    LoadData();
+                }
+                else
+                {
+                    JOptionPane.showMessageDialog(courseManager.cardMainPanelAdmin,
+                            "Only accept file .dat, the file you just selected is "+extension,
+                            "Admin: Error", JOptionPane.ERROR_MESSAGE);
+                }
             }
         }
-
     }
 
     private void LoadData()
     {
-        this.courseTreeMap = (TreeMap<String, Course>) Course.readCourseList(this.pathCourse);
 
-        if (this.courseTreeMap == null) {
+        if (Data.courseList == null) {
             JOptionPane.showMessageDialog(this.courseManager, "Can't load course data", "Admin: Error", JOptionPane.ERROR_MESSAGE);
         }
         else
         {
             courseManager.contanerCourseBoxPanel.removeAll();
-            for (Course course: this.courseTreeMap.values())
+            for (Course course: Data.courseList.values())
             {
                 CourseBox courseBox = new CourseBox(course.getName(), course.getId());
                 courseBox.btnRegisterCourse.setVisible(false);
@@ -337,7 +338,7 @@ public class AdminController {
             courseManager.lbInvalidIdCourse.setText("Enter id*");
             courseManager.lbInvalidIdCourse.setVisible(true);
         }
-        else if(courseTreeMap.containsKey(id))
+        else if(Data.courseList.containsKey(id))
         {
             courseManager.lbInvalidIdCourse.setText("ID existed*");
             courseManager.lbInvalidIdCourse.setVisible(true);
@@ -441,15 +442,15 @@ public class AdminController {
     private void DeleteCourse()
     {
         String courseId = editCourseDialog.txtCourseId.getText();
-        if(courseTreeMap.containsKey(courseId))
+        if(Data.courseList.containsKey(courseId))
         {
             int choice = JOptionPane.showConfirmDialog(editCourseDialog,
                     "Delete course with ID: "+ courseId,
                     "Confirm", JOptionPane.OK_CANCEL_OPTION);
             if(choice == JOptionPane.OK_OPTION)
             {
-                courseTreeMap.remove(courseId);
-                if(FileProcess.writeObject(pathCourse, courseTreeMap))
+                Data.courseList.remove(courseId);
+                if(FileProcess.writeObject(pathCourse, Data.courseList))
                 {
                     courseManager.contanerCourseBoxPanel.removeAll();
                     LoadData();
@@ -474,9 +475,9 @@ public class AdminController {
 
     private void LoadDataCourseDetail(String courseId)
     {
-        if(this.courseTreeMap.containsKey(courseId))
+        if(Data.courseList.containsKey(courseId))
         {
-            for (Course course: courseTreeMap.values())
+            for (Course course: Data.courseList.values())
             {
                 if(course.getId().equals(courseId))
                 {
@@ -496,7 +497,7 @@ public class AdminController {
 
     private boolean saveCourse(String id, String name, int numOfLession, String description, String type)
     {
-        if(courseTreeMap == null)
+        if(Data.courseList == null)
         {
             int choice = JOptionPane.showConfirmDialog(courseManager.cardMainPanelAdmin,
                     "Current file not available! create new file?",
@@ -510,7 +511,7 @@ public class AdminController {
                 }
                 else
                 {
-                    courseTreeMap = (TreeMap<String, Course>) FileProcess.readObject(pathCourse);
+                    Data.courseList = (TreeMap<String, Course>) FileProcess.readObject(pathCourse);
                 }
 
             }
@@ -518,15 +519,15 @@ public class AdminController {
         if(type.equals("newCourse"))
         {
             Course course = new Course(id, name, numOfLession, description, new ArrayList<>());
-            courseTreeMap.put(id, course);
+            Data.courseList.put(id, course);
         }
         else
         {
-            courseTreeMap.get(id).setName(name);
-            courseTreeMap.get(id).setNumberOfLessons(numOfLession);
-            courseTreeMap.get(id).setDescription(description);
+            Data.courseList.get(id).setName(name);
+            Data.courseList.get(id).setNumberOfLessons(numOfLession);
+            Data.courseList.get(id).setDescription(description);
         }
-        return FileProcess.writeObject(pathCourse, courseTreeMap);
+        return FileProcess.writeObject(pathCourse, Data.courseList);
     }
 
     private boolean Regex(String regex, String str)

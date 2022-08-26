@@ -2,6 +2,7 @@ package controller;
 
 import library.fileProcess.FileProcess;
 import model.course.Course;
+import model.data.Data;
 import model.user.User;
 import server.Server;
 import view.CourseBox.CourseBox;
@@ -27,14 +28,12 @@ public class ClassRoomController {
     private Thread receiver;
     private DataInputStream dis;
     private DataOutputStream dos;
-    private TreeMap<String, Course> room;
+
     private List<CourseBox> courseBoxList;
     private DefaultListModel messListModel;
     private DefaultListModel userListModel;
     private String email;
     private String username;
-    private String path = System.getProperty("user.dir")+"\\src\\model\\course\\courseList.dat";
-
     public ClassRoomController(CourseManager courseManager, String email)
     {
         this.email = email;
@@ -69,7 +68,7 @@ public class ClassRoomController {
                 int choice = JOptionPane.showConfirmDialog(courseManager, "Logout ?", "Confirm",JOptionPane.OK_CANCEL_OPTION);
                 if(choice == JOptionPane.OK_OPTION)
                 {
-                    if(IsAdminRole())
+                    if(IsAdminRole() && Server.serverIsOn)
                     {
                         if(Connect())
                         {
@@ -117,32 +116,35 @@ public class ClassRoomController {
             dos.writeUTF("leaveRoom,"+roomId);
         }catch (Exception ex)
         {
-            System.out.println(ex);
+            JOptionPane.showMessageDialog(courseManager, "Can't leave this room, something wrong!",
+                    "Class room: error", JOptionPane.ERROR_MESSAGE);
         }
     }
 
     private void LoadRoom()
     {
-        this.room = (TreeMap<String, Course>) Course.readCourseList(this.path);
-        if(this.room == null)
+        if(Data.courseList == null)
         {
             JOptionPane.showMessageDialog(courseManager.cardClassRoom, "Can't load room", "Error", JOptionPane.ERROR_MESSAGE);
         }
         else
         {
             courseManager.containerRoomPanel.removeAll();
-            for (Course course: this.room.values())
+            for (Course course: Data.courseList.values())
             {
-                CourseBox courseBox = new CourseBox(course.getName(), course.getId());
-                courseBox.btnRegisterCourse.setVisible(false);
-                courseBox.btnCourseId.addActionListener(new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        enrollRoom(e.getActionCommand(), email);
-                    }
-                });
-                this.courseBoxList.add(courseBox);
-                courseManager.containerRoomPanel.add(courseBox, FlowLayout.LEFT);
+                if(course.getStudentList().contains(this.email))
+                {
+                    CourseBox courseBox = new CourseBox(course.getName(), course.getId());
+                    courseBox.btnRegisterCourse.setVisible(false);
+                    courseBox.btnCourseId.addActionListener(new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+                            enrollRoom(e.getActionCommand(), email);
+                        }
+                    });
+                    this.courseBoxList.add(courseBox);
+                    courseManager.containerRoomPanel.add(courseBox, FlowLayout.LEFT);
+                }
             }
             courseManager.containerRoomPanel.revalidate();
             courseManager.containerRoomPanel.repaint();

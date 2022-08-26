@@ -3,6 +3,7 @@ package controller;
 import library.colorCustom.ColorCustom;
 import library.fileProcess.FileProcess;
 import model.course.Course;
+import model.data.Data;
 import model.user.User;
 import view.CourseBox.CourseBox;
 import view.CourseManager.CourseManager;
@@ -22,32 +23,26 @@ public class CourseManagerController {
     private CardLayout cardLayout;
     public String currentCard = "cardCourse";
     private CourseManager courseManager;
-    private TreeMap<String, Course> courseTreeMap;
-    private TreeMap<String, List<String>> registerList;
-    private String path = System.getProperty("user.dir")+"\\src\\model\\course\\courseList.dat";
-    private String pathRegisterList = System.getProperty("user.dir")+"\\src\\model\\course\\studentRegisterCourse.dat";
 
     public CourseManagerController(CourseManager courseManager, String email, String role)
     {
         this.courseManager = courseManager;
-
+        courseManager.lbEmail.setText(email);
         CourseConfig(email, role);
         LoadData();
     }
     private void LoadData()
     {
         courseManager.containerCourseList.removeAll();
-        this.courseTreeMap = (TreeMap<String, Course>) FileProcess.readObject(path);
-        this.registerList = (TreeMap<String, List<String>>) FileProcess.readObject(pathRegisterList);
 
-        if(courseTreeMap != null)
+        if(Data.courseList != null)
         {
-            for (Course course: this.courseTreeMap.values())
+            for (Course course: Data.courseList.values())
             {
                 CourseBox courseBox = new CourseBox(course.getName(), course.getId());
                 courseBox.btnCourseId.setVisible(false);
 
-                if(registerList.containsKey(course.getId()) && registerList.get(course.getId()).contains(email))
+                if(course.getStudentList().contains(this.email))
                 {
                     courseBox.btnRegisterCourse.setEnabled(false);
                     courseBox.btnRegisterCourse.setText("Registered");
@@ -67,29 +62,13 @@ public class CourseManagerController {
 
     private void RegisterCourse(String courseId, CourseBox courseBox)
     {
-        if(this.registerList.containsKey(courseId) && !this.registerList.containsValue(email) )
+        if(Data.courseList.containsKey(courseId))
         {
-            this.registerList.get(courseId).add(email);
-            System.out.println("success");
-        }
-        else
-        {
-            if(!registerList.containsKey(courseId))
-            {
-                this.registerList.put(courseId,  new ArrayList<>());
-                System.out.println("new");
-            }
-        }
-        if(!FileProcess.writeObject(pathRegisterList,registerList))
-        {
-            JOptionPane.showMessageDialog(courseManager, "Something wrong!", "Register error", JOptionPane.ERROR_MESSAGE);
+            Data.courseList.get(courseId).getStudentList().add(this.email);
+            Data.SaveCourseList();
         }
         courseBox.btnRegisterCourse.setEnabled(false);
         courseBox.btnRegisterCourse.setText("Registered");
-        for (String tr:registerList.keySet())
-        {
-            System.out.println(tr);
-        }
     }
 
     private void CourseConfig(String email, String role)

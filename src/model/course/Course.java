@@ -17,20 +17,18 @@ public class Course implements Serializable {
     private int numberOfLessons;
     private String description;
 
+    private List<String> studentList;
+
     public Course(String id, String name, int numberOfLessons, String description, List<User> studentList) {
         this.id = id;
         this.name = name;
         this.numberOfLessons = numberOfLessons;
         this.description = description;
+        this.studentList = new ArrayList<>();
     }
 
     public static void main(String[] args) {
         FileProcess.writeObject("src/model/course/courseList.dat", new TreeMap<String, Course>());
-    }
-
-    public boolean createCourseList(String path)
-    {
-        return FileProcess.writeObject(path, new TreeMap<String, Course>());
     }
 
     public static Object readCourseList(String path)
@@ -55,6 +53,10 @@ public class Course implements Serializable {
         return description;
     }
 
+    public List<String> getStudentList() {
+        return studentList;
+    }
+
 
     public void setId(String id) {
         this.id = id;
@@ -71,6 +73,9 @@ public class Course implements Serializable {
     public void setDescription(String description)
     {
         this.description = description;
+    }
+    public void setStudentList(List<String> studentList) {
+        this.studentList = studentList;
     }
 
 }

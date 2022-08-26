@@ -44,6 +44,8 @@ public class CourseManager extends JFrame {
         classRoomController = new JLabel();
         adminController = new JLabel();
         courseController = new JLabel();
+        lbEmail = new JLabel();
+        label7 = new JLabel();
         titlePanel = new JPanel();
         lbTitleHeader = new JLabel();
         cardPanel = new JPanel();
@@ -100,14 +102,12 @@ public class CourseManager extends JFrame {
 
         //======== mainPanel ========
         {
-            mainPanel.setBorder(new javax.swing.border.CompoundBorder(new javax.swing.border.TitledBorder(
-            new javax.swing.border.EmptyBorder(0,0,0,0), "JF\u006frmD\u0065sig\u006eer \u0045val\u0075ati\u006fn"
-            ,javax.swing.border.TitledBorder.CENTER,javax.swing.border.TitledBorder.BOTTOM
-            ,new java.awt.Font("Dia\u006cog",java.awt.Font.BOLD,12)
-            ,java.awt.Color.red),mainPanel. getBorder()));mainPanel. addPropertyChangeListener(
-            new java.beans.PropertyChangeListener(){@Override public void propertyChange(java.beans.PropertyChangeEvent e
-            ){if("\u0062ord\u0065r".equals(e.getPropertyName()))throw new RuntimeException()
-            ;}});
+            mainPanel.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing. border.
+            EmptyBorder( 0, 0, 0, 0) , "JF\u006frm\u0044es\u0069gn\u0065r \u0045va\u006cua\u0074io\u006e", javax. swing. border. TitledBorder. CENTER, javax. swing
+            . border. TitledBorder. BOTTOM, new java .awt .Font ("D\u0069al\u006fg" ,java .awt .Font .BOLD ,12 ),
+            java. awt. Color. red) ,mainPanel. getBorder( )) ); mainPanel. addPropertyChangeListener (new java. beans. PropertyChangeListener( )
+            { @Override public void propertyChange (java .beans .PropertyChangeEvent e) {if ("\u0062or\u0064er" .equals (e .getPropertyName () ))
+            throw new RuntimeException( ); }} );
 
             //======== controllerPanel ========
             {
@@ -143,6 +143,14 @@ public class CourseManager extends JFrame {
                 courseController.setHorizontalTextPosition(SwingConstants.LEFT);
                 courseController.setHorizontalAlignment(SwingConstants.LEFT);
 
+                //---- lbEmail ----
+                lbEmail.setText("khang@123");
+                lbEmail.setForeground(new Color(5, 230, 148));
+
+                //---- label7 ----
+                label7.setText("email");
+                label7.setForeground(Color.white);
+
                 GroupLayout controllerPanelLayout = new GroupLayout(controllerPanel);
                 controllerPanel.setLayout(controllerPanelLayout);
                 controllerPanelLayout.setHorizontalGroup(
@@ -155,7 +163,11 @@ public class CourseManager extends JFrame {
                                     .addGap(0, 0, Short.MAX_VALUE)
                                     .addComponent(courseController, GroupLayout.PREFERRED_SIZE, 207, GroupLayout.PREFERRED_SIZE))
                                 .addComponent(classRoomController, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(adminController, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(adminController, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(lbEmail, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(controllerPanelLayout.createSequentialGroup()
+                                    .addComponent(label7, GroupLayout.PREFERRED_SIZE, 71, GroupLayout.PREFERRED_SIZE)
+                                    .addGap(0, 0, Short.MAX_VALUE)))
                             .addContainerGap())
                 );
                 controllerPanelLayout.setVerticalGroup(
@@ -169,7 +181,11 @@ public class CourseManager extends JFrame {
                             .addComponent(classRoomController, GroupLayout.PREFERRED_SIZE, 39, GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(adminController, GroupLayout.PREFERRED_SIZE, 39, GroupLayout.PREFERRED_SIZE)
-                            .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 371, Short.MAX_VALUE)
+                            .addComponent(label7)
+                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(lbEmail)
+                            .addGap(24, 24, 24))
                 );
             }
 
@@ -233,7 +249,7 @@ public class CourseManager extends JFrame {
                         cardCourseLayout.createParallelGroup()
                             .addGroup(cardCourseLayout.createSequentialGroup()
                                 .addGroup(cardCourseLayout.createParallelGroup()
-                                    .addComponent(scrollPane2, GroupLayout.DEFAULT_SIZE, 896, Short.MAX_VALUE)
+                                    .addComponent(scrollPane2, GroupLayout.DEFAULT_SIZE, 903, Short.MAX_VALUE)
                                     .addGroup(GroupLayout.Alignment.TRAILING, cardCourseLayout.createSequentialGroup()
                                         .addContainerGap(774, Short.MAX_VALUE)
                                         .addComponent(btnRefreshCourseList)
@@ -582,7 +598,7 @@ public class CourseManager extends JFrame {
                                                             .addComponent(txtCourseId, GroupLayout.PREFERRED_SIZE, 232, GroupLayout.PREFERRED_SIZE)
                                                             .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
                                                             .addComponent(lbInvalidIdCourse, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE))))))
-                                        .addContainerGap(116, Short.MAX_VALUE))
+                                        .addContainerGap(123, Short.MAX_VALUE))
                             );
                             cardNewCourseLayout.setVerticalGroup(
                                 cardNewCourseLayout.createParallelGroup()
@@ -651,12 +667,12 @@ public class CourseManager extends JFrame {
                             cardCourseManagerLayout.setHorizontalGroup(
                                 cardCourseManagerLayout.createParallelGroup()
                                     .addGroup(cardCourseManagerLayout.createSequentialGroup()
-                                        .addGap(0, 595, Short.MAX_VALUE)
+                                        .addGap(0, 602, Short.MAX_VALUE)
                                         .addComponent(btnLoadDataFromDisk)
                                         .addGap(34, 34, 34)
                                         .addComponent(btnSaveAs)
                                         .addContainerGap())
-                                    .addComponent(scrollPane3, GroupLayout.DEFAULT_SIZE, 902, Short.MAX_VALUE)
+                                    .addComponent(scrollPane3, GroupLayout.DEFAULT_SIZE, 909, Short.MAX_VALUE)
                             );
                             cardCourseManagerLayout.setVerticalGroup(
                                 cardCourseManagerLayout.createParallelGroup()
@@ -742,6 +758,8 @@ public class CourseManager extends JFrame {
     public JLabel classRoomController;
     public JLabel adminController;
     public JLabel courseController;
+    public JLabel lbEmail;
+    private JLabel label7;
     public JPanel titlePanel;
     public JLabel lbTitleHeader;
     public JPanel cardPanel;

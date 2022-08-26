@@ -16,7 +16,6 @@ import java.util.logging.Handler;
 public class Server
 {
     public static boolean serverIsOn = false;
-    public static boolean killServer = false;
     private ServerSocket serverSocket;
     private Socket socket;
     static TreeMap<String, List<handler>> clients = new TreeMap<>(); //TreeMap<roomId, client>

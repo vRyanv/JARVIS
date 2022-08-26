@@ -7,13 +7,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="34a4562e-e422-4f6a-9647-613949237cee" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/artifacts/JARVIS_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/JARVIS_jar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/model/data/Data.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JARVIS.jar" beforeDir="false" afterPath="$PROJECT_DIR$/JARVIS.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controller/AdminController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/AdminController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/controller/ClassRoomController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/ClassRoomController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/course/studentRegisterCourse.dat" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/course/studentRegisterCourse.dat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/user/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/user/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/LoginForm/LoginForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/LoginForm/LoginForm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controller/CourseManagerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/CourseManagerController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/course/Course.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/course/Course.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/course/courseList.dat" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/course/courseList.dat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/course/studentRegisterCourse.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/server/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/Server.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/CourseManager/CourseManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/CourseManager/CourseManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/CourseManager/CourseManager.jfd" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/CourseManager/CourseManager.jfd" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,25 +46,25 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Project.color": "036860",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "last_opened_file_path": "D:/App/JformDesign/lib/flatlaf-2.4.jar",
-    "project.structure.last.edited": "Artifacts",
-    "project.structure.proportion": "0.15429688",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "preferences.lookFeel"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Project.color&quot;: &quot;036860&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/App/JformDesign/lib/flatlaf-2.4.jar&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Artifacts&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15429688&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;
   },
-  "keyToStringList": {
-    "com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File": [
-      "JAVA",
-      "PLAIN_TEXT"
+  &quot;keyToStringList&quot;: {
+    &quot;com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File&quot;: [
+      &quot;JAVA&quot;,
+      &quot;PLAIN_TEXT&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="Application.LoginForm">
     <configuration name="Course" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="model.course.Course" />
