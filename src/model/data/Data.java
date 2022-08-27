@@ -14,7 +14,7 @@ public class Data {
     public static TreeMap<String, User> userList = (TreeMap<String, User>) FileProcess.readObject(Data.pathUserList);
     public static boolean SaveCourseList()
     {
-        return FileProcess.writeObject(Data.pathCourseList, courseList);
+        return FileProcess.writeObject(Data.pathCourseList, Data.courseList);
     }
 
     public static boolean IsAdminRole(String email)

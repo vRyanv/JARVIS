@@ -84,7 +84,7 @@ public class ClassRoomController {
     }
 
     //====== chat =====
-    public Socket enrollRoom(String roomId, String email)
+    public Socket EnrollRoom(String roomId, String email)
     {
         if(Connect())
         {

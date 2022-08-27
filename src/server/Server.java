@@ -19,11 +19,9 @@ public class Server
     private ServerSocket serverSocket;
     private Socket socket;
     static TreeMap<String, List<handler>> clients = new TreeMap<>(); //TreeMap<roomId, client>
-    private Jarvis jarvis;
-    public Server(Jarvis jarvis)
+    public Server()
     {
         try {
-            this.jarvis = jarvis;
             this.serverSocket = new ServerSocket(2108);
             System.out.println("Server: running!");
             while (serverIsOn)
@@ -42,6 +40,7 @@ public class Server
                             handlers.dos.writeUTF("serverDead,");
                         }
                     }
+                    serverIsOn = false;
                     break;
                 }
                 else
@@ -69,7 +68,7 @@ public class Server
             this.serverSocket.close();
             System.out.println("Server: stop!");
         }catch (Exception exception){
-            JOptionPane.showMessageDialog(jarvis, "server has stopped", "Server: Error", JOptionPane.ERROR_MESSAGE);
+            System.out.println("Server: stop!");
         }
     }
 

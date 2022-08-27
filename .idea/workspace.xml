@@ -7,9 +7,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="34a4562e-e422-4f6a-9647-613949237cee" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/JunitTest/JunitTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JARVIS.jar" beforeDir="false" afterPath="$PROJECT_DIR$/JARVIS.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ReadMe.txt" beforeDir="false" afterPath="$PROJECT_DIR$/ReadMe.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backupCouseList/courseList.dat" beforeDir="false" afterPath="$PROJECT_DIR$/backupFile/courseList.dat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/JunitTest/JunitTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/JunitTest/JunitTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/controller/AdminController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/AdminController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controller/ClassRoomController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/ClassRoomController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controller/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/LoginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/course/courseList.dat" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/course/courseList.dat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/data/Data.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/data/Data.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/user/userList.dat" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/user/userList.dat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/server/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/Server.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/Jarvis/Jarvis.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/Jarvis/Jarvis.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,7 +52,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Downloaded.Files.Path.Enabled": "false",
-    "Project.color": "036860",
+    "Project.color": "000f0e",
     "Repository.Attach.Annotations": "false",
     "Repository.Attach.JavaDocs": "false",
     "Repository.Attach.Sources": "false",
@@ -62,38 +73,12 @@
   }
 }]]></component>
   <component name="RunManager" selected="Application.LoginForm">
-    <configuration name="Course" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="model.course.Course" />
+    <configuration name="JunitTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="JunitTest.JunitTest" />
       <module name="JARVIS" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="model.course.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="CourseController" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="controller.CourseController" />
-      <module name="JARVIS" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="controller.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Jarvis" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="view.Jarvis.Jarvis" />
-      <module name="JARVIS" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="view.Jarvis.Jarvis" />
+          <option name="PATTERN" value="JunitTest.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -128,6 +113,37 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="JunitTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="JARVIS" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="JunitTest.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="JunitTest" />
+      <option name="MAIN_CLASS_NAME" value="JunitTest.JunitTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="JunitTest.TestGetCourseDetail" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="JARVIS" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="JunitTest.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="JunitTest" />
+      <option name="MAIN_CLASS_NAME" value="JunitTest.JunitTest" />
+      <option name="METHOD_NAME" value="TestGetCourseDetail" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="JARVIS" type="JarApplication">
       <option name="JAR_PATH" value="$PROJECT_DIR$/out/artifacts/JARVIS_jar/JARVIS.jar" />
       <option name="ALTERNATIVE_JRE_PATH" />
@@ -136,20 +152,20 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="Application.CourseController" />
-      <item itemvalue="Application.Jarvis" />
-      <item itemvalue="Application.Course" />
+      <item itemvalue="Application.JunitTest" />
       <item itemvalue="Application.LoginForm" />
       <item itemvalue="JAR Application.JARVIS" />
+      <item itemvalue="JUnit.JunitTest" />
+      <item itemvalue="JUnit.JunitTest.TestGetCourseDetail" />
       <item itemvalue="JUnit.CalculatorTest" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Application.LoginForm" />
+        <item itemvalue="JUnit.JunitTest" />
+        <item itemvalue="Application.JunitTest" />
+        <item itemvalue="JUnit.JunitTest.TestGetCourseDetail" />
         <item itemvalue="JUnit.CalculatorTest" />
-        <item itemvalue="Application.Course" />
-        <item itemvalue="Application.CourseController" />
-        <item itemvalue="Application.Jarvis" />
       </list>
     </recent_temporary>
   </component>

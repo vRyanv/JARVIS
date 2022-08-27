@@ -253,10 +253,7 @@ public class Jarvis extends JFrame {
     private void RenderRoom()
     {
         List<Course> roomList = classRoomController.GetRoom(email);
-
-        if(!roomList.isEmpty())
-        {
-            containerRoomPanel.removeAll();
+        containerRoomPanel.removeAll();
             for (Course course:roomList)
             {
                 CourseBox courseBox = new CourseBox(course.getName(), course.getId());
@@ -272,7 +269,6 @@ public class Jarvis extends JFrame {
             }
             containerRoomPanel.revalidate();
             containerRoomPanel.repaint();
-        }
     }
     private void JoinRoom(String roomId)
     {
@@ -281,7 +277,7 @@ public class Jarvis extends JFrame {
         this.userListModel = new DefaultListModel<>();
         listUserInRoom.setModel(this.userListModel);
 
-        Socket socket = classRoomController.enrollRoom(roomId, email);
+        Socket socket = classRoomController.EnrollRoom(roomId, email);
         if(socket != null)
         {
             receiver = new Thread(new Receiver(socket, Jarvis.this, messListModel, userListModel, cardLayoutOfClassRoom, email));
@@ -499,7 +495,7 @@ public class Jarvis extends JFrame {
 
     private void CreateServer()
     {
-        if(adminController.NewServer(Jarvis.this))
+        if(adminController.NewServer())
         {
             lbServerTitle.setForeground(ColorCustom.green);
         }

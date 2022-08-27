@@ -53,17 +53,17 @@ public class AdminController {
         }
     }
 
-    public boolean NewServer(Jarvis jarvis)
+    public boolean NewServer()
     {
         if(Server.serverIsOn == false)
-
-            Server.serverIsOn = true;{
+        {
+                Server.serverIsOn = true;
             try {
                 this.threadServer = new Thread() {
                     @Override
                     public void run() {
                         try {
-                            server = new Server(jarvis);
+                            server = new Server();
                         } catch (Exception ex) {
                         }
                     }
@@ -74,6 +74,7 @@ public class AdminController {
                 return false;
             }
         }
+        return false;
     }
 
     public boolean SaveAs(String path)
@@ -171,9 +172,16 @@ public class AdminController {
         }
         else
         {
-            Data.courseList.get(id).setName(name);
-            Data.courseList.get(id).setNumberOfLessons(numOfLesson);
-            Data.courseList.get(id).setDescription(description);
+            if(Data.courseList.containsKey(id))
+            {
+                Data.courseList.get(id).setName(name);
+                Data.courseList.get(id).setNumberOfLessons(numOfLesson);
+                Data.courseList.get(id).setDescription(description);
+            }
+            else
+            {
+                return false;
+            }
         }
         return Data.SaveCourseList();
     }

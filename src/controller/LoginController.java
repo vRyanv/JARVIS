@@ -64,7 +64,7 @@ public class LoginController{
         }
     }
 
-    private boolean checkInvalidEmail(String email)
+    public boolean checkInvalidEmail(String email)
     {
         String regex = "^(.+)@(.+)$";
         Pattern pattern = Pattern.compile(regex);
@@ -73,7 +73,7 @@ public class LoginController{
         return matcher.matches();
     }
 
-    private boolean checkEmailExisted(String email)
+    public boolean checkEmailExisted(String email)
     {
         return Data.userList == null ? false : Data.userList.containsKey(email);
 
